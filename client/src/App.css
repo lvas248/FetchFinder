@@ -36,3 +36,15 @@
     transform: rotate(360deg);
   }
 }
+/* 
+---------------- */
+
+#form{
+  padding: 10%;
+  border: black 2px solid;
+  border-radius: 50px;
+}
+.inputField{
+  text-align: left;
+  margin-top: 5%;
+}
