@@ -20,6 +20,25 @@ export const signup = createAsyncThunk(
     }
 )
 
+export const login = createAsyncThunk( 
+    'session/login',
+    async( obj, { dispatch, rejectWithValue})=>{
+        const response = await fetch('/login',{
+            method: 'POST',
+            headers: {
+                'Content-Type':'application/json'
+            },
+            body: JSON.stringify(obj)
+        })
+        const data = await response.json()
+        if(response.ok){
+            dispatch(setUser(data))
+            return
+        }
+        return rejectWithValue(data)
+    }
+)
+
 const initialState = {
     loggedIn: false,
     status: null,
@@ -43,6 +62,20 @@ const sessionSlice = createSlice({
             })
             .addCase( signup.rejected , (state, action )=> {
                 state.status = 'error'
+                state.loggedIn = false
+                state.error = action.payload
+            }) 
+            .addCase( login.pending , state => {
+                state.status = 'pending'
+                state.error = null
+            })            
+            .addCase( login.fulfilled, state => {
+                state.status = 'idle'
+                state.loggedIn = true
+                state.error = null
+            })
+            .addCase( login.rejected , (state, action )=> {
+                state.status = 'idle'
                 state.loggedIn = false
                 state.error = action.payload
             }) 

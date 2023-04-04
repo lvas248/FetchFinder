@@ -48,3 +48,7 @@
   text-align: left;
   margin-top: 5%;
 }
+.error{
+  color: red;
+  list-style-type: none;
+}
