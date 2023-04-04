@@ -2,12 +2,12 @@ import React, { useState } from 'react'
 import { Button, Input, Label } from 'reactstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { login } from './features/sessionSlice'
-import { useHistory } from 'react-router-dom'
+// import { useHistory } from 'react-router-dom'
 
 function Login(){   
 
     const dispatch = useDispatch()
-    const history = useHistory()
+    // const history = useHistory()
    
     const [ loginObj, setLoginObj ] = useState({
         username: '',
@@ -25,9 +25,9 @@ function Login(){
     function submitForm(e){
         e.preventDefault()
         dispatch(login(loginObj)).then(result =>{
-            if(result.type === 'session/login/fulfilled'){
-                history.push('/profile')
-            }
+            // if(result.type === 'session/login/fulfilled'){
+            //     history.push('/profile')
+            // }
         })
         setLoginObj({
             username: '',
