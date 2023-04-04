@@ -10,7 +10,16 @@ class UsersController < ApplicationController
         render json: user, status: :created
     end
 
+    def show
+        user = get_user
+        render json: user, status: :ok
+    end
+
     private
+
+    def get_user
+        User.find(session[:user_id]) 
+    end
 
     def render_invalid(invalid)
         render json: { errors: invalid.record.errors.full_messages }, status: :unprocessable_entity
