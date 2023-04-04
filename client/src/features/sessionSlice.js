@@ -39,6 +39,19 @@ export const login = createAsyncThunk(
     }
 )
 
+
+export const refresh = createAsyncThunk( 
+    'session/refresh' ,
+    async( obj, { dispatch, rejectWithValue })=>{
+        const response = await fetch('/me')
+        const data = await response.json()
+        if(response.ok){ 
+            dispatch(setUser(data))
+            return }
+        return rejectWithValue(data)
+    }
+)
+
 const initialState = {
     loggedIn: false,
     status: null,
@@ -79,6 +92,23 @@ const sessionSlice = createSlice({
                 state.loggedIn = false
                 state.error = action.payload
             }) 
+            .addCase( refresh.pending, state => {
+                state.status = 'pending'
+                state.error = null
+            })
+            .addCase( refresh.fulfilled, state => {
+                state.status = 'idle'
+                state.loggedIn = true
+                state.error = null
+            })
+            .addCase( refresh.rejected , (state, action )=> {
+                state.status = 'idle'
+                state.loggedIn = false
+                state.error = action.payload
+            }) 
+
+
+
     }
 })
 

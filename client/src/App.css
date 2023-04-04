@@ -52,3 +52,28 @@
   color: red;
   list-style-type: none;
 }
+a.active{
+  background-color: slategrey;
+  color: white;
+}
+
+#navbar{
+  background-color: lightgray;
+  padding-top: 4px;
+}
+#navbar ul{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.navItem{
+  padding: 8px;
+  text-decoration: none;
+  color: black;
+  border-radius: 25px;
+}
+.navItem:hover{
+  background-color: slategray;
+  color: white;
+}
