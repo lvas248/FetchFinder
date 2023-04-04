@@ -2,11 +2,11 @@ import React, { useState } from 'react'
 import { Button, Input, Label } from 'reactstrap'
 import { useDispatch } from 'react-redux'
 import { signup } from './features/sessionSlice'
-
+import { useHistory } from 'react-router-dom'
 function Signup(){
 
     const dispatch = useDispatch()
-
+    const history = useHistory()
     
     const [ signupObj, setSignupObj ] = useState({
         username: '',
@@ -33,6 +33,10 @@ function Signup(){
             password: '',
             password_confirmation: ''
         })
+    }
+
+    function navigateToLogin(){
+        history.push('/')
     }
 
     const renderErrors = errors?.map( e => {
@@ -90,6 +94,8 @@ function Signup(){
             </div>
 
             <ul className='errorList'>{renderErrors}</ul>
+
+            <p>Back to <Button id='signupHere' size='sm' color='success' onClick={navigateToLogin}>LOGIN</Button></p>
            
         </form>
     )

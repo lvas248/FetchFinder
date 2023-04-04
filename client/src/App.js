@@ -14,7 +14,7 @@ function App() {
   const dispatch = useDispatch()
 
   const state = useSelector(state => state)
-
+  
   console.log(state)
   
   useEffect(()=>{
@@ -39,6 +39,10 @@ function App() {
 
         <Route path='/profile'>
           <Profile />
+        </Route>
+
+        <Route path='/signup'>
+          <Signup />
         </Route>
 
 
