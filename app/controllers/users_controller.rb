@@ -15,6 +15,14 @@ class UsersController < ApplicationController
         render json: user, status: :ok
     end
 
+    def update
+        user = get_user
+        user.update!(user_params)
+        # binding.pry
+        render json: user, status: :ok
+    end
+
+
     private
 
     def get_user
