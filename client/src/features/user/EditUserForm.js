@@ -2,6 +2,7 @@ import { useDispatch} from "react-redux"
 import React, { useState } from 'react'
 import { Button,Label, Input } from 'reactstrap'
 import { editUser } from "./userSlice"
+import ImageUpload from "../../ImageUpload"
 
 
 function EditUserForm({user={}, clickEdit}){
@@ -32,6 +33,7 @@ function EditUserForm({user={}, clickEdit}){
 
     console.log(user)
     return (
+        <>
             <form 
                 id='form'
                 onSubmit={submitUpdate}
@@ -51,6 +53,9 @@ function EditUserForm({user={}, clickEdit}){
 
                 <Button color='primary'>Submit</Button>
             </form>
+            <ImageUpload />
+
+        </>
     )
 }
 export default EditUserForm

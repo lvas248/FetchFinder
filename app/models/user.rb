@@ -1,3 +1,4 @@
+
 class User < ApplicationRecord
     has_secure_password
 
@@ -19,5 +20,7 @@ class User < ApplicationRecord
             public_id: result['public_id']
         )
     end
+
+    
 
 end

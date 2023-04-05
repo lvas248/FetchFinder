@@ -1,3 +1,5 @@
+require 'pry'
+
 class UserImagesController < ApplicationController
 
     def create
