@@ -117,11 +117,11 @@ const sessionSlice = createSlice({
                 state.loggedIn = true
                 state.error = null
             })
-            .addCase( refresh.rejected , (state, action )=> {
-                state.status = 'idle'
-                state.loggedIn = false
-                state.error = action.payload
-            }) 
+            // .addCase( refresh.rejected , (state, action )=> {
+            //     state.status = 'idle'
+            //     state.loggedIn = false
+            //     state.error = action.payload
+            // }) 
             .addCase( logout.pending , state => {
                 state.status = 'pending'
                 state.error = null
