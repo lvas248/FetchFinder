@@ -24,8 +24,8 @@ function NavBar(){
                         <h6>VISIT</h6>
                     </NavLink>
 
-                    <NavLink className='navItem' to='/map'>
-                        <h6>MAP</h6>
+                    <NavLink className='navItem' to='/parks'>
+                        <h6>PARKS</h6>
                     </NavLink>
 
                     <NavLink className='navItem' to='/profile'>

@@ -13,7 +13,7 @@ export const getParks = createAsyncThunk(
     }
 )
 const initialState = {
-    entity :{},
+    entity :[],
     status: 'idle',
     error: ''
 }

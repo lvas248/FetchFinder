@@ -4,6 +4,7 @@ import Signup from './Signup';
 import Login from './Login';
 import NavBar from './NavBar';
 import Profile from './Profile'
+import Parks from './Parks';
 
 import { useEffect } from 'react';
 import { refresh } from './features/sessionSlice';
@@ -31,6 +32,11 @@ function App() {
 
       <Switch>
 
+        <Route path='/Parks'>
+          <Parks />
+        </Route>
+        
+        
         <Route path='/signup'>
           <Signup />
         </Route>
