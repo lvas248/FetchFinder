@@ -7,6 +7,7 @@ import Profile from './Profile'
 
 import { useEffect } from 'react';
 import { refresh } from './features/sessionSlice';
+import { getParks } from './features/park/parkSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { Switch, Route } from 'react-router-dom'
 function App() {
@@ -19,6 +20,7 @@ function App() {
   
   useEffect(()=>{
     dispatch(refresh())
+    dispatch(getParks())
   }, [dispatch])
 
 
