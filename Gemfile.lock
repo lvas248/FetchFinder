@@ -85,11 +85,15 @@ GEM
     dotenv (2.8.1)
     erubi (1.10.0)
     ffi (1.15.1)
+    geocoder (1.8.1)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
     http-accept (1.7.0)
     http-cookie (1.0.5)
       domain_name (~> 0.5)
+    httparty (0.21.0)
+      mini_mime (>= 1.0.0)
+      multi_xml (>= 0.5.2)
     i18n (1.8.10)
       concurrent-ruby (~> 1.0)
     jsonapi-renderer (0.2.2)
@@ -110,6 +114,7 @@ GEM
     mini_portile2 (2.5.3)
     minitest (5.14.4)
     msgpack (1.4.2)
+    multi_xml (0.6.0)
     netrc (0.11.0)
     nio4r (2.5.7)
     nokogiri (1.11.7)
@@ -210,6 +215,8 @@ DEPENDENCIES
   byebug
   cloudinary
   dotenv
+  geocoder
+  httparty
   listen (~> 3.3)
   pg (~> 1.1)
   pry

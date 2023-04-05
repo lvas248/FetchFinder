@@ -53,3 +53,5 @@ gem "active_model_serializers", "~> 0.10.12"
 gem 'dotenv'
 gem 'cloudinary'
 gem 'pry'
+gem 'geocoder'
+gem 'httparty'

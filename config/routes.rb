@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   
+  resources :parks
+  
   get 'sessions/create'
   get 'sessions/destroy'
 

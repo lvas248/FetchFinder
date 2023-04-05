@@ -33,6 +33,7 @@ function Signup(){
             password: '',
             password_confirmation: ''
         })
+        history.push('/home')
     }
 
     function navigateToLogin(){
@@ -95,7 +96,7 @@ function Signup(){
 
             <ul className='errorList'>{renderErrors}</ul>
 
-            <p>Back to <Button id='signupHere' size='sm' color='success' onClick={navigateToLogin}>LOGIN</Button></p>
+            <Button id='signupHere' size='sm' color='success' onClick={navigateToLogin}>BACK TO LOGIN</Button>
            
         </form>
     )

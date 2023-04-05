@@ -8,7 +8,7 @@ class User < ApplicationRecord
 
     def upload_and_replace_user_image(new_image)
         result =  Cloudinary::Uploader.upload(new_image.tempfile.path, :transformation => 
-            {:width => 400, :height => 400, :crop=> :scale})
+            {:width => 400, :height => 400, :crop=> :fill})
 
         if self.user_image
             Cloudinary::Uploader.destroy(self.user_image.public_id)

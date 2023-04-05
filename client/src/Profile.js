@@ -2,7 +2,6 @@ import { useState } from 'react'
 import EditUserForm from "./features/user/EditUserForm"
 import { useSelector } from 'react-redux'
 import { Button } from 'reactstrap'
-import ImageUpload from './ImageUpload'
 function Profile(){
 
 
@@ -14,17 +13,15 @@ function Profile(){
         setEditBtnClick(!editBtnClick)
     }
 
-    console.log(user)
     return (
         <div>
 
-            <img src={user.user_image ? user.user_image.url : "http://res.cloudinary.com/dfbe9u9zm/image/upload/v1680705302/cuhgah9jlswpb2uc7p9e.jpg"}/>
+            <img alt={user.username} src={user.user_image ? user.user_image.url : "http://res.cloudinary.com/dfbe9u9zm/image/upload/v1680705302/cuhgah9jlswpb2uc7p9e.jpg"}/>
 
             
             {
                 editBtnClick ? (
                     <>                    
-                        {/* <ImageUpload /> */}
                         <EditUserForm user={user} clickEdit={clickEdit}/> 
                         <Button onClick={clickEdit}>Back</Button>
 
