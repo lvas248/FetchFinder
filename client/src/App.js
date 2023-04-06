@@ -11,6 +11,7 @@ import { refresh } from './features/sessionSlice';
 import { getParks } from './features/park/parkSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { Switch, Route } from 'react-router-dom'
+import MultipleImageUpload from './MultipleImageUpload';
 function App() {
 
   const dispatch = useDispatch()
@@ -51,6 +52,9 @@ function App() {
 
         <Route path='/signup'>
           <Signup />
+        </Route>
+
+        <Route exact path='/visit'>
         </Route>
 
 
