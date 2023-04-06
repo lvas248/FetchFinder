@@ -11,7 +11,7 @@ function ParkCard({park}){
     }
 
    const imageItems = park.park_images?.map( i => {
-        return { caption: park.name, key: i.id, src: i.url}
+        return { caption: park.name, key: i.id, src: i.url }
    })
 
     return (

@@ -82,3 +82,18 @@ a.active{
 #carousel{
   padding: 5%;
 }
+
+
+.switchContainer{
+  overflow-y: scroll;
+  height: 90vh
+}
+
+#navContainer{
+  height: 10vh;
+}
+#map_container{
+  height: 500px;
+  width: 100vw;
+  padding: 5%;
+}

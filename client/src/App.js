@@ -5,13 +5,14 @@ import Login from './Login';
 import NavBar from './NavBar';
 import Profile from './Profile'
 import Parks from './Parks';
+import Home from './Home';
 
 import { useEffect } from 'react';
 import { refresh } from './features/sessionSlice';
 import { getParks } from './features/park/parkSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { Switch, Route } from 'react-router-dom'
-import MultipleImageUpload from './MultipleImageUpload';
+
 function App() {
 
   const dispatch = useDispatch()
@@ -27,40 +28,50 @@ function App() {
 
 
   return (
+
     <div className="App">
-      <h1>Fetch Finder NYC</h1>
-      <NavBar />
+      <div id='navContainer'>
+        <h1>Fetch Finder NYC</h1>
+        <NavBar />       
+      </div>
 
-      <Switch>
+      <div >
+          <Switch >
 
-        <Route path='/Parks'>
-          <Parks />
-        </Route>
-        
-        
-        <Route path='/signup'>
-          <Signup />
-        </Route>
+            <Route path='/parks'>
+              <Parks />
+            </Route>
 
-        <Route exact path='/'>
-          <Login />
-        </Route>
+            <Route path='/home'>
+              <Home />
+            </Route>
+            
+            
+            <Route path='/signup'>
+              <Signup />
+            </Route>
 
-        <Route path='/profile'>
-          <Profile />
-        </Route>
+            <Route exact path='/'>
+              <Login />
+            </Route>
 
-        <Route path='/signup'>
-          <Signup />
-        </Route>
+            <Route path='/profile'>
+              <Profile />
+            </Route>
 
-        <Route exact path='/visit'>
-        </Route>
+            <Route path='/signup'>
+              <Signup />
+            </Route>
+
+            <Route exact path='/visit'>
+            </Route>
 
 
 
-      </Switch>
+          </Switch>
       
+      </div>
+    
       
     </div>
   );
