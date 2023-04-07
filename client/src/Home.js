@@ -1,7 +1,7 @@
-import Map from './Map'
+import Map from './MapComp'
 
 function Home(){
-    
+
     return (
         <div className='switchContainer'>
             <Map />
