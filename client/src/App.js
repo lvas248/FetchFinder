@@ -18,21 +18,20 @@ function App() {
 
   const dispatch = useDispatch()
 
-  const state = useSelector(state => state)
-  const parks = useSelector(state => state.park.entity)
   
-  console.log(state)
-  
+useEffect(()=>{
+    navigator.geolocation.getCurrentPosition(p => {
+        dispatch(setUserLocation({latitude: p.coords.latitude, longitude: p.coords.longitude}))})
+  },[dispatch])
+
   useEffect(()=>{
     dispatch(refresh())
     dispatch(getParks())
   }, [dispatch])
 
-  useEffect(()=>{
-    navigator.geolocation.getCurrentPosition(p => {
-        dispatch(setUserLocation({latitude: p.coords.latitude, longitude: p.coords.longitude}))})
-
-},[dispatch])
+  const state = useSelector(state => state)
+  const parks = useSelector(state => state.park.entity)
+  console.log(state)
 
   
   return (
