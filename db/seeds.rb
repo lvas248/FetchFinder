@@ -1,5 +1,5 @@
-# require 'pry'
-# require 'geocoder'
+require 'pry'
+require 'geocoder'
 # # This file should contain all the record creation needed to seed the database with its default values.
 # # The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
 # #
@@ -32,7 +32,8 @@
 
 #     park_data.map do |p|
 #         # binding.pry
-#             results = Geocoder.search([p['the_geom']['coordinates'][0][0][0][1], p['the_geom']['coordinates'][0][0][0][0]])
+#         results = Geocoder.search([p['the_geom']['coordinates'][0][0][0][1], p['the_geom']['coordinates'][0][0][0][0]])
+#         puts results
 #         Park.create({
 #             name: p['name'],
 #             borough: borough(p['borough']),
@@ -40,8 +41,9 @@
 #             lat: p['the_geom']['coordinates'][0][0][0][1],
 #             long: p['the_geom']['coordinates'][0][0][0][0],
 #             address: results.first.address
-#         })
-     
+#         }) 
+        
+    
 #     end
 
 # end

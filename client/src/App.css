@@ -93,13 +93,33 @@ a.active{
   height: 10vh;
 }
 #map_container{
-  height: 500px;
-  width: 100vw;
+  /* height: 500px;
+  width: 100vw; */
   padding: 5%;
+}
+#map{
+  margin: auto;
+ 
 }
 .text-left{
   text-align: left;
 }
 .header{
   height: 10px;
+}
+#dist{
+  float: right;
+}
+
+.marker{
+  border: none;
+  background-color: transparent;
+  width: 35px;
+  height: 35px;
+}
+
+.selected{
+  border: 2px solid red;
+  border-radius: 35px;
+  background-color: lightyellow;
 }

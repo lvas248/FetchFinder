@@ -10,6 +10,7 @@ import Home from './Home';
 import { useEffect } from 'react';
 import { refresh } from './features/sessionSlice';
 import { getParks } from './features/park/parkSlice';
+import { setUserLocation } from './features/user/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { Switch, Route } from 'react-router-dom'
 
@@ -18,6 +19,7 @@ function App() {
   const dispatch = useDispatch()
 
   const state = useSelector(state => state)
+  const parks = useSelector(state => state.park.entity)
   
   console.log(state)
   
@@ -26,7 +28,13 @@ function App() {
     dispatch(getParks())
   }, [dispatch])
 
+  useEffect(()=>{
+    navigator.geolocation.getCurrentPosition(p => {
+        dispatch(setUserLocation({latitude: p.coords.latitude, longitude: p.coords.longitude}))})
 
+},[dispatch])
+
+  
   return (
 
     <div className="App">

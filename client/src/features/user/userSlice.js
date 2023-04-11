@@ -42,6 +42,7 @@ const initialState = {
         username: '',
         user_image: {}
     },
+    location: null,
     status: '',
     error: ''
 }
@@ -55,6 +56,9 @@ const userSlice = createSlice({
 
         removeUser: ( state ) => {
             state.entity = initialState
+        }, 
+        setUserLocation: (state, action) => {
+            state.location = action.payload
         }
     },
     extraReducers: ( builder ) => {
@@ -89,4 +93,4 @@ const userSlice = createSlice({
 
 export default userSlice.reducer
 
-export const { setUser, removeUser } = userSlice.actions
+export const { setUser, removeUser, setUserLocation } = userSlice.actions

@@ -1,4 +1,4 @@
-import MapGL, { Marker, NavigationControl, GeolocateControl, FullscreenControl } from 'react-map-gl';
+import MapGL, { Marker, NavigationControl, FullscreenControl, GeolocateControl } from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css'
 
 import React, { useState, useEffect } from 'react'
@@ -7,63 +7,56 @@ import ParkBlurb from './ParkBlurb';
 
 function MapComp(){
 
-    const [ viewport, setViewport] = useState({
-        latitude: 40.7128,
-        longitude: -74.0060,
-        zoom: 12
-    })
-    const [ userLocation, setUserLocation ] = useState(null)
-
-    useEffect(()=>{
-        navigator.geolocation.getCurrentPosition(p => {
-            console.log('yes')
-            setUserLocation({latitude: p.coords.latitude, longitude: p.coords.longitude})
-            setViewport({...viewport,latitude: p.coords.latitude, longitude: p.coords.longitude})})
-    },[userLocation])
-
+    const userLocation = useSelector( state => state.user.location)
     const parks = useSelector(state => state.park.entity)
+    const [ viewport, setViewport] = useState({
+        latitude: 40.77686530072597,
+        longitude: -73.85443092329274,
+        zoom: 10
+    })
     const [ selectedPark, setSelectedPark ] = useState(null)
+
+
     
-
-
-
+    function handleViewportChange(v){
+            setViewport(v)
+    }
     const renderMarkers = parks.map( p => {
         return (<Marker 
                     key={p.id} 
                     longitude={p.long} 
                     latitude={p.lat}
-                    onClick={()=> setSelectedPark(p)}
+                    onClick={()=> {
+                        setSelectedPark(p)
+                        
+                    }}
                 >
                     
-            <button>❌</button>
+                    <button className={selectedPark === p ? "selected" : 'marker'}>🌳</button>
         </Marker>)
     })
-    
-   function handleViewportChange(v){
-        setViewport(v)
-   }
-
-
-    const renderUser =  userLocation ? <Marker latitude={userLocation.latitude} longitude={userLocation.longitude}>🤷🏽‍♂️</Marker> : null
+    const renderUser =  userLocation ? <Marker className='marker' latitude={userLocation.latitude} longitude={userLocation.longitude}>❌</Marker> : null
+  
     return (
        
            <div id='map_container'>
-            <div>
+            <div id='map'>
                  <MapGL                   
                     {...viewport}
                     mapboxAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
                     style={{ 
-                        width: '500px', 
-                        height: '500px', 
+                        width: '90vw', 
+                        height: '50vh', 
                         borderRadius: '15px', 
                         border: '2px solid black'
                     }}
                     onMove={handleViewportChange}      
                     mapStyle='mapbox://styles/mapbox/streets-v12'
-                    
                 >
                     <GeolocateControl 
-                    />
+                        positionOptions={{enableHighAccuracy: true}}
+                        trackUserLocation={true}
+                        />
                     <FullscreenControl />
                     <NavigationControl />
                     {renderUser}
@@ -73,7 +66,7 @@ function MapComp(){
                
             </div>
 
-                {selectedPark ? <ParkBlurb park={selectedPark}/> : null }
+                {selectedPark ? <ParkBlurb park={selectedPark} /> : null }
 
            </div>
     )
