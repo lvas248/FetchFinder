@@ -6,6 +6,9 @@ class User < ApplicationRecord
 
     validates :username, { presence: true, uniqueness: true }
 
+    geocoded_by :address
+    after_validation :geocode, if: :address_changed?
+    
     def upload_and_replace_user_image(new_image)
         result =  Cloudinary::Uploader.upload(new_image.tempfile.path, :transformation => 
             {:width => 400, :height => 400, :crop=> :lfill})
@@ -21,6 +24,12 @@ class User < ApplicationRecord
         )
     end
 
-    
+    def address
+        self.home_address
+    end
+
+    def address_changed?
+        self.home_address_changed?
+    end
 
 end

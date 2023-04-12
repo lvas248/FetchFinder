@@ -10,7 +10,6 @@ import Home from './Home';
 import { useEffect } from 'react';
 import { refresh } from './features/sessionSlice';
 import { getParks } from './features/park/parkSlice';
-import { setUserLocation } from './features/user/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { Switch, Route } from 'react-router-dom'
 
@@ -19,10 +18,7 @@ function App() {
   const dispatch = useDispatch()
 
   
-useEffect(()=>{
-    navigator.geolocation.getCurrentPosition(p => {
-        dispatch(setUserLocation({latitude: p.coords.latitude, longitude: p.coords.longitude}))})
-  },[dispatch])
+
 
   useEffect(()=>{
     dispatch(refresh())

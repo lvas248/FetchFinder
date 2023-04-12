@@ -114,8 +114,8 @@ a.active{
 .marker{
   border: none;
   background-color: transparent;
-  width: 35px;
-  height: 35px;
+  width: 100px;
+  height: 100px;
 }
 
 .selected{

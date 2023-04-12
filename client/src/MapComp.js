@@ -1,13 +1,13 @@
 import MapGL, { Marker, NavigationControl, FullscreenControl, GeolocateControl } from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css'
 
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import ParkBlurb from './ParkBlurb';
 
 function MapComp(){
 
-    const userLocation = useSelector( state => state.user.location)
+    const userLocation = useSelector(state => state.user.entity.home)
     const parks = useSelector(state => state.park.entity)
     const [ viewport, setViewport] = useState({
         latitude: 40.77686530072597,
@@ -16,7 +16,7 @@ function MapComp(){
     })
     const [ selectedPark, setSelectedPark ] = useState(null)
 
-
+    // console.log(process.env.REACT_APP_MAPBOX_ACCESS_TOKEN)
     
     function handleViewportChange(v){
             setViewport(v)
@@ -35,7 +35,7 @@ function MapComp(){
                     <button className={selectedPark === p ? "selected" : 'marker'}>🌳</button>
         </Marker>)
     })
-    const renderUser =  userLocation ? <Marker className='marker' latitude={userLocation.latitude} longitude={userLocation.longitude}>❌</Marker> : null
+    const renderUser =  userLocation ? <Marker className='marker' latitude={userLocation[1]} longitude={userLocation[0]}>🏠</Marker> : null
   
     return (
        
@@ -44,6 +44,7 @@ function MapComp(){
                  <MapGL                   
                     {...viewport}
                     mapboxAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
+
                     style={{ 
                         width: '90vw', 
                         height: '50vh', 

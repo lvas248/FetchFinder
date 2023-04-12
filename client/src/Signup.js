@@ -11,7 +11,8 @@ function Signup(){
     const [ signupObj, setSignupObj ] = useState({
         username: '',
         password: '',
-        password_confirmation: ''
+        password_confirmation: '',
+        home_address: ''
     })
     const [ errors, setErrors] = useState([])
 
@@ -31,7 +32,8 @@ function Signup(){
         setSignupObj({
             username: '',
             password: '',
-            password_confirmation: ''
+            password_confirmation: '',
+            home_address: ''
         })
         history.push('/home')
     }
@@ -82,6 +84,18 @@ function Signup(){
                 <Input 
                     id='password_confirmation' 
                     value={signupObj.password_confirmation} 
+                    onChange={updateSignupObj} 
+                    required 
+                />
+
+            </div>
+
+            <div className='inputField'>
+
+                <Label>Home Address: </Label>
+                <Input 
+                    id='home_address' 
+                    value={signupObj.home_address} 
                     onChange={updateSignupObj} 
                     required 
                 />
