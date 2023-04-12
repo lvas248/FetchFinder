@@ -43,7 +43,8 @@ function MapComp(){
             <div id='map'>
                  <MapGL                   
                     {...viewport}
-                    mapboxAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
+                    // mapboxAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
+                    mapboxAccessToken='pk.eyJ1IjoibHZhczI0OCIsImEiOiJjbGc1ZGNsNmQwMmVhM2xwb3Y4bTl3eTF6In0.gUK1qM941_27NOUGgiP9jg'
 
                     style={{ 
                         width: '90vw', 

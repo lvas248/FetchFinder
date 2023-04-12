@@ -1,9 +1,11 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { setUser, removeUser } from './user/userSlice'
+import { setParks } from './park/parkSlice'
+import updateParkDistances from '../turf'
 
 export const signup = createAsyncThunk( 
     'session/signup',
-    async( obj, { dispatch, rejectWithValue})=>{
+    async( obj, { dispatch, rejectWithValue, getState})=>{
         const response = await fetch('/signup',{
             method: 'POST',
             headers: {
@@ -13,7 +15,14 @@ export const signup = createAsyncThunk(
         })
         const data = await response.json()
         if(response.ok){
+            const parks = getState().park.entity
+            const updatedParks = parks.map( p => {
+                return {...p, distance_from_user: updateParkDistances([p.long, p.lat],data.home)}
+            })
             dispatch(setUser(data))
+            dispatch(setParks(updatedParks))
+
+            
             return
         }
         return rejectWithValue(data)
@@ -22,7 +31,7 @@ export const signup = createAsyncThunk(
 
 export const login = createAsyncThunk( 
     'session/login',
-    async( obj, { dispatch, rejectWithValue})=>{
+    async( obj, { dispatch, rejectWithValue, getState })=>{
         const response = await fetch('/login',{
             method: 'POST',
             headers: {
@@ -31,8 +40,16 @@ export const login = createAsyncThunk(
             body: JSON.stringify(obj)
         })
         const data = await response.json()
+        //if response ok, update distance_from_park attribute in parks and update user
         if(response.ok){
+            const parks = getState().park.entity
+            const updatedParks = parks.map( p => {
+                return {...p, distance_from_user: updateParkDistances([p.long, p.lat],data.home)}
+            })
+            //set user
             dispatch(setUser(data))
+            //update parks with distance from user
+            dispatch(setParks(updatedParks))
             return
         }
         return rejectWithValue(data)
@@ -42,25 +59,32 @@ export const login = createAsyncThunk(
 
 export const refresh = createAsyncThunk( 
     'session/refresh' ,
-    async( _, { dispatch, rejectWithValue })=>{
+    async( _, { dispatch, rejectWithValue, getState })=>{
         const response = await fetch('/me')
         const data = await response.json()
         if(response.ok){ 
+            const parks = getState().park.entity
+            const updatedParks = parks.map( p => {
+                return {...p, distance_from_user: updateParkDistances([p.long, p.lat], data.home)}
+            })
             dispatch(setUser(data))
-            return }
+            dispatch(setParks(updatedParks))
+            return 
+        }
         return rejectWithValue(data)
     }
 )
 
 export const logout = createAsyncThunk(
     'session/logout',
-    async( _,{ dispatch })=>{
+    async( _,{ dispatch, getState })=>{
 
         const response = await fetch('/logout',{
             method: 'DELETE'
         })
         if(response.ok){ 
             dispatch(removeUser())
+
             return 
         }
 

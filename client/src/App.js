@@ -20,7 +20,7 @@ function App() {
   
 
 
-  useEffect(()=>{
+  useEffect(()=>{    
     dispatch(refresh())
     dispatch(getParks())
   }, [dispatch])

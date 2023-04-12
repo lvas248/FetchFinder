@@ -1,13 +1,26 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import updateParkDistances from '../../turf'
 
 export const getParks = createAsyncThunk(
     'parks/get',
-    async(_,{rejectWithValue})=>{
+    async(_,{rejectWithValue, getState})=>{
         const response = await fetch('/parks')
         const data = await response.json()
 
-        if(response.ok){
-            return data
+        if(response.ok){        
+            const loggedIn = getState().session.loggedIn
+            
+            //if there is a user logged in, add distance_from_user attribtute to parks
+            if(loggedIn){
+                const userLocation = getState().user.entity.home
+                const updatedParks = data.map( p => {
+                    return {...p, distance_from_user: updateParkDistances([p.long, p.lat], userLocation)}
+                })
+                return updatedParks
+            }
+            else{
+                return data
+            }
         }
         return rejectWithValue(data)
     }
@@ -39,6 +52,9 @@ const parkSlice = createSlice({
     name: 'park',
     initialState: initialState,
     reducers:{
+        setParks: (state, action) =>{
+            state.entity = action.payload
+        }
 
     },
     extraReducers: builder =>{
