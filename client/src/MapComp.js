@@ -2,9 +2,9 @@ import MapGL, { Marker, NavigationControl, FullscreenControl, GeolocateControl }
 import 'mapbox-gl/dist/mapbox-gl.css'
 
 import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import ParkBlurb from './ParkBlurb';
-
+import { updateParkDistanceFromUser } from './features/park/parkSlice';
 function MapComp(){
 
     const userLocation = useSelector(state => state.user.entity.home)
@@ -14,21 +14,26 @@ function MapComp(){
         longitude: -73.85443092329274,
         zoom: 10
     })
-    const [ selectedPark, setSelectedPark ] = useState(null)
-
+    const [ selectedMarker, setSelectedMarker ] = useState(null)
+    const dispatch = useDispatch()
     // console.log(process.env.REACT_APP_MAPBOX_ACCESS_TOKEN)
-    
+    function updateUserLocation(e){
+        dispatch(updateParkDistanceFromUser([e.coords.longitude, e.coords.latitude]))
+    }
+
     function handleViewportChange(v){
             setViewport(v)
     }
+
+    const selectedPark = parks.find( p => p.id === selectedMarker)
+
     const renderMarkers = parks.map( p => {
         return (<Marker 
                     key={p.id} 
                     longitude={p.long} 
                     latitude={p.lat}
                     onClick={()=> {
-                        setSelectedPark(p)
-                        
+                        setSelectedMarker(p.id)
                     }}
                 >
                     
@@ -58,6 +63,7 @@ function MapComp(){
                     <GeolocateControl 
                         positionOptions={{enableHighAccuracy: true}}
                         trackUserLocation={true}
+                        onGeolocate={updateUserLocation}
                         />
                     <FullscreenControl />
                     <NavigationControl />
@@ -68,7 +74,7 @@ function MapComp(){
                
             </div>
 
-                {selectedPark ? <ParkBlurb park={selectedPark} /> : null }
+                {selectedMarker ? <ParkBlurb park={selectedPark} /> : null }
 
            </div>
     )

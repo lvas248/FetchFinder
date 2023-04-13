@@ -8,19 +8,20 @@ export const getParks = createAsyncThunk(
         const data = await response.json()
 
         if(response.ok){        
-            const loggedIn = getState().session.loggedIn
+            // const loggedIn = getState().session.loggedIn
             
             //if there is a user logged in, add distance_from_user attribtute to parks
-            if(loggedIn){
-                const userLocation = getState().user.entity.home
-                const updatedParks = data.map( p => {
-                    return {...p, distance_from_user: updateParkDistances([p.long, p.lat], userLocation)}
-                })
-                return updatedParks
-            }
-            else{
-                return data
-            }
+            // if(loggedIn){
+            //     const userLocation = getState().user.entity.home
+            //     const updatedParks = data.map( p => {
+            //         return {...p, distance_from_user: updateParkDistances([p.long, p.lat], userLocation)}
+            //     })
+            //     return updatedParks
+            // }
+            // else{
+            //     return data
+            // }
+            return data
         }
         return rejectWithValue(data)
     }
@@ -54,6 +55,11 @@ const parkSlice = createSlice({
     reducers:{
         setParks: (state, action) =>{
             state.entity = action.payload
+        },
+        updateParkDistanceFromUser: (state, action) =>{
+            state.entity = state.entity.map( p =>{
+                return {...p, distance_from_user: updateParkDistances([p.long, p.lat], action.payload)}
+            })
         }
 
     },
@@ -92,4 +98,4 @@ const parkSlice = createSlice({
 
 export default parkSlice.reducer
 
-export const { setParks } = parkSlice.actions
+export const { setParks, updateParkDistanceFromUser } = parkSlice.actions

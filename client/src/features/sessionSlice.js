@@ -15,14 +15,7 @@ export const signup = createAsyncThunk(
         })
         const data = await response.json()
         if(response.ok){
-            const parks = getState().park.entity
-            const updatedParks = parks.map( p => {
-                return {...p, distance_from_user: updateParkDistances([p.long, p.lat],data.home)}
-            })
             dispatch(setUser(data))
-            dispatch(setParks(updatedParks))
-
-            
             return
         }
         return rejectWithValue(data)
@@ -40,22 +33,13 @@ export const login = createAsyncThunk(
             body: JSON.stringify(obj)
         })
         const data = await response.json()
-        //if response ok, update distance_from_park attribute in parks and update user
         if(response.ok){
-            const parks = getState().park.entity
-            const updatedParks = parks.map( p => {
-                return {...p, distance_from_user: updateParkDistances([p.long, p.lat],data.home)}
-            })
-            //set user
             dispatch(setUser(data))
-            //update parks with distance from user
-            dispatch(setParks(updatedParks))
             return
         }
         return rejectWithValue(data)
     }
 )
-
 
 export const refresh = createAsyncThunk( 
     'session/refresh' ,
@@ -63,12 +47,7 @@ export const refresh = createAsyncThunk(
         const response = await fetch('/me')
         const data = await response.json()
         if(response.ok){ 
-            const parks = getState().park.entity
-            const updatedParks = parks.map( p => {
-                return {...p, distance_from_user: updateParkDistances([p.long, p.lat], data.home)}
-            })
             dispatch(setUser(data))
-            dispatch(setParks(updatedParks))
             return 
         }
         return rejectWithValue(data)
