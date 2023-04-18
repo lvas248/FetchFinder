@@ -129,3 +129,8 @@ a.active{
   text-align: left;
   padding: 5%;
 }
+
+#locate{
+  float: right;
+  margin: 1%;
+}

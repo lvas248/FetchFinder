@@ -2,7 +2,7 @@
 import { NavLink, useHistory, Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { logout } from './features/sessionSlice'
-
+import { Button } from 'reactstrap'
 
 function NavBar(){
     const dispatch = useDispatch()
@@ -17,7 +17,7 @@ function NavBar(){
         <nav id='navbar'>
             <ul>
                     <NavLink className='navItem' to='/map'>
-                        <h6>Map</h6>
+                        <h6>MAP</h6>
                     </NavLink>
 
                     <NavLink className='navItem' to='/visit'>

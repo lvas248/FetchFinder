@@ -47,6 +47,11 @@ const parkSlice = createSlice({
             state.entity = state.entity.map( p =>{
                 return {...p, distance_from_user: updateParkDistances([p.long, p.lat], action.payload)}
             })
+        },
+        removeParkDistanceFromUser: (state) =>{
+            state.entity = state.entity.map( p =>{
+                return {...p, distance_from_user: 1}
+            })
         }
     },
     extraReducers: builder =>{
@@ -84,4 +89,4 @@ const parkSlice = createSlice({
 
 export default parkSlice.reducer
 
-export const { setParks, updateParkDistanceFromUser } = parkSlice.actions
+export const { setParks, updateParkDistanceFromUser, removeParkDistanceFromUser } = parkSlice.actions

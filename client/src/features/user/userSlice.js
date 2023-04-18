@@ -52,22 +52,6 @@ export const getUserPosition = createAsyncThunk(
                 reject(error)
             }) 
         })
-
-
-
-
-
-        // return new Promise((resolve, reject) => {
-        //     navigator.geolocation.getCurrentPosition(
-        //         p =>{
-        //             const { latitude, longitude } = p.coords
-        //             resolve({longitude, latitude})
-        //         },
-        //         error => {
-        //             reject(error)
-        //         }
-        //     )
-        // })
     }
 )
 

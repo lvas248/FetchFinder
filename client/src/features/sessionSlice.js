@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { setUser, removeUser } from './user/userSlice'
+import { removeParkDistanceFromUser } from './park/parkSlice'
 
 export const signup = createAsyncThunk( 
     'session/signup',
@@ -46,6 +47,7 @@ export const refresh = createAsyncThunk(
         const data = await response.json()
         if(response.ok){ 
             dispatch(setUser(data))
+            removeParkDistanceFromUser()
             return 
         }
         return rejectWithValue(data)
@@ -54,7 +56,7 @@ export const refresh = createAsyncThunk(
 
 export const logout = createAsyncThunk(
     'session/logout',
-    async( _,{ dispatch, getState })=>{
+    async( _,{ dispatch })=>{
 
         const response = await fetch('/logout',{
             method: 'DELETE'

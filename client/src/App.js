@@ -12,26 +12,30 @@ import { refresh } from './features/sessionSlice';
 import { getParks } from './features/park/parkSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { Switch, Route } from 'react-router-dom'
+import { Button } from 'reactstrap';
+import { getUserPosition } from './features/user/userSlice';
 
 function App() {
 
   const dispatch = useDispatch()
-
 
   useEffect(()=>{    
     dispatch(refresh())
     dispatch(getParks())
   }, [dispatch])
 
-  const state = useSelector(state => state)
-  console.log(state)
+  const user = useSelector( state => state.user)
 
+  function locateUser(){
+    dispatch(getUserPosition())
+  }
   
   return (
 
     <div className="App">
       <div id='navContainer'>
-        <h1>Fetch Finder NYC</h1>
+        { user.location ? null : <Button id='locate' color='warning' onClick={locateUser}>📍</Button> } 
+        <h1>Fetch Finder NYC</h1>        
         <NavBar />       
       </div>
 
