@@ -5,9 +5,11 @@ import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import ParkBlurb from './ParkBlurb';
 import { updateParkDistanceFromUser } from './features/park/parkSlice';
+
 function MapComp(){
 
-    const userLocation = useSelector(state => state.user.entity.home)
+
+    const home = useSelector(state => state.user.entity.home)
     const parks = useSelector(state => state.park.entity)
     const [ viewport, setViewport] = useState({
         latitude: 40.77686530072597,
@@ -16,7 +18,7 @@ function MapComp(){
     })
     const [ selectedMarker, setSelectedMarker ] = useState(null)
     const dispatch = useDispatch()
-    // console.log(process.env.REACT_APP_MAPBOX_ACCESS_TOKEN)
+
     function updateUserLocation(e){
         dispatch(updateParkDistanceFromUser([e.coords.longitude, e.coords.latitude]))
     }
@@ -40,7 +42,7 @@ function MapComp(){
                     <button className={selectedPark === p ? "selected" : 'marker'}>🌳</button>
         </Marker>)
     })
-    const renderUser =  userLocation ? <Marker className='marker' latitude={userLocation[1]} longitude={userLocation[0]}>🏠</Marker> : null
+    const renderUser =  home ? <Marker className='marker' latitude={home[1]} longitude={home[0]}>🏠</Marker> : null
   
     return (
        
@@ -74,8 +76,7 @@ function MapComp(){
                
             </div>
 
-                {selectedMarker ? <ParkBlurb park={selectedPark} /> : null }
-
+                {selectedMarker ? <ParkBlurb park={selectedPark} /> : <p>Select a park for details</p> }
            </div>
     )
     

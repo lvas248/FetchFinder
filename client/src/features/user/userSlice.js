@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { updateParkDistanceFromUser } from "../park/parkSlice";
 
 export const editUser = createAsyncThunk(
     'user/editUser',
@@ -35,6 +36,39 @@ export const uploadUserImage = createAsyncThunk(
         return rejectWithValue(image)
     }
 
+)
+
+export const getUserPosition = createAsyncThunk(
+    'user/getPosition',
+    async( _, { dispatch })=>{
+        return new Promise((resolve, reject)=>{
+           navigator.geolocation.getCurrentPosition( 
+            p=>{
+                const coords = [p.coords.longitude, p.coords.latitude]
+                dispatch(updateParkDistanceFromUser(coords))
+                resolve(coords)
+            },
+            error => {
+                reject(error)
+            }) 
+        })
+
+
+
+
+
+        // return new Promise((resolve, reject) => {
+        //     navigator.geolocation.getCurrentPosition(
+        //         p =>{
+        //             const { latitude, longitude } = p.coords
+        //             resolve({longitude, latitude})
+        //         },
+        //         error => {
+        //             reject(error)
+        //         }
+        //     )
+        // })
+    }
 )
 
 const initialState = {
@@ -77,11 +111,22 @@ const userSlice = createSlice({
                 state.status = 'pending'
             })
             .addCase( uploadUserImage.fulfilled, (state, action)=>{
-                state.state = 'idle'
+                state.status = 'idle'
                 state.entity = {...state.entity, user_image: action.payload}
             })
             .addCase( uploadUserImage.rejected, state => {
                 state.status = 'error'
+            })
+            .addCase( getUserPosition.pending, state=>{
+                state.status = 'pending'
+            })
+            .addCase( getUserPosition.fulfilled, (state, action)=>{
+                state.status = 'fullfilled'
+                state.location = action.payload
+            })
+            .addCase( getUserPosition.rejected, (state, action)=>{
+                state.status = 'rejected'
+                state.error = action.payload
             })
             
     }

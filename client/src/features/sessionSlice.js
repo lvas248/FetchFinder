@@ -1,7 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { setUser, removeUser } from './user/userSlice'
-import { setParks } from './park/parkSlice'
-import updateParkDistances from '../turf'
 
 export const signup = createAsyncThunk( 
     'session/signup',

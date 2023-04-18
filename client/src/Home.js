@@ -1,10 +1,13 @@
-import Map from './MapComp'
 
+import { useParams } from 'react-router-dom'
 function Home(){
+
+    const { parkId } = useParams()
+    console.log(parkId)
 
     return (
         <div className='switchContainer'>
-            <Map />
+   
             
         </div>
     )

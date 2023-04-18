@@ -124,3 +124,8 @@ a.active{
   border-radius: 35px;
   background-color: lightyellow;
 }
+
+#parkCardBody{
+  text-align: left;
+  padding: 5%;
+}

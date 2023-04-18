@@ -5,8 +5,8 @@ import Login from './Login';
 import NavBar from './NavBar';
 import Profile from './Profile'
 import Parks from './Parks';
-import Home from './Home';
-
+import MapComp from './MapComp';
+import ParkCard from  './ParkCard'
 import { useEffect } from 'react';
 import { refresh } from './features/sessionSlice';
 import { getParks } from './features/park/parkSlice';
@@ -17,8 +17,6 @@ function App() {
 
   const dispatch = useDispatch()
 
-  
-
 
   useEffect(()=>{    
     dispatch(refresh())
@@ -26,7 +24,6 @@ function App() {
   }, [dispatch])
 
   const state = useSelector(state => state)
-  const parks = useSelector(state => state.park.entity)
   console.log(state)
 
   
@@ -41,12 +38,16 @@ function App() {
       <div >
           <Switch >
 
-            <Route path='/parks'>
-              <Parks />
+            <Route exact path='/map'>
+              <MapComp />
             </Route>
 
-            <Route path='/home'>
-              <Home />
+            <Route path='/map/park/:parkId'>
+              <ParkCard />
+            </Route>
+
+            <Route path='/parks'>
+              <Parks />
             </Route>
             
             

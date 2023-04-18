@@ -16,8 +16,8 @@ function NavBar(){
     return (
         <nav id='navbar'>
             <ul>
-                    <NavLink className='navItem' to='/home'>
-                        <h6>HOME</h6>
+                    <NavLink className='navItem' to='/map'>
+                        <h6>Map</h6>
                     </NavLink>
 
                     <NavLink className='navItem' to='/visit'>

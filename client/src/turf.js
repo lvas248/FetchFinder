@@ -1,5 +1,4 @@
 import * as turf from '@turf/turf'
-import { useSelector } from 'react-redux';
 
 function updateParkDistances(coord1,coord2){
 

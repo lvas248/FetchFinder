@@ -26,7 +26,7 @@ function Login(){
         e.preventDefault()
         dispatch(login(loginObj)).then(result =>{
             if(result.type === 'session/login/fulfilled'){
-                history.push('/home')
+                history.push('/map')
                 
             }
         })
