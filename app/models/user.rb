@@ -3,7 +3,7 @@ class User < ApplicationRecord
     has_secure_password
 
     has_one :user_image
-    
+    has_many :comments
 
     validates :username, { presence: true, uniqueness: true }
 
