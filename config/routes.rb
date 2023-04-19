@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   
   
+  resources :comments
   resources :parks
 
   post '/park_images/:id', to: 'park_images#create'
