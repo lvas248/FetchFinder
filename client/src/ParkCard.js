@@ -1,12 +1,10 @@
 import { useState } from 'react'
 import { Card, CardTitle, CardSubtitle, CardBody, CardText, Button, UncontrolledCarousel } from 'reactstrap'
 import MultipleImageUpload from "./MultipleImageUpload"
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useParams, useHistory } from 'react-router-dom'
-import { getUserPosition } from './features/user/userSlice'
 
 function ParkCard({ park = null }){
-    const dispatch = useDispatch()
     const history = useHistory()
     const { parkId } = useParams()
     const parks = useSelector(state => state.park.entity)
@@ -19,11 +17,6 @@ function ParkCard({ park = null }){
     }
     function navigateToMap(){
         history.push('/map')
-    }
-
-    function getUserLocation(){
-        dispatch(getUserPosition())
-        
     }
 
    const imageItems = park?.park_images?.map( i => {
@@ -67,7 +60,6 @@ function ParkCard({ park = null }){
                     <Button size='sm' onClick={clickBtn}>{ addImageClick ? 'Cancel' : 'Add Images'}</Button>
                     <Button size='sm' color='primary' onClick={navigateToMap} >Map</Button>
                     <Button size='sm' color='success'>Schedule a visit</Button>
-                    {  park?.distance_from_user ? null : <Button onClick={getUserLocation} size='sm'>Geolocate</Button>}
                 </div>
 
                 <div id='parkCardBody'>

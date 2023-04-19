@@ -64,6 +64,7 @@ const initialState = {
     status: '',
     error: ''
 }
+
 const userSlice = createSlice({
     name: 'user',
     initialState: initialState,
@@ -73,7 +74,8 @@ const userSlice = createSlice({
             ,
 
         removeUser: ( state ) => {
-            state.entity = initialState
+            state.entity = initialState.entity
+            state.location = null
         }, 
         setUserLocation: (state, action) => {
             state.location = action.payload

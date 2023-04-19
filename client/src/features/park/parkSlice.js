@@ -52,6 +52,27 @@ const parkSlice = createSlice({
             state.entity = state.entity.map( p =>{
                 return {...p, distance_from_user: 1}
             })
+        },
+        alphabetizeParks: ( state ) =>{
+            state.entity = state.entity.sort((a,b)=>{
+                if(a.name > b.name) return 1
+                else if(a.name < b.name) return -1
+                else return 0
+            })
+        },
+        reverseAlphabetizeParks: ( state ) =>{
+            state.entity = state.entity.sort((a,b)=>{
+                if(a.name < b.name) return 1
+                else if(a.name > b.name) return -1
+                else return 0
+            })
+        },
+        organizeParksByDistance: ( state ) => {
+            state.entity = state.entity.sort((a,b)=>{
+                if(a.distance_from_user > b.distance_from_user) return 1
+                else if(a.distance_from_user < b.distance_from_user) return -1
+                else return 0
+            })
         }
     },
     extraReducers: builder =>{
@@ -89,4 +110,4 @@ const parkSlice = createSlice({
 
 export default parkSlice.reducer
 
-export const { setParks, updateParkDistanceFromUser, removeParkDistanceFromUser } = parkSlice.actions
+export const { setParks, updateParkDistanceFromUser, removeParkDistanceFromUser, alphabetizeParks, reverseAlphabetizeParks, organizeParksByDistance } = parkSlice.actions

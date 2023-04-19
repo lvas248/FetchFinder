@@ -131,6 +131,26 @@ a.active{
 }
 
 #locate{
-  float: right;
-  margin: 1%;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+
+#parkFilter{
+  margin: 2%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+#parkFilterSearchInput{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 50%;
+  margin: auto;
+}
+
+.filterDiv > * {
+  margin: 3px;
 }

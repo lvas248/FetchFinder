@@ -1,10 +1,9 @@
-import MapGL, { Marker, NavigationControl, FullscreenControl, GeolocateControl } from 'react-map-gl';
+import MapGL, { Marker, NavigationControl, FullscreenControl } from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css'
 
 import React, { useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import ParkBlurb from './ParkBlurb';
-import { Button } from 'reactstrap'
 function MapComp(){
 
 
@@ -16,11 +15,6 @@ function MapComp(){
         zoom: 10
     })
     const [ selectedMarker, setSelectedMarker ] = useState(null)
-    const dispatch = useDispatch()
-
-    // function updateUserLocation(e){
-    //     dispatch(updateParkDistanceFromUser([e.coords.longitude, e.coords.latitude]))
-    // }
 
     function handleViewportChange(v){
             setViewport(v)
@@ -60,11 +54,6 @@ function MapComp(){
                     onMove={handleViewportChange}      
                     mapStyle='mapbox://styles/mapbox/streets-v12'
                 >
-                    {/* <GeolocateControl 
-                        positionOptions={{enableHighAccuracy: true}}
-                        trackUserLocation={true}
-                        onGeolocate={updateUserLocation}
-                        /> */}
                     <FullscreenControl />
                     <NavigationControl />
                     {renderHome}                   

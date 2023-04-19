@@ -25,6 +25,9 @@ function App() {
   }, [dispatch])
 
   const user = useSelector( state => state.user)
+  const session = useSelector( state => state.session)
+
+  console.log(user)
 
   function locateUser(){
     dispatch(getUserPosition())
@@ -34,7 +37,7 @@ function App() {
 
     <div className="App">
       <div id='navContainer'>
-        { user.location ? null : <Button id='locate' color='warning' onClick={locateUser}>📍</Button> } 
+        { !user.location && session.loggedIn ? <Button id='locate' color='warning' onClick={locateUser}>📍</Button> : null } 
         <h1>Fetch Finder NYC</h1>        
         <NavBar />       
       </div>
@@ -54,10 +57,6 @@ function App() {
               <Parks />
             </Route>
             
-            
-            <Route path='/signup'>
-              <Signup />
-            </Route>
 
             <Route exact path='/'>
               <Login />

@@ -2,7 +2,6 @@
 import { NavLink, useHistory, Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { logout } from './features/sessionSlice'
-import { Button } from 'reactstrap'
 
 function NavBar(){
     const dispatch = useDispatch()
