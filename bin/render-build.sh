@@ -9,5 +9,6 @@ cp -a client/build/. public/
 
 # builds the back end code
 bundle install
-bundle exec rake db:drop db:create db:migrate
+bundle exec rake db:drop RAILS_ENV=production
+bundle exec rake db:create db:migrate
 bundle exec rake db:seed # if you have seed data, run this command for the initial deploy only
