@@ -8,6 +8,7 @@ require 'geocoder'
 # #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 # #   Character.create(name: 'Luke', movie: movies.first)
 
+
 response = HTTParty.get("https://data.cityofnewyork.us/resource/hxx3-bwgv.json")
 
 if response.code == 200
