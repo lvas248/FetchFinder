@@ -11,8 +11,6 @@ require 'geocoder'
 
 response = HTTParty.get("https://data.cityofnewyork.us/resource/hxx3-bwgv.json")
 
-Park.destroy_all
-
 if response.code == 200
     park_data = JSON.parse(response.body)
     # binding.pry
