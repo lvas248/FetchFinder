@@ -80,7 +80,7 @@ function ParkCard({ park = null }){
                 
             { session.loggedIn ? <Button size='link' color='warning' id='commentBtn' onClick={()=>setShowComments(!showComments)}>{ showComments ? 'Hide Comments' : 'Show Comments'}</Button> : null }
             
-            { showComments ? <Comments comments={park?.comments}/> : null}
+            { showComments ? <Comments comments={park?.comments} parkId={park?.id}/> : null}
 
         </Card>
     )

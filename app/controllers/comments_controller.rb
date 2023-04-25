@@ -2,7 +2,7 @@ class CommentsController < ApplicationController
 
     def create
         user = User.find(session[:user_id])
-        comment = user.comments.create(comment_params)
+        comment = user.comments.create!(comment_params)
         render json: comment, status: :created
     end
 
@@ -13,3 +13,5 @@ class CommentsController < ApplicationController
     end
 
 end
+
+# Figure out params issue

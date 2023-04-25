@@ -30,6 +30,25 @@ export const uploadParkImages = createAsyncThunk(
     }
 )
 
+export const addCommentToPark = createAsyncThunk(
+    'parks/addComment',
+    async(obj, { rejectWithValue })=>{
+        const response = await fetch('/comments',{
+            method: 'POST',
+            headers: {
+                'Content-Type':'application/json'
+            },
+            body: JSON.stringify(obj)        
+        })
+
+        const data = await response.json()
+
+        if(response.ok) return data
+
+        return rejectWithValue(data)
+    }
+)
+
 const initialState = {
     entity:[],
     status: 'idle',
@@ -101,6 +120,21 @@ const parkSlice = createSlice({
                    else return p
                 })
             })
+            .addCase( addCommentToPark.pending, (state) => {
+                state.status = 'pending'
+            })
+            .addCase( addCommentToPark.fulfilled, (state, action)=>{
+                state.status = 'idle'            
+                state.entity = state.entity.map( p =>{
+                    if( p.id === action.payload.park.id){
+                        return {...p, comments: [action.payload, ...p.comments]}
+                    }else return p
+                })
+            })
+            .addCase( addCommentToPark.rejected, (state, action)=>{
+                state.error = action.payload
+            })
+        
 
 
     }

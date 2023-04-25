@@ -4,7 +4,7 @@ import { removeParkDistanceFromUser } from './park/parkSlice'
 
 export const signup = createAsyncThunk( 
     'session/signup',
-    async( obj, { dispatch, rejectWithValue, getState})=>{
+    async( obj, { dispatch, rejectWithValue })=>{
         const response = await fetch('/signup',{
             method: 'POST',
             headers: {

@@ -24,7 +24,7 @@ function App() {
     dispatch(getParks())
   }, [dispatch])
 
-  const user = useSelector( state => state.user)
+  const user = useSelector( state => state.park)
   const session = useSelector( state => state.session)
 
   console.log(user)
