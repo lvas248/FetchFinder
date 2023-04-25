@@ -50,7 +50,7 @@ const parkSlice = createSlice({
         },
         removeParkDistanceFromUser: (state) =>{
             state.entity = state.entity.map( p =>{
-                return {...p, distance_from_user: 1}
+                return {...p, distance_from_user: null}
             })
         },
         alphabetizeParks: ( state ) =>{

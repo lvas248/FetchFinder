@@ -63,7 +63,7 @@ export const logout = createAsyncThunk(
         })
         if(response.ok){ 
             dispatch(removeUser())
-
+            dispatch(removeParkDistanceFromUser())
             return 
         }
 
