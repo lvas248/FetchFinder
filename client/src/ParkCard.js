@@ -3,14 +3,19 @@ import { Card, CardTitle, CardSubtitle, CardBody, CardText, Button, Uncontrolled
 import MultipleImageUpload from "./MultipleImageUpload"
 import { useSelector } from 'react-redux'
 import { useParams, useHistory } from 'react-router-dom'
+import Comments from './Comments'
 
 function ParkCard({ park = null }){
+
     const history = useHistory()
     const { parkId } = useParams()
+
     const parks = useSelector(state => state.park.entity)
+    const session = useSelector(state => state.session)
     park = park || parks.find( p => p.id === parseInt(parkId))
 
     const [ addImageClick, setAddImageClick ] = useState(false)
+    const [ showComments, setShowComments ] = useState(false)
 
     function clickBtn(){
         setAddImageClick(!addImageClick)
@@ -19,9 +24,12 @@ function ParkCard({ park = null }){
         history.push('/map')
     }
 
-   const imageItems = park?.park_images?.map( i => {
-        return { caption: park.name, key: i.id, src: i.url }
-   })
+    const imageItems = park?.park_images.map( i => {
+            return { caption: park.name, key: i.id, src: i.url }
+    })
+
+
+
 
     return (
         <Card className='parkCard'>
@@ -68,7 +76,12 @@ function ParkCard({ park = null }){
 
                 </div>
             </CardBody>
-        
+
+                
+            { session.loggedIn ? <Button size='link' color='warning' id='commentBtn' onClick={()=>setShowComments(!showComments)}>{ showComments ? 'Hide Comments' : 'Show Comments'}</Button> : null }
+            
+            { showComments ? <Comments comments={park?.comments}/> : null}
+
         </Card>
     )
 }

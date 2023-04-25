@@ -154,3 +154,49 @@ a.active{
 .filterDiv > * {
   margin: 3px;
 }
+
+#commentCard{
+  display: flex;
+  flex-direction: row;
+  flex-direction: column;
+  margin: 2%;
+}
+
+#commentImage{
+  height: 35px;
+  width: 35px;
+  float: left;
+  margin: auto;
+  margin-right: 5px;
+  border-radius: 25px;
+}
+
+#commentUsername{
+  float: left;
+  margin-left: 5px;
+  font-size: 15px;
+}
+
+#commentText{
+  text-align: left;
+}
+#headerText{
+  float: right;
+  color: grey;
+  font-size: 12px;
+}
+
+#formContainer{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+#commentContainer{
+  padding: 5%;
+}
+
+#commentBtn{
+  width:fit-content;
+  margin: auto;
+}

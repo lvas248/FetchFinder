@@ -8,9 +8,7 @@ function Parks(){
     const parks = useSelector(state => state.park.entity)
     const [ filterInput, setFilterInput ] = useState('')
     
-    const filteredParks = parks.filter( p => {
-        if(p.name.toLowerCase().includes(filterInput.toLowerCase())) return p
-    })
+    const filteredParks = parks.filter( p => p.name.toLowerCase().includes(filterInput.toLowerCase())) 
 
 
     const renderParks = filteredParks?.map(p => {

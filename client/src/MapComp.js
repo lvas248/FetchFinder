@@ -37,15 +37,15 @@ function MapComp(){
     const renderHome =  user.entity?.home ? <Marker className='marker' latitude={user.entity.home[1]} longitude={user.entity.home[0]}>🏠</Marker> : null
     const renderUser = user.location ? <Marker className='marker' latitude={user.location[1]} longitude={user.location[0]}>❌</Marker> : null
 
-    console.log(process.env.REACT_APP_MAPBOX_ACCESS_TOKEN)
+    // console.log(process.env.REACT_APP_MAPBOX_ACCESS_TOKEN)
     return (
        
            <div id='map_container'>
             <div id='map'>
                  <MapGL                   
                     {...viewport}
-                    mapboxAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
-                    // mapboxAccessToken='pk.eyJ1IjoibHZhczI0OCIsImEiOiJjbGc1ZGNsNmQwMmVhM2xwb3Y4bTl3eTF6In0.gUK1qM941_27NOUGgiP9jg'
+                    // mapboxAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
+                    mapboxAccessToken='pk.eyJ1IjoibHZhczI0OCIsImEiOiJjbGc1ZGNsNmQwMmVhM2xwb3Y4bTl3eTF6In0.gUK1qM941_27NOUGgiP9jg'
                     style={{ 
                         width: '90vw', 
                         height: '50vh', 

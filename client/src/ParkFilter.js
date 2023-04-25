@@ -1,4 +1,3 @@
-import { Label, Input } from 'reactstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { alphabetizeParks, reverseAlphabetizeParks, organizeParksByDistance } from './features/park/parkSlice'
 function ParkFilter({updatefilterInput, filterInput}){
