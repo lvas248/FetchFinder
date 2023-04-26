@@ -72,6 +72,29 @@ export const deleteComment = createAsyncThunk(
         return rejectWithValue(data)
     }
 )
+export const updateComment = createAsyncThunk(
+    'parks/updateComment',
+    async(obj, { dispatch, rejectWithValue })=>{
+        const response = await fetch(`/comments/${obj.id}`,{
+            method: 'PATCH',
+            headers: {
+                'Content-Type':'application/json'
+            },
+            body: JSON.stringify({ comment: obj.comment})        
+        })
+
+        const data = await response.json()
+
+        if(response.ok) return data
+
+        setTimeout(()=>{
+                dispatch(clearError())
+            }, 5000)
+
+        return rejectWithValue(data)
+ 
+    }
+)
 
 
 const initialState = {
@@ -177,6 +200,24 @@ const parkSlice = createSlice({
                 state.status = 'idle'
             })
             .addCase( deleteComment.rejected, (state,action) =>{
+                state.error = action.payload.errors
+            })
+
+            .addCase( updateComment.pending, (state)=>{
+                state.status = 'pending'
+            })
+            .addCase( updateComment.fulfilled, (state, action)=>{
+                state.entity = state.entity.map( p =>{
+                    if( p.id === action.payload.park.id){
+                        return {...p, comments: p.comments.map( c => {
+                            if( c.id === action.payload.id) return action.payload
+                            else return c
+                        })}
+                    }else return p
+                })
+                state.status = 'idle'
+            })
+            .addCase( updateComment.rejected, (state,action) =>{
                 state.error = action.payload.errors
             })
         

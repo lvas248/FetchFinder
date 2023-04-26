@@ -17,7 +17,7 @@ function CommentCard({comment}){
             comment_id: comment.id
         }))
     }
-    
+
     function clickEditBtn(){
         setEditClick(!editClicked)
     }
@@ -33,7 +33,7 @@ function CommentCard({comment}){
 
             <CardBody>
 
-                    {editClicked ? <EditCommentTextForm comment={comment.comment} clickEditBtn={clickEditBtn}  /> : <p id='commentText'>{comment.comment}</p> }
+                    {editClicked ? <EditCommentTextForm comment={comment} clickEditBtn={clickEditBtn}  /> : <p id='commentText'>{comment.comment}</p> }
                 
             </CardBody>
 
