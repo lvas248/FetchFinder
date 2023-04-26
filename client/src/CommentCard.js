@@ -6,6 +6,7 @@ function CommentCard({comment}){
     const current_user = useSelector( state => state.user.entity.username)
     const isUserComment = (current_user === comment.filtered_user?.username)
 
+    console.log(comment)
     function deleteComment(){
 
     }
