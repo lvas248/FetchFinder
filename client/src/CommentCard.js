@@ -1,14 +1,18 @@
 import { Card, CardBody, CardText, CardHeader, Button } from 'reactstrap'
-import { useSelector, dispatch } from 'react-redux'
-
+import { useSelector, useDispatch } from 'react-redux'
+import { deleteComment } from './features/park/parkSlice'
 function CommentCard({comment}){
 
     const current_user = useSelector( state => state.user.entity.username)
     const isUserComment = (current_user === comment.filtered_user?.username)
+    const dispatch = useDispatch()
 
-    console.log(comment)
-    function deleteComment(){
-
+    // console.log(comment)
+    function deleteUserComment(){
+        dispatch(deleteComment({
+            park_id: comment.park.id,
+            comment_id: comment.id
+        }))
     }
 
     function editComment(){
@@ -32,7 +36,7 @@ function CommentCard({comment}){
 
             { isUserComment ? (
                 <CardBody>
-                    <Button onClick={deleteComment} id='delete' color='' size='sm'>🗑️</Button>
+                    <Button onClick={deleteUserComment} id='delete' color='' size='sm'>🗑️</Button>
                     <Button onClick={editComment} id='delete' color='' size='sm'>✏️</Button>
                 </CardBody> 
             ) : null }

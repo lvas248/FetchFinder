@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   # resources :comments
   resources :parks
 
-  get '/comments', to: 'comments#create'
+  post '/comments', to: 'comments#create'
   delete '/comments', to: 'comments#destroy'
 
   post '/park_images/:id', to: 'park_images#create'

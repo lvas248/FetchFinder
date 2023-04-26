@@ -10,7 +10,7 @@ class CommentsController < ApplicationController
         user = get_user
         comment = user.comments.find(params[:id])
         comment.destroy
-        head :no_content
+        head :no_content, status: :ok
     end
 
     private

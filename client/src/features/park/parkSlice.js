@@ -51,17 +51,18 @@ export const addCommentToPark = createAsyncThunk(
 export const deleteComment = createAsyncThunk(
     'park/deleteComment',
     async( obj, {rejectWithValue} )=>{
+
         const response = await fetch('/comments',{
             method: 'DELETE',
             headers: {
                 'Content-Type':'application/json'
             },
-            body: JSON.stringify(obj)        
+            body: JSON.stringify({id: obj.comment_id})        
         })
-        
-        const data = await response.json()
 
-        if(response.ok) return data
+        const data = await response
+
+        if(response.ok) return obj
 
         return rejectWithValue(data)
     }
@@ -125,6 +126,7 @@ const parkSlice = createSlice({
                 state.status = 'idle'
                 state.error = action.error
             })
+
             .addCase( uploadParkImages.pending, state => {
                 state.status = 'pending'
             })
@@ -138,6 +140,7 @@ const parkSlice = createSlice({
                    else return p
                 })
             })
+
             .addCase( addCommentToPark.pending, (state) => {
                 state.status = 'pending'
             })
@@ -150,6 +153,21 @@ const parkSlice = createSlice({
                 })
             })
             .addCase( addCommentToPark.rejected, (state, action)=>{
+                state.error = action.payload.errors
+            })
+
+            .addCase( deleteComment.pending, (state)=>{
+                state.status = 'pending'
+            })
+            .addCase( deleteComment.fulfilled, (state, action)=>{
+                state.entity = state.entity.map( p => {
+                    if( p.id === action.payload.park_id ){
+                        return {...p, comments: p.comments.filter( c => c.id !== action.payload.comment_id)}
+                    }else return p
+                })
+                state.status = 'idle'
+            })
+            .addCase( deleteComment.rejected, (state,action) =>{
                 state.error = action.payload.errors
             })
         
