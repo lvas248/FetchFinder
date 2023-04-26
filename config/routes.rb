@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   post '/comments', to: 'comments#create'
   delete '/comments', to: 'comments#destroy'
+  patch '/comments/:id', to: 'comments#update'
 
   post '/park_images/:id', to: 'park_images#create'
 

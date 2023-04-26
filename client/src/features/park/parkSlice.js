@@ -32,7 +32,7 @@ export const uploadParkImages = createAsyncThunk(
 
 export const addCommentToPark = createAsyncThunk(
     'parks/addComment',
-    async(obj, { rejectWithValue })=>{
+    async(obj, { dispatch, rejectWithValue })=>{
         const response = await fetch('/comments',{
             method: 'POST',
             headers: {
@@ -45,7 +45,12 @@ export const addCommentToPark = createAsyncThunk(
 
         if(response.ok) return data
 
+        setTimeout(()=>{
+                dispatch(clearError())
+            }, 5000)
+
         return rejectWithValue(data)
+ 
     }
 )
 export const deleteComment = createAsyncThunk(
@@ -67,6 +72,7 @@ export const deleteComment = createAsyncThunk(
         return rejectWithValue(data)
     }
 )
+
 
 const initialState = {
     entity:[],
@@ -111,6 +117,9 @@ const parkSlice = createSlice({
                 else if(a.distance_from_user < b.distance_from_user) return -1
                 else return 0
             })
+        },
+        clearError: ( state ) => {
+            state.error = ''
         }
     },
     extraReducers: builder =>{
@@ -180,4 +189,4 @@ const parkSlice = createSlice({
 
 export default parkSlice.reducer
 
-export const { setParks, updateParkDistanceFromUser, removeParkDistanceFromUser, alphabetizeParks, reverseAlphabetizeParks, organizeParksByDistance } = parkSlice.actions
+export const { setParks, updateParkDistanceFromUser, removeParkDistanceFromUser, alphabetizeParks, reverseAlphabetizeParks, organizeParksByDistance, clearError } = parkSlice.actions

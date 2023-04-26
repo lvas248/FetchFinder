@@ -6,7 +6,9 @@ import { addCommentToPark } from './features/park/parkSlice'
 function CommentForm({parkId}){
 
     const profile_image = useSelector( state => state.user.entity.user_image?.url)
+
     const error = useSelector( state => state.park.error)
+    
 
     const [commentText, setCommentText] = useState('')
     const dispatch = useDispatch()
@@ -35,7 +37,7 @@ function CommentForm({parkId}){
                 <Input value={commentText} placeholder='comment...' onChange={handleTextChange} type='text' />
                 
                 <Button>Submit</Button>
-                
+
             </form>
             <p className='error'>{error}</p>
 

@@ -6,6 +6,14 @@ class CommentsController < ApplicationController
         render json: comment, status: :created
     end
 
+    def update
+        user = get_user
+        comment = user.comments.find(params[:id])
+        comment.update!(comment: params[:comment])
+        render json: comment, status: :created
+    end
+
+
     def destroy
         user = get_user
         comment = user.comments.find(params[:id])
