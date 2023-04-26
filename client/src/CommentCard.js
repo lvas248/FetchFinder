@@ -1,22 +1,25 @@
-import { Card, CardBody, CardText, CardHeader, Button } from 'reactstrap'
+import { Card, CardBody, CardHeader, Button, Input } from 'reactstrap'
 import { useSelector, useDispatch } from 'react-redux'
 import { deleteComment } from './features/park/parkSlice'
+import { useState } from 'react'
+import EditCommentTextForm from './EditCommentTextForm'
 function CommentCard({comment}){
 
     const current_user = useSelector( state => state.user.entity.username)
     const isUserComment = (current_user === comment.filtered_user?.username)
     const dispatch = useDispatch()
 
-    // console.log(comment)
+    const [ editClicked, setEditClick ] = useState(false)
+
     function deleteUserComment(){
         dispatch(deleteComment({
             park_id: comment.park.id,
             comment_id: comment.id
         }))
     }
-
-    function editComment(){
-
+    
+    function clickEditBtn(){
+        setEditClick(!editClicked)
     }
 
     return (
@@ -29,15 +32,15 @@ function CommentCard({comment}){
             </CardHeader>
 
             <CardBody>
-                <CardText id='commentText'>
-                    {comment.comment}
-                </CardText>
+
+                    {editClicked ? <EditCommentTextForm comment={comment.comment} clickEditBtn={clickEditBtn}  /> : <p id='commentText'>{comment.comment}</p> }
+                
             </CardBody>
 
             { isUserComment ? (
                 <CardBody>
                     <Button onClick={deleteUserComment} id='delete' color='' size='sm'>🗑️</Button>
-                    <Button onClick={editComment} id='delete' color='' size='sm'>✏️</Button>
+                    <Button onClick={clickEditBtn} id='delete' color='' size='sm'>✏️</Button>
                 </CardBody> 
             ) : null }
  
