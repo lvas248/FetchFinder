@@ -64,10 +64,13 @@ function ParkCard({ park = null }){
             
 
             <CardBody>
-                <div>
-                    <Button size='sm' onClick={clickBtn}>{ addImageClick ? 'Cancel' : 'Add Images'}</Button>
-                    <Button size='sm' color='primary' onClick={navigateToMap} >Map</Button>
-                    <Button size='sm' color='success'>Schedule a visit</Button>
+                <div>                    
+                   { session.loggedIn ? (
+                    <>                         
+                        <Button size='sm' color='primary' onClick={navigateToMap} >Map</Button>
+                        <Button size='sm' onClick={clickBtn}>{ addImageClick ? 'Cancel' : 'Add Images'}</Button>
+                        <Button size='sm' color='success'>Schedule a visit</Button>
+                    </>) : null }
                 </div>
 
                 <div id='parkCardBody'>

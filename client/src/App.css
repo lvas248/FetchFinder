@@ -155,6 +155,9 @@ a.active{
   margin: 3px;
 }
 
+#commentHeader{
+  background-color: rgb(208, 243, 232);
+}
 #commentCard{
   display: flex;
   flex-direction: row;
@@ -184,7 +187,9 @@ a.active{
   float: right;
   color: grey;
   font-size: 12px;
+  
 }
+
 
 #formContainer{
   display: flex;
@@ -199,4 +204,8 @@ a.active{
 #commentBtn{
   width:fit-content;
   margin: auto;
+}
+
+#delete{
+  float: right;
 }

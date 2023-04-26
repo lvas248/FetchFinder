@@ -48,6 +48,24 @@ export const addCommentToPark = createAsyncThunk(
         return rejectWithValue(data)
     }
 )
+export const deleteComment = createAsyncThunk(
+    'park/deleteComment',
+    async( obj, {rejectWithValue} )=>{
+        const response = await fetch('/comments',{
+            method: 'DELETE',
+            headers: {
+                'Content-Type':'application/json'
+            },
+            body: JSON.stringify(obj)        
+        })
+        
+        const data = await response.json()
+
+        if(response.ok) return data
+
+        return rejectWithValue(data)
+    }
+)
 
 const initialState = {
     entity:[],
@@ -132,7 +150,7 @@ const parkSlice = createSlice({
                 })
             })
             .addCase( addCommentToPark.rejected, (state, action)=>{
-                state.error = action.payload
+                state.error = action.payload.errors
             })
         
 

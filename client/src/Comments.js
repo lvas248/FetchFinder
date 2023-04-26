@@ -12,7 +12,6 @@ function Comments({comments, parkId}){
             <CommentForm parkId={parkId}/>
             {renderComments}
 
-
         </div>
     )
 }
