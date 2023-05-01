@@ -4,6 +4,7 @@ class User < ApplicationRecord
 
     has_one :user_image
     has_many :comments
+    has_many :visits
 
     validates :username, { presence: true, uniqueness: true }
 

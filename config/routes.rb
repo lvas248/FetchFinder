@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   resources :visits
   # resources :comments
   resources :parks
+  post '/visits/:park_id', to: 'visits#create'
+
 
   post '/comments', to: 'comments#create'
   delete '/comments', to: 'comments#destroy'
