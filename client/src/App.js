@@ -56,28 +56,27 @@ function App() {
               <ParkCard />
             </Route>
 
+            <Route exact path='/visit'>
+              
+            </Route>
+
             <Route path='/parks'>
               <Parks />
             </Route>
             
-
-            <Route exact path='/'>
-              <Login />
-            </Route>
-
             <Route path='/profile'>
               <Profile />
             </Route>
 
+            <Route exact path='/'>
+              <Login />
+            </Route>
+            
             <Route path='/signup'>
               <Signup />
             </Route>
 
-            <Route exact path='/visit'>
-            </Route>
-
-
-
+    
           </Switch>
       
       </div>
