@@ -21,7 +21,7 @@ function ParkCard({ park = null }){
         setAddImageClick(!addImageClick)
     }
     function navigateToMap(){
-        history.push('/map')
+        history.push(`/map/${park.id}`)
     }
 
     const imageItems = park?.park_images.map( i => {

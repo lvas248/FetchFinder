@@ -16,7 +16,7 @@ function ParkBlurb({park}){
         <Card >
             <CardBody>
                 <CardHeader className='header'></CardHeader>
-                {<CardSubtitle id='dist'>{ session.loggedIn && park.distance_from_user ? park.distance_from_user + ' miles': null}</CardSubtitle>}                <CardTitle className='text-left' tag='h5'>{park?.name}</CardTitle>
+                {<CardSubtitle id='dist'>{ session.loggedIn && park?.distance_from_user ? park.distance_from_user + ' miles': null}</CardSubtitle>}                <CardTitle className='text-left' tag='h5'>{park?.name}</CardTitle>
                 <CardText className='text-left' >{park?.address}</CardText>
                 <Button size='sm' onClick={navigateToPark}>See Park</Button>
                 <Button size='sm'>Schdeule a visit</Button>

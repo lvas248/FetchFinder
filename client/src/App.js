@@ -26,9 +26,9 @@ function App() {
 
   const user = useSelector( state => state.user)
   const session = useSelector( state => state.session)
-  const parks = useSelector( state => state.park)
+  // const parks = useSelector( state => state.park)
 
-  console.log('user: ',user, 'parks: ', parks)
+  console.log('user: ',user)
 
   function locateUser(){
     dispatch(getUserPosition())
@@ -48,11 +48,11 @@ function App() {
       <div >
           <Switch >
 
-            <Route exact path='/map'>
+            <Route exact path='/map/:id?'>
               <MapComp />
             </Route>
 
-            <Route path='/map/park/:parkId'>
+            <Route path='/map/:id?/park/:parkId'>
               <ParkCard />
             </Route>
 
