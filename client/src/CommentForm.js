@@ -1,4 +1,4 @@
-import { Card, Input, Button } from 'reactstrap'
+import { Input, Button } from 'reactstrap'
 import { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux' 
 import { addCommentToPark } from './features/park/parkSlice'
@@ -33,7 +33,7 @@ function CommentForm({parkId}){
             <form onSubmit={submitComment}
                 id='formContainer'>
 
-                <img alt='user image' id='commentImage' src={profile_image}/>
+                <img alt='Prof' id='commentImage' src={profile_image}/>
                 <Input value={commentText} placeholder='comment...' onChange={handleTextChange} type='text' />
                 
                 <Button>Submit</Button>

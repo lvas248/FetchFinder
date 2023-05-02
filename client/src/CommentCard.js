@@ -1,4 +1,4 @@
-import { Card, CardBody, CardHeader, Button, Input } from 'reactstrap'
+import { Card, CardBody, CardHeader, Button } from 'reactstrap'
 import { useSelector, useDispatch } from 'react-redux'
 import { deleteComment } from './features/park/parkSlice'
 import { useState } from 'react'

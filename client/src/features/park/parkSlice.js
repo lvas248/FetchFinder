@@ -97,6 +97,7 @@ export const updateComment = createAsyncThunk(
 )
 
 
+
 const initialState = {
     entity:[],
     status: 'idle',
@@ -220,6 +221,7 @@ const parkSlice = createSlice({
             .addCase( updateComment.rejected, (state,action) =>{
                 state.error = action.payload.errors
             })
+
         
 
 

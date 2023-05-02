@@ -4,10 +4,10 @@ Rails.application.routes.draw do
   resources :visits
   # resources :comments
   resources :parks
-  post '/visits/:park_id', to: 'visits#create'
+  post '/visits', to: 'visits#create'
 
 
-  post '/comments', to: 'comments#create'
+  post '/comments/', to: 'comments#create'
   delete '/comments', to: 'comments#destroy'
   patch '/comments/:id', to: 'comments#update'
 

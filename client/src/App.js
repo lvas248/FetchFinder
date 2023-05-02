@@ -7,6 +7,8 @@ import Profile from './Profile'
 import Parks from './Parks';
 import MapComp from './MapComp';
 import ParkCard from  './ParkCard'
+import Visit from './Visit';
+
 import { useEffect } from 'react';
 import { refresh } from './features/sessionSlice';
 import { getParks } from './features/park/parkSlice';
@@ -57,7 +59,7 @@ function App() {
             </Route>
 
             <Route exact path='/visit'>
-              
+              <Visit />
             </Route>
 
             <Route path='/parks'>
@@ -71,7 +73,7 @@ function App() {
             <Route exact path='/'>
               <Login />
             </Route>
-            
+
             <Route path='/signup'>
               <Signup />
             </Route>

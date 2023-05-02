@@ -34,7 +34,7 @@ function MapComp(){
         //         zoom: 11
         //     })
         // }
-    },[user.location])
+    },[])
 
     const [ selectedMarker, setSelectedMarker ] = useState(params.id)
 

@@ -3,6 +3,7 @@ class VisitsController < ApplicationController
 
     def create
         user = get_user
+        # binding.pry
         visit = user.visits.create!(visit_params)
         render json: visit, status: :created
     end

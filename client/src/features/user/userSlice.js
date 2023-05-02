@@ -55,6 +55,25 @@ export const getUserPosition = createAsyncThunk(
     }
 )
 
+export const createVisit = createAsyncThunk(
+    'parks/createVisit',
+    async(obj, { rejectWithValue })=>{
+        const response = await fetch(`/visits`,{
+            method: 'POST',
+            headers: {
+                'Content-Type':'application/json'
+            },
+            body: JSON.stringify(obj)        
+        })
+        const data = await response.json()
+
+        if( response.ok ){
+            return data
+        }
+        return rejectWithValue(data)
+    }
+)
+
 const initialState = {
     entity: {
         username: '',
@@ -113,6 +132,9 @@ const userSlice = createSlice({
             .addCase( getUserPosition.rejected, (state, action)=>{
                 state.status = 'rejected'
                 state.error = action.payload
+            })
+            .addCase( createVisit.pending, ( state )=>{
+                state.status = 'pending'
             })
             
     }
