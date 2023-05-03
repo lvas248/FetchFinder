@@ -55,7 +55,7 @@
   list-style-type: none;
 }
 a.active{
-  background-color: slategrey;
+  background-color: grey;
   color: white;
 }
 
@@ -222,3 +222,21 @@ a.active{
   text-align: left;
 }
 
+#visit{
+  display: flex;
+  flex-direction: grid;
+  grid-template-columns: 1fr 4fr;
+  gap: 10px;
+}
+
+.visitNavItem{
+  color: black;
+}
+.visitNavItem.active{
+  color: blue;
+}
+#visitShowPanel{
+  padding: 5%;
+  overflow: auto;
+  height: 80wh;
+}

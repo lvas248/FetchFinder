@@ -4,7 +4,7 @@ function VisitCard({visit}){
 
     return (
         <Card>
-            <CardHeader className='right'>{visit?.start.date}</CardHeader>
+            <CardHeader className='left'>{visit?.start.date}</CardHeader>
             <CardBody className='left'>
                 <h5>{visit?.park.name}</h5>
                 
