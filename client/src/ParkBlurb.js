@@ -9,7 +9,7 @@ function ParkBlurb({park}){
     const history = useHistory()
 
     function navigateToPark(){
-        history.push(`map/park/${park.id}`)
+        history.push(`/map/parkcard/${park.id}`)
     }
 
     return (

@@ -1,12 +1,29 @@
-import VisitForm from "./VisitForm"
+// import VisitForm from "./VisitForm"
+import VisitCard from "./VisitCard"
+import { useSelector } from "react-redux"
+import { Switch, Route } from 'react-router-dom'
 
 function Visit(){
 
+    const visits = useSelector( state => state.user.entity.visits)
+
     return (
         <div>
-            <h1>Visit</h1>
+            <h2>My Visits</h2>
 
-            <VisitForm />
+            <Switch>
+               
+                <Route exact path='/visit/upcoming'>
+                    <VisitCard visit={visits[0]}/>    
+                </Route>
+
+            </Switch>
+
+
+            
+
+
+            {/* <VisitForm /> */}
 
         </div>
     )

@@ -8,7 +8,7 @@ import Parks from './Parks';
 import MapComp from './MapComp';
 import ParkCard from  './ParkCard'
 import Visit from './Visit';
-
+import VisitCard from './VisitCard';
 import { useEffect } from 'react';
 import { refresh } from './features/sessionSlice';
 import { getParks } from './features/park/parkSlice';
@@ -50,18 +50,21 @@ function App() {
       <div >
           <Switch >
 
-            <Route exact path='/map/:id?'>
+            <Route exact path='/map/:parkId?'>
               <MapComp />
             </Route>
 
-            <Route path='/map/:id?/park/:parkId'>
+            <Route path='/map/parkcard/:parkId'>
               <ParkCard />
             </Route>
 
-            <Route exact path='/visit'>
-              <Visit />
+            <Route path='/visit'>
+              <Visit />     
             </Route>
 
+  
+
+  
             <Route path='/parks'>
               <Parks />
             </Route>

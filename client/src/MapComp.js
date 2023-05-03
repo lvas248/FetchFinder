@@ -36,7 +36,7 @@ function MapComp(){
         // }
     },[])
 
-    const [ selectedMarker, setSelectedMarker ] = useState(params.id)
+    const [ selectedMarker, setSelectedMarker ] = useState(params.parkId)
 
     function handleViewportChange(v){
             setViewport(v)

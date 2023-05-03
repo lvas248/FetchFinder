@@ -77,7 +77,8 @@ export const createVisit = createAsyncThunk(
 const initialState = {
     entity: {
         username: '',
-        user_image: {}
+        user_image: {},
+        visits: []
     },
     location: null,
     status: '',
