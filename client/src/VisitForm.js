@@ -2,10 +2,13 @@ import { Label, Input, Button } from 'reactstrap'
 import { useSelector, useDispatch } from 'react-redux'
 import { useState } from 'react'
 import { createVisit } from './features/visits/visitSlice'
+import { useHistory } from 'react-router-dom'
+
 function VisitForm(){
 
     const parks = useSelector( state => state.park.entity)
     const dispatch = useDispatch()
+    const history = useHistory()
 
     const date = Date.now()
     const now = new Date(date)
@@ -38,6 +41,8 @@ function VisitForm(){
             start_time: startTime,
             end_time: endTime
         }))
+        history.push('/visit')
+
 
     }
 

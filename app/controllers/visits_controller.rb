@@ -8,6 +8,12 @@ class VisitsController < ApplicationController
         render json: visit, status: :created
     end
 
+    def destroy
+        user = get_user
+        user.visits.find(params[:visit_id]).destroy
+        head :no_content
+    end
+
     private 
 
     def get_user
