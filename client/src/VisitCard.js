@@ -1,6 +1,17 @@
 import { Button, Card, CardBody, CardHeader } from 'reactstrap'
+import { useDispatch } from 'react-redux'
+import { deleteVisit } from './features/visits/visitSlice'
 
 function VisitCard({visit}){
+
+    const dispatch = useDispatch()
+
+    function handleDelete(){
+        dispatch(deleteVisit(visit.id)).then(res => {
+            if(res.ok) console.log('yes')
+            else console.log('no')
+        })
+    }
 
     return (
         <Card>
@@ -15,7 +26,7 @@ function VisitCard({visit}){
 
                 <div className={visit.upcoming ? 'right' : 'hidden'}>
                     <Button color=''>✏️</Button>
-                    <Button color=''>🗑️</Button>
+                    <Button onClick={handleDelete} color=''>🗑️</Button>
                 </div>
                 
             </CardBody>

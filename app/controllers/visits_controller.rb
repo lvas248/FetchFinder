@@ -10,8 +10,9 @@ class VisitsController < ApplicationController
 
     def destroy
         user = get_user
-        user.visits.find(params[:visit_id]).destroy
-        head :no_content
+        visit = user.visits.find(params[:visit_id]).destroy
+        visit.destroy
+        render json: visit
     end
 
     private 
