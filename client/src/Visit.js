@@ -6,31 +6,26 @@ import { Switch, Route, NavLink } from 'react-router-dom'
 
 function Visit(){
 
-    const visits = useSelector( state => state.user.entity.visits)
+    const visits = useSelector( state => state.visit?.entity)
 
-    const renderAllVisits = visits.map( v => {
+    
+    const renderAllVisits = visits?.map( v => {
         return <VisitCard key={v.id} visit={v}/>
     })
 
-     const renderUpcomingVisits = visits.map( v =>{
-        if(v.upcoming) return <VisitCard key={v.id} visit={v}/>
-     })
 
     return (
         <div id='visit'>
 
                 <nav>
                     <ul>
+                        <NavLink className='visitNavItem' to='/visit/schedule'>
+                                <h6>Schedule a visit</h6>
+                        </NavLink>
+
+
                         <NavLink className='visitNavItem' exact to='/visit'>
-                                <h6>Schedule</h6>
-                        </NavLink>
-
-                        <NavLink className='visitNavItem' to='/visit/upcoming'>
-                                <h6>Upcoming</h6>
-                        </NavLink>
-
-                        <NavLink className='visitNavItem' to='/visit/all'>
-                                <h6>All</h6>
+                                <h6>My Visits</h6>
                         </NavLink>
                     </ul>
 
@@ -39,14 +34,11 @@ function Visit(){
                 <div id='visitShowPanel'>
                     <Switch>
 
-                        <Route exact path='/visit'>
+                        <Route exact path='/visit/schedule'>
                             <VisitForm />
                         </Route>
 
-                        <Route  exact path='/visit/upcoming'>
-                            {renderUpcomingVisits}                          </Route>
-
-                        <Route exact path='/visit/all'>
+                        <Route exact path='/visit'>
                             {renderAllVisits}
                         </Route>
 

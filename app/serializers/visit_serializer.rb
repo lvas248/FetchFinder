@@ -1,7 +1,7 @@
 require 'time'
 
 class VisitSerializer < ActiveModel::Serializer
-  attributes :id, :start, :end, :user, :park, :upcoming
+  attributes :id, :start, :end, :user, :park, :upcoming, :start_time
  
   def start
     # binding.pry

@@ -1,8 +1,7 @@
 import { Label, Input, Button } from 'reactstrap'
 import { useSelector, useDispatch } from 'react-redux'
-import { createVisit } from './features/user/userSlice'
 import { useState } from 'react'
-
+import { createVisit } from './features/visits/visitSlice'
 function VisitForm(){
 
     const parks = useSelector( state => state.park.entity)
@@ -34,11 +33,6 @@ function VisitForm(){
 
         endTime.setHours(endTime.getHours()+visit.duration.hours)
         endTime.setMinutes(endTime.getMinutes() + visit.duration.minutes)
-        // console.log({
-        //     park_id: visit.park_id,
-        //     start_time: startTime,
-        //     end_time: endTime
-        // })
         dispatch(createVisit({
             park_id: visit.park_id,
             start_time: startTime,
@@ -60,7 +54,7 @@ function VisitForm(){
 
                 <Label size='sm'>Date: </Label>
                 <Input 
-                    size='sm'
+                    bsSize='sm'
                     type='date'
                     value={visit.date}
                     onChange={e=>setVisit({...visit, date: e.target.value})}
@@ -72,7 +66,7 @@ function VisitForm(){
 
                 <Label size='sm'>Time: </Label>
                 <Input 
-                    size='sm'
+                    bsSize='sm'
                     type='time'
                     value={visit.time}
                     onChange={e => setVisit({...visit, time: e.target.value})}
@@ -90,7 +84,7 @@ function VisitForm(){
                         <>
                             <Label size='sm'>Hrs: </Label>
                             <Input 
-                                size='sm'
+                                bsSize='sm'
                                 type='number'
                                 value={visit.duration.hours}
                                 onChange={e => setVisit({...visit, duration: {...visit.duration, hours: parseInt(e.target.value)||0}})}
@@ -100,7 +94,7 @@ function VisitForm(){
                         <>
                             <Label size='sm'>Min: </Label>
                             <Input 
-                                size='sm'
+                                bsSize='sm'
                                 type='number'
                                 value={visit.duration.minutes}
                                 onChange={e => setVisit({...visit, duration: {...visit.duration, minutes: parseInt(e.target.value)||0}})}

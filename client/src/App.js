@@ -26,11 +26,12 @@ function App() {
     dispatch(getParks())
   }, [dispatch])
 
+  const state = useSelector( state => state)
   const user = useSelector( state => state.user)
   const session = useSelector( state => state.session)
   // const parks = useSelector( state => state.park)
 
-  console.log('user: ',user)
+  console.log('user: ',user, 'state: ', state)
 
   function locateUser(){
     dispatch(getUserPosition())
@@ -62,9 +63,6 @@ function App() {
               <Visit />     
             </Route>
 
-  
-
-  
             <Route path='/parks'>
               <Parks />
             </Route>

@@ -24,7 +24,9 @@ function Parks(){
     return (
         <div>
             <ParkFilter filterInput={filterInput} updatefilterInput={updatefilterInput}/>
-            {renderParks}
+            <div id='parkcardShowPanel'>
+                {renderParks}
+            </div>
         </div>
     )
 }

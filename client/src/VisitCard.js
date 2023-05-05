@@ -4,7 +4,7 @@ function VisitCard({visit}){
 
     return (
         <Card>
-            <CardHeader className='left'>{visit?.start.date}</CardHeader>
+            <CardHeader id={visit.upcoming ? 'commentHeader' : null } className={'left'}>{visit?.start.date}</CardHeader>
             <CardBody className='left'>
                 <h5>{visit?.park.name}</h5>
                 
@@ -13,10 +13,11 @@ function VisitCard({visit}){
                     <p>Duration: {visit?.end.time}</p>
                 </div>
 
-                <div className='right'>
+                <div className={visit.upcoming ? 'right' : 'hidden'}>
                     <Button color=''>✏️</Button>
                     <Button color=''>🗑️</Button>
                 </div>
+                
             </CardBody>
         </Card>
     )
