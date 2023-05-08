@@ -4,4 +4,5 @@ class Visit < ApplicationRecord
 
   default_scope {order(:start_time => :desc)}
 
+  
 end

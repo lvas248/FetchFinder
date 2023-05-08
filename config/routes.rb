@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   # resources :comments
   resources :parks
 
+  patch '/visits/:visit_id', to: 'visits#update'
   post '/visits', to: 'visits#create'
   delete '/visits/:visit_id', to: 'visits#destroy'
 
