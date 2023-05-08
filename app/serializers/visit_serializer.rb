@@ -1,7 +1,9 @@
 require 'time'
 
 class VisitSerializer < ActiveModel::Serializer
-  attributes :id, :start, :end, :user, :park, :upcoming, :start_time
+  attributes :id, :start, :upcoming, :park, :formatted_duration,
+  
+  # :id, :start, :end, :user, :park, :upcoming, :start_time
  
   def start
     # binding.pry
@@ -12,12 +14,12 @@ class VisitSerializer < ActiveModel::Serializer
     }
   end
 
-  def end
-    formatted_date = self.object.end_time.in_time_zone("Eastern Time (US & Canada)")
-    {
-      date: formatted_date.strftime('%B %d, %Y'),
-      time: formatted_date.strftime('%I:%M %p %Z')
-    }
+  def formatted_duration
+    # binding.pry
+    seconds = self.object.duration
+    hours, remainder = seconds.divmod(3600)
+    minutes, = remainder.divmod(60)
+    return { hours: hours, minutes: minutes}
   end
 
   def upcoming

@@ -6,6 +6,7 @@ function VisitCard({visit}){
 
     const dispatch = useDispatch()
 
+    const duration = `${visit.formatted_duration.hours} hours, ${visit.formatted_duration.minutes} minutes`
     function handleDelete(){
         dispatch(deleteVisit(visit.id)).then(res => {
             if(res.ok) console.log('yes')
@@ -21,7 +22,7 @@ function VisitCard({visit}){
                 
                 <div className='left'>                
                     <p>Time: {visit?.start.time}</p>
-                    <p>Duration: {visit?.end.time}</p>
+                    <p>Duration: { duration }</p>
                 </div>
 
                 <div className={visit.upcoming ? 'right' : 'hidden'}>

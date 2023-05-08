@@ -27,23 +27,13 @@ function VisitForm(){
     })
 
     function submitVisit(e){
-
-        e.preventDefault()             
-        const visitHour = parseInt(visit.time.slice(0,2))
-        const visitMinutes = parseInt(visit.time.slice(3))
-        const startTime = new Date(visit.date+`T${visitHour}:${visitMinutes.toString().padStart(2,'0')}:00-0400`)
-        const endTime = new Date(startTime)
-
-        endTime.setHours(endTime.getHours()+visit.duration.hours)
-        endTime.setMinutes(endTime.getMinutes() + visit.duration.minutes)
+        e.preventDefault()   
         dispatch(createVisit({
             park_id: visit.park_id,
-            start_time: startTime,
-            end_time: endTime
+            start_time: new Date(visit.date + 'T' + visit.time),
+            duration: ( visit.duration.hours * 3600 ) + ( visit.duration.minutes * 60 )
         }))
         history.push('/visit')
-
-
     }
 
     return (

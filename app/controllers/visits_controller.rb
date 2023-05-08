@@ -3,7 +3,6 @@ class VisitsController < ApplicationController
 
     def create
         user = get_user
-        # binding.pry
         visit = user.visits.create!(visit_params)
         render json: visit, status: :created
     end
@@ -29,7 +28,7 @@ class VisitsController < ApplicationController
     end
 
     def visit_params
-        params.permit(:start_time, :end_time, :park_id)
+        params.permit(:start_time, :duration, :park_id)
     end
 
 end
