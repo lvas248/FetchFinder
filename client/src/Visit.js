@@ -18,13 +18,15 @@ function Visit(){
 
                 <nav>
                     <ul>
+                        
+                        <NavLink className='visitNavItem' exact to='/visit'>
+                                <h6>My Visits</h6>
+                        </NavLink>
+
                         <NavLink className='visitNavItem' to='/visit/schedule'>
                                 <h6>Schedule a visit</h6>
                         </NavLink>
 
-                        <NavLink className='visitNavItem' exact to='/visit'>
-                                <h6>My Visits</h6>
-                        </NavLink>
                     </ul>
 
                 </nav>

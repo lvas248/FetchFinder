@@ -47,7 +47,9 @@ function VisitForm(){
 
             <div className='duration'>
                 <Label size='sm'>Park: </Label>
-                <Input value={visit.park_id} onChange={e=>setVisit({...visit, park_id: e.target.value})} type='select'>{renderParkOptions}</Input>
+                <Input value={visit.park_id} onChange={e=>setVisit({...visit, park_id: e.target.value})} type='select'>
+                    [<option value='0'>Select a park</option>, {renderParkOptions}]
+                </Input>
             </div>
 
             <div className='duration'>

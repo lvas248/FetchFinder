@@ -1,7 +1,7 @@
 import { Card, CardBody, CardText, CardTitle, Button, CardHeader, CardSubtitle } from 'reactstrap'
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { useHistory } from 'react-router-dom'
+import { useHistory, useParams } from 'react-router-dom'
 
 function ParkBlurb({park}){
 
@@ -11,6 +11,9 @@ function ParkBlurb({park}){
     function navigateToPark(){
         history.push(`/map/parkcard/${park.id}`)
     }
+    function navigateToVisitForm(){
+        history.push(`/visit/schedule/${park.id}`)
+    }
 
     return (
         <Card >
@@ -19,7 +22,7 @@ function ParkBlurb({park}){
                 {<CardSubtitle id='dist'>{ session.loggedIn && park?.distance_from_user ? park.distance_from_user + ' miles': null}</CardSubtitle>}                <CardTitle className='text-left' tag='h5'>{park?.name}</CardTitle>
                 <CardText className='text-left' >{park?.address}</CardText>
                 <Button size='sm' onClick={navigateToPark}>See Park</Button>
-                <Button size='sm'>Schdeule a visit</Button>
+                <Button size='sm' onClick={navigateToVisitForm}>Schdeule a visit</Button>
             </CardBody>
 
         </Card>
