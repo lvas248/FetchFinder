@@ -1,7 +1,7 @@
 require 'time'
 
 class VisitSerializer < ActiveModel::Serializer
-  attributes :id, :start, :upcoming, :park, :formatted_duration,
+  attributes :id, :start_time, :start, :upcoming, :park, :formatted_duration,
   
   # :id, :start, :end, :user, :park, :upcoming, :start_time
  

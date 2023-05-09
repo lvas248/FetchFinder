@@ -231,7 +231,7 @@ a.active{
 }
 
 .visitNavItem{
-  color: grey;
+  color: lightgray;
 }
 .visitNavItem.active{
   color: black;
@@ -252,4 +252,13 @@ a.active{
 }
 .upcoming{
   background-color: green;
+}
+.editForm{
+  display: flex;
+  flex-direction: row;
+  gap: 4%;
+}
+
+.editForm > Input{
+ align-items: left;
 }
