@@ -22,7 +22,6 @@ function Visit(){
                                 <h6>Schedule a visit</h6>
                         </NavLink>
 
-
                         <NavLink className='visitNavItem' exact to='/visit'>
                                 <h6>My Visits</h6>
                         </NavLink>
@@ -33,7 +32,7 @@ function Visit(){
                 <div id='visitShowPanel'>
                     <Switch>
 
-                        <Route exact path='/visit/schedule'>
+                        <Route exact path='/visit/schedule/:park_id?'>
                             <VisitForm />
                         </Route>
 

@@ -2,13 +2,15 @@ import { Label, Input, Button } from 'reactstrap'
 import { useSelector, useDispatch } from 'react-redux'
 import { useState } from 'react'
 import { createVisit } from './features/visits/visitSlice'
-import { useHistory } from 'react-router-dom'
+import { useHistory, useParams } from 'react-router-dom'
 
 function VisitForm(){
 
     const parks = useSelector( state => state.park.entity)
     const dispatch = useDispatch()
     const history = useHistory()
+    const params  = useParams()
+
 
     const date = Date.now()
     const now = new Date(date)
@@ -19,7 +21,7 @@ function VisitForm(){
         date: now.toISOString().slice(0,10),
         time: '12:00',
         duration: { hours: 0, minutes: 0 },
-        park_id: 0
+        park_id: params.park_id || 0
     })
 
     const renderParkOptions = parks.map( p => {
@@ -32,8 +34,11 @@ function VisitForm(){
             park_id: visit.park_id,
             start_time: new Date(visit.date + 'T' + visit.time),
             duration: ( visit.duration.hours * 3600 ) + ( visit.duration.minutes * 60 )
-        }))
-        history.push('/visit')
+        })).then( data => {
+            if(data.meta.requestStatis === 'fulfilled'){
+                history.push('/visit')
+            }
+        })
     }
 
     return (

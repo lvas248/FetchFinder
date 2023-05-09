@@ -24,6 +24,11 @@ function ParkCard({ park = null }){
         history.push(`/map/${park.id}`)
     }
 
+    function navigateToVisitForm(){
+        history.push(`/visit/schedule/${park.id}`)
+
+    }
+
     const imageItems = park?.park_images.map( i => {
             return { caption: park.name, key: i.id, src: i.url }
     })
@@ -69,7 +74,7 @@ function ParkCard({ park = null }){
                     <>                         
                         <Button size='sm' color='primary' onClick={navigateToMap} >Map</Button>
                         <Button size='sm' onClick={clickBtn}>{ addImageClick ? 'Cancel' : 'Add Images'}</Button>
-                        <Button size='sm' color='success'>Schedule a visit</Button>
+                        <Button size='sm' color='success' onClick={navigateToVisitForm} >Schedule a visit</Button>
                     </>) : null }
                 </div>
 
