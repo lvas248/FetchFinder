@@ -1,12 +1,12 @@
 import { CardHeader, CardBody, Button, Input } from "reactstrap"
 import { useState } from 'react'
 import { useSelector, useDispatch } from "react-redux"
-import { editVisit } from './features/visits/visitSlice'
+import { editVisit, removeErrors } from './features/visits/visitSlice'
 
 function EditVisitForm({visit, clickEditBtn}){
 
     const parks = useSelector( state => state.park.entity)
-    const dispatch = useDispatch()
+    const errors = useSelector( state => state.visit.errors)
 
     const [ editVisitObj, setEditVisitObj ] = useState({
         date: new Date(visit.start.date).toISOString().slice(0,10),
@@ -14,8 +14,10 @@ function EditVisitForm({visit, clickEditBtn}){
         time: visit.start.time.slice(0,5),
         hours: parseInt(visit.formatted_duration.hours),
         minutes: parseInt(visit.formatted_duration.minutes)
-    })  
-    
+    })      
+
+    const dispatch = useDispatch()
+
     function updateEditVisitObj(e){
         const copy = {...editVisitObj}
         copy[e.target.name] =  e.target.value
@@ -26,6 +28,11 @@ function EditVisitForm({visit, clickEditBtn}){
         return <option key={p.id} value={p.id}>{p.name}</option>
     })
 
+    function exitEditForm(){
+        clickEditBtn()
+        dispatch(removeErrors())
+    }
+
     function submitVisitUpdate(e){
         e.preventDefault()
         dispatch(editVisit({
@@ -33,7 +40,9 @@ function EditVisitForm({visit, clickEditBtn}){
             park_id: editVisitObj.park_id,
             start_time: new Date(editVisitObj.date + 'T' + editVisitObj.time + ':00'),
             duration: editVisitObj.hours*3600 + editVisitObj.minutes*60
-        }))
+        })).then( data => {
+            if(data.meta.requestStatus === 'fulfilled') clickEditBtn()
+        })
         
 
     }
@@ -69,6 +78,7 @@ function EditVisitForm({visit, clickEditBtn}){
                     </Input>
                 </div>
 
+
                 <div className='editForm'>
                     <p><strong>Time:</strong></p>
                     <Input
@@ -79,6 +89,8 @@ function EditVisitForm({visit, clickEditBtn}){
                         bsSize='sm'
                     />
                 </div>
+
+                { errors.start_time ? <p className='error'>{errors.start_time}</p> : null }
 
                 <div>
 
@@ -103,9 +115,12 @@ function EditVisitForm({visit, clickEditBtn}){
                         />
 
                     </div>
+
+                    { errors.duration ? <p className='error'>{errors.duration}</p> : null }
+          
                     <div className='right'>
                         <Button type='submit' color='' >✅</Button>
-                        <Button type='button' onClick={clickEditBtn}color='' size='sm'>❌</Button>
+                        <Button type='button' onClick={exitEditForm} color='' size='sm'>❌</Button>
                     </div>
                 </div>
 

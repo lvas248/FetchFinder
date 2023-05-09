@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, createAction } from "@reduxjs/toolkit";
 
 export const createVisit = createAsyncThunk(
     'visit/createVisit',
@@ -16,13 +16,14 @@ export const createVisit = createAsyncThunk(
         if(response.ok){ 
             return data
         }
+        
         return rejectWithValue(data)
     }
 )
 
 export const editVisit = createAsyncThunk(
     'visit/editVisit',
-    async( obj, { rejectWithValue })=>{
+    async( obj, { dispatch, rejectWithValue })=>{
         const response = await fetch(`/visits/${obj.visit_id}`,{
             method: 'PATCH',
             headers: {
@@ -64,7 +65,7 @@ export const deleteVisit = createAsyncThunk(
 const initialState = {
     entity: [],
     status: '',
-    error: ''
+    errors: []
 }
 
 const visitSlice = createSlice({
@@ -76,37 +77,45 @@ const visitSlice = createSlice({
         },
         removeVisits: (state) =>{
             state.entity = initialState.entity
+        },
+        removeErrors: (state) =>{
+            state.errors = []
         }
     },
     extraReducers: ( builder ) => {
         builder
             .addCase( createVisit.pending, state =>{
                 state.status = 'pending'
+                state.errors = []
             })
             .addCase( createVisit.fulfilled, (state, action)=>{
                 state.status = 'idle'
                 state.entity = [...state.entity, action.payload].sort((a,b)=> Date.parse(b.start_time) - Date.parse(a.start_time))
+                state.errors = []
             })
             .addCase( createVisit.rejected, (state, action)=>{
-                state.error = action.payload.errors
+                state.errors = action.payload.errors
                 state.status = 'idle'
             })
             .addCase( deleteVisit.pending, state => {
                 state.status = 'pending'
+                state.errors = []
             })
             .addCase( deleteVisit.fulfilled, (state, action)=>{
                 state.entity = state.entity.filter( v => v.id !== action.payload.id)
                 state.status = 'idle'
             })
             .addCase( deleteVisit.rejected, (state, action)=>{
-                state.error = action.payload
+                state.errors = action.payload
                 state.status = 'idle'
             })
             .addCase( editVisit.pending, state => {
                 state.status = 'pending'
+                state.errors = []
             })
             .addCase( editVisit.fulfilled, (state, action)=>{
                 state.status = 'idle'
+                state.errors = []
                 state.entity = state.entity.map( v => {
                     if(v.id === action.payload.id) return action.payload
                     else return v
@@ -114,8 +123,9 @@ const visitSlice = createSlice({
             })
             .addCase( editVisit.rejected, ( state, action )=>{
                 state.errors = action.payload.errors
+                state.status = 'idle'
             })
 }})
 
 export default visitSlice.reducer
-export const { setVisits, removeVisits } =  visitSlice.actions
+export const { setVisits, removeVisits, removeErrors } =  visitSlice.actions

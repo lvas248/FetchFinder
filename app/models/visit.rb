@@ -1,6 +1,11 @@
 class Visit < ApplicationRecord
+
   before_create :set_end_time
   before_update :update_end_time
+
+  validate :future_date
+  validates :duration, numericality: { greater_than: 0}
+
 
   belongs_to :user
   belongs_to :park
@@ -19,6 +24,12 @@ class Visit < ApplicationRecord
       self.end_time = self.start_time + self.duration.to_i
     end
     # binding.pry
+  end
+
+  def future_date
+    unless self.start_time > DateTime.now
+      errors.add(:start_time, 'Must pick a future date and time')
+    end
   end
   
 end

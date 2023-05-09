@@ -262,3 +262,8 @@ a.active{
 .editForm > Input{
  align-items: left;
 }
+
+.error{
+  color: red;
+  
+}
