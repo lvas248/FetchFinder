@@ -21,9 +21,7 @@ function VisitCard({visit}){
     }
 
     return (
-        <Card>
-
-            
+        <Card> 
         {  editBtn ? (
             <EditVisitForm visit={visit} clickEditBtn={clickEditBtn}/>
             

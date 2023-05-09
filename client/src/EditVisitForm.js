@@ -1,8 +1,12 @@
 import { CardHeader, CardBody, Button, Input } from "reactstrap"
 import { useState } from 'react'
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
+import { editVisit } from './features/visits/visitSlice'
 
 function EditVisitForm({visit, clickEditBtn}){
+
+    const parks = useSelector( state => state.park.entity)
+    const dispatch = useDispatch()
 
     const [ editVisitObj, setEditVisitObj ] = useState({
         date: new Date(visit.start.date).toISOString().slice(0,10),
@@ -10,19 +14,13 @@ function EditVisitForm({visit, clickEditBtn}){
         time: visit.start.time.slice(0,5),
         hours: parseInt(visit.formatted_duration.hours),
         minutes: parseInt(visit.formatted_duration.minutes)
-
     })  
     
     function updateEditVisitObj(e){
-        // console.log(e)
         const copy = {...editVisitObj}
         copy[e.target.name] =  e.target.value
         setEditVisitObj(copy)
     }
-
-
-    const parks = useSelector( state => state.park.entity)
-
 
     const renderParkOptions = parks.map( p => {
         return <option key={p.id} value={p.id}>{p.name}</option>
@@ -30,11 +28,13 @@ function EditVisitForm({visit, clickEditBtn}){
 
     function submitVisitUpdate(e){
         e.preventDefault()
-        console.log({
+        dispatch(editVisit({
+            visit_id: visit.id,
             park_id: editVisitObj.park_id,
             start_time: new Date(editVisitObj.date + 'T' + editVisitObj.time + ':00'),
             duration: editVisitObj.hours*3600 + editVisitObj.minutes*60
-        })
+        }))
+        
 
     }
     
