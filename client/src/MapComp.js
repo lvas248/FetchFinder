@@ -66,8 +66,7 @@ function MapComp(){
             <div id='map'>
                  <ReactMapGL                   
                     {...viewport}
-                    // mapboxAccessToken={apiKey}
-                    mapboxAccessToken='pk.eyJ1IjoibHZhczI0OCIsImEiOiJjbGc1ZGNsNmQwMmVhM2xwb3Y4bTl3eTF6In0.gUK1qM941_27NOUGgiP9jg'
+                    mapboxAccessToken={apiKey}
                     style={{ 
                         width: '90vw', 
                         height: '50vh', 
