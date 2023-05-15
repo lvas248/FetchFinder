@@ -48,6 +48,8 @@ function ParkCard({ park = null }){
                 <CardSubtitle
                     className='mb-2 text-muted'
                 >{park?.borough}</CardSubtitle>
+                <CardSubtitle><strong>🐕</strong> {park.users_at_park_now}</CardSubtitle>               
+
 
             </CardBody>
 

@@ -1,10 +1,11 @@
 
 class User < ApplicationRecord
+    
     has_secure_password
 
-    has_one :user_image
-    has_many :comments
-    has_many :visits
+    has_one :user_image, dependent: :destroy
+    has_many :comments, dependent: :destroy
+    has_many :visits, dependent: :destroy
 
     validates :username, { presence: true, uniqueness: true }
 

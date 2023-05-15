@@ -35,7 +35,7 @@ function VisitForm(){
             start_time: new Date(visit.date + 'T' + visit.time),
             duration: ( visit.duration.hours * 3600 ) + ( visit.duration.minutes * 60 )
         })).then( data => {
-            if(data.meta.requestStatis === 'fulfilled'){
+            if(data.meta.requestStatus === 'fulfilled'){
                 history.push('/visit')
             }
         })

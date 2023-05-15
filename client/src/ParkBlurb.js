@@ -18,9 +18,15 @@ function ParkBlurb({park}){
     return (
         <Card >
             <CardBody>
-                <CardHeader className='header'></CardHeader>
-                {<CardSubtitle id='dist'>{ session.loggedIn && park?.distance_from_user ? park.distance_from_user + ' miles': null}</CardSubtitle>}                <CardTitle className='text-left' tag='h5'>{park?.name}</CardTitle>
-                <CardText className='text-left' >{park?.address}</CardText>
+                <CardHeader className='header'>
+                    <CardSubtitle id='dist'><strong>🐕</strong> {park.users_at_park_now}</CardSubtitle>               
+                    <CardTitle className='text-left' tag='h5'>{park?.name}</CardTitle>
+                </CardHeader>
+                <CardBody>
+                    <CardText className='text-left' ><strong>Address: </strong> {park?.address}</CardText>
+                    {/* {<CardText id='dist'>{ session.loggedIn && park?.distance_from_user ? (<strong>Distance: </strong> + park.distance_from_user + ' miles'): null}</CardText>}                 */}
+                    { session.loggedIn && park?.distance_from_user ? <CardText className='left'><strong>Distance: </strong> {park.distance_from_user} miles</CardText> : null }
+                </CardBody>
                 <Button size='sm' onClick={navigateToPark}>See Park</Button>
                 <Button size='sm' onClick={navigateToVisitForm}>Schdeule a visit</Button>
             </CardBody>

@@ -18,7 +18,7 @@ function Visit(){
 
                 <nav>
                     <ul>
-                        
+
                         <NavLink className='visitNavItem' exact to='/visit'>
                                 <h6>My Visits</h6>
                         </NavLink>
@@ -39,7 +39,7 @@ function Visit(){
                         </Route>
 
                         <Route exact path='/visit'>
-                            {renderAllVisits}
+                            {renderAllVisits.length > 0 ? renderAllVisits : 'No Scheduled Visits'}
                         </Route>
 
                     </Switch>

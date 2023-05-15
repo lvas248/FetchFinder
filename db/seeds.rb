@@ -1,5 +1,6 @@
 require 'pry'
 require 'geocoder'
+require 'faker'
 # # This file should contain all the record creation needed to seed the database with its default values.
 # # The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
 # #
@@ -57,3 +58,24 @@ require 'geocoder'
 # #   else
 # #     puts "No results found"
 # # end
+
+# 5.times do
+#     User.create!(
+#         username: Faker::Internet.unique.username,
+#         password: '123',
+#         password_confirmation: '123'
+#     )
+# end
+
+# 100.times do 
+#     Visit.create!(
+#         user_id: User.all.sample.id,
+#         park_id: Park.all.sample.id,
+#         start_time: Faker::Time.between(from: DateTime.now, to: DateTime.now + Rational(1,1440)),
+#         end_time: Faker::Time.between(from: DateTime.now + Rational(1,24), to: DateTime.now + Rational(2,24)),
+#         duration: rand(3600..10800)
+#     )
+# end
+
+# ^^This creates visits for random parks by random users  with start_time now
+

@@ -26,14 +26,6 @@ function MapComp(){
                 zoom: 11
             })
         }
-        // else 
-        // if(user.location){
-        //     setViewport({
-        //         longitude: user.location[0],
-        //         latitude: user.location[1],
-        //         zoom: 11
-        //     })
-        // }
     },[])
 
     const [ selectedMarker, setSelectedMarker ] = useState(params.parkId)
@@ -53,7 +45,6 @@ function MapComp(){
                     latitude={p.lat}
                     onClick={()=> {
                         setSelectedMarker(p.id)
-                        // setViewport({latitude: p.lat, longitude: p.long, zoom: 11})
                     }}
                 >
                     
@@ -80,8 +71,6 @@ function MapComp(){
                     }}
                     onMove={handleViewportChange}      
                     mapStyle='mapbox://styles/mapbox/streets-v12'
-                    // transitionInterpolator={new FlyToInterpolator()}
-                    // transitionDuration={10000}
                 >
                     <FullscreenControl />
                     <NavigationControl />

@@ -16,6 +16,7 @@ function EditVisitForm({visit, clickEditBtn}){
         minutes: parseInt(visit.formatted_duration.minutes)
     })      
 
+
     const dispatch = useDispatch()
 
     function updateEditVisitObj(e){
@@ -30,7 +31,7 @@ function EditVisitForm({visit, clickEditBtn}){
 
     function exitEditForm(){
         clickEditBtn()
-        dispatch(removeErrors())
+        // dispatch(removeErrors())
     }
 
     function submitVisitUpdate(e){
@@ -41,10 +42,9 @@ function EditVisitForm({visit, clickEditBtn}){
             start_time: new Date(editVisitObj.date + 'T' + editVisitObj.time + ':00'),
             duration: editVisitObj.hours*3600 + editVisitObj.minutes*60
         })).then( data => {
+            //if http request is successful, close editVisitForm
             if(data.meta.requestStatus === 'fulfilled') clickEditBtn()
         })
-        
-
     }
     
     return (
