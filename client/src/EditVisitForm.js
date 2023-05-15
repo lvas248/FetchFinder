@@ -16,6 +16,13 @@ function EditVisitForm({visit, clickEditBtn}){
         minutes: parseInt(visit.formatted_duration.minutes)
     })      
 
+    // function clearErrorTimeout(){
+    //     if(errors){
+    //         setTimeout(()=>{
+    //             dispatch(removeErrors())
+    //         }, 2000)
+    //     }
+    // }
 
     const dispatch = useDispatch()
 
@@ -31,7 +38,7 @@ function EditVisitForm({visit, clickEditBtn}){
 
     function exitEditForm(){
         clickEditBtn()
-        // dispatch(removeErrors())
+        dispatch(removeErrors())
     }
 
     function submitVisitUpdate(e){
@@ -42,9 +49,11 @@ function EditVisitForm({visit, clickEditBtn}){
             start_time: new Date(editVisitObj.date + 'T' + editVisitObj.time + ':00'),
             duration: editVisitObj.hours*3600 + editVisitObj.minutes*60
         })).then( data => {
+            console.log(data)
             //if http request is successful, close editVisitForm
             if(data.meta.requestStatus === 'fulfilled') clickEditBtn()
         })
+        // clearErrorTimeout()
     }
     
     return (
@@ -90,7 +99,7 @@ function EditVisitForm({visit, clickEditBtn}){
                     />
                 </div>
 
-                { errors.start_time ? <p className='error'>{errors.start_time}</p> : null }
+                { errors.hasOwnProperty('errors') && errors.visit === visit.id ? <p className='error'>{errors.errors.start_time}</p> : null }
 
                 <div>
 

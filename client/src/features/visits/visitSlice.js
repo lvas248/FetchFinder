@@ -122,7 +122,7 @@ const visitSlice = createSlice({
                 }).sort((a,b) => a.start_time - b.start_time)          
             })
             .addCase( editVisit.rejected, ( state, action )=>{
-                state.errors = action.payload.errors
+                state.errors = {errors: action.payload.errors, visit: action.meta.arg.visit_id}
                 state.status = 'idle'
             })
 }})
