@@ -98,7 +98,7 @@ const sessionSlice = createSlice({
             .addCase( signup.rejected , (state, action )=> {
                 state.status = 'error'
                 state.loggedIn = false
-                state.error = action.payload
+                state.error = { errors: action.payload.errors }
             }) 
             .addCase( login.pending , state => {
                 state.status = 'pending'

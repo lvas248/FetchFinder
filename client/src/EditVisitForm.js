@@ -71,6 +71,7 @@ function EditVisitForm({visit, clickEditBtn}){
                         />
 
                 </div>
+
             </CardHeader>
             <CardBody>
 
@@ -125,7 +126,7 @@ function EditVisitForm({visit, clickEditBtn}){
 
                     </div>
 
-                    { errors.duration ? <p className='error'>{errors.duration}</p> : null }
+                    { errors.hasOwnProperty('errors') && errors.visit === visit.id ? <p className='error'>{errors.errors.duration}</p> : null }
           
                     <div className='right'>
                         <Button type='submit' color='' >✅</Button>

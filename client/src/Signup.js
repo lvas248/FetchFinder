@@ -1,20 +1,19 @@
 import React, { useState } from 'react'
 import { Button, Input, Label } from 'reactstrap'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { signup } from './features/sessionSlice'
 import { useHistory } from 'react-router-dom'
 function Signup(){
 
     const dispatch = useDispatch()
     const history = useHistory()
+    const errors = useSelector( state => state.session.error)
     
     const [ signupObj, setSignupObj ] = useState({
         username: '',
         password: '',
-        password_confirmation: '',
-        home_address: ''
+        password_confirmation: ''
     })
-    const [ errors, setErrors] = useState([])
 
     function updateSignupObj(e){
         const copy = {...signupObj}
@@ -24,29 +23,25 @@ function Signup(){
 
     function submitForm(e){
         e.preventDefault()
-        dispatch(signup(signupObj)).then(result =>{
-            if(result.type === 'session/signup/rejected'){
-              setErrors(result.payload.errors)
+        dispatch(signup(signupObj)).then( data => {
+            if(data.meta.requestStatus === 'fulfilled'){
+                history.push('/home')   
+                setSignupObj({
+                    username: '',
+                    password: '',
+                    password_confirmation: ''
+                })
             }
         })
-        setSignupObj({
-            username: '',
-            password: '',
-            password_confirmation: '',
-            home_address: ''
-        })
-        history.push('/home')
+     
     }
 
     function navigateToLogin(){
         history.push('/')
     }
 
-    const renderErrors = errors?.map( e => {
-        return <li className='error' key={e}>{e}</li>
-    })
+   
 
-    console.log()
     return (
         <form 
             id='form'
@@ -65,6 +60,8 @@ function Signup(){
                 />
 
             </div>
+
+            { errors?.hasOwnProperty('errors') ? <p className='error left'>{errors.errors.username}</p>: null }
 
             <div className='inputField'>
 
@@ -90,7 +87,9 @@ function Signup(){
 
             </div>
 
-            <div className='inputField'>
+            { errors?.hasOwnProperty('errors') && errors.errors.password_confirmation ? <p className='error left'>{errors.errors.password_confirmation}</p> : null }
+
+            {/* <div className='inputField'>
 
                 <Label>Home Address: </Label>
                 <Input 
@@ -100,15 +99,13 @@ function Signup(){
                     required 
                 />
 
-            </div>
+            </div> */}
 
             <div className='inputField'>
 
                 <Button color='primary' >Submit</Button>
                 
             </div>
-
-            <ul className='errorList'>{renderErrors}</ul>
 
             <Button id='signupHere' size='sm' color='success' onClick={navigateToLogin}>BACK TO LOGIN</Button>
            

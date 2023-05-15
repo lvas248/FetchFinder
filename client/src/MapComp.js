@@ -13,7 +13,6 @@ function MapComp(){
     const parks = useSelector(state => state.park.entity)
     
     const apiKey = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN
-    console.log(apiKey)
 
 
     const [ viewport, setViewport] = useState({
