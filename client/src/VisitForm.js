@@ -7,10 +7,12 @@ import { useHistory, useParams } from 'react-router-dom'
 function VisitForm(){
 
     const parks = useSelector( state => state.park.entity)
+    const errors = useSelector( state => state.visit.errors)
     const dispatch = useDispatch()
     const history = useHistory()
     const params  = useParams()
 
+    console.log(errors)
 
     const date = Date.now()
     const now = new Date(date)

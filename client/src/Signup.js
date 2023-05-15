@@ -9,6 +9,8 @@ function Signup(){
     const history = useHistory()
     const errors = useSelector( state => state.session.error)
     
+
+
     const [ signupObj, setSignupObj ] = useState({
         username: '',
         password: '',
@@ -45,6 +47,7 @@ function Signup(){
     return (
         <form 
             id='form'
+            className='login'
             onSubmit={submitForm}>
 
             <h1>Signup</h1>

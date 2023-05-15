@@ -26,8 +26,7 @@ function Login(){
         e.preventDefault()
         dispatch(login(loginObj)).then(result =>{
             if(result.type === 'session/login/fulfilled'){
-                history.push('/map')
-                
+                history.push('/map')   
             }
         })
         setLoginObj({
@@ -43,6 +42,7 @@ function Login(){
     return (
         <form 
             id='form'
+            className='login'
             onSubmit={submitForm}>
                 <h1>Login</h1>
             <div className='inputField'>

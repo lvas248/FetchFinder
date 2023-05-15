@@ -16,7 +16,7 @@ function Profile(){
     return (
         <div>
 
-            <img alt={user.username} src={user.user_image ? user.user_image.url : "http://res.cloudinary.com/dfbe9u9zm/image/upload/v1680705302/cuhgah9jlswpb2uc7p9e.jpg"}/>
+            <img className='profileImg' alt={user.username} src={user.user_image ? user.user_image.url : "http://res.cloudinary.com/dfbe9u9zm/image/upload/v1680705302/cuhgah9jlswpb2uc7p9e.jpg"}/>
 
             
             {

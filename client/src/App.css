@@ -271,3 +271,35 @@ a.active{
   color: red;
   
 }
+
+@media (max-width: 600px){
+  #parkFilter{
+    height: 120px;
+  }
+  #visit{
+    padding-top: 5%;
+  }
+  #visit nav{
+    width: 25vw;
+  }
+  #parkFilter{
+    height: 10vh;
+    padding-top: 5px;
+  }
+  .parkImg{
+    width: 65vw;
+  }
+  .d-block{
+    width: 65vw;
+  }
+  .login, .signup{
+    margin: 10px;
+  }
+  #form{ 
+    padding: 5%;
+  }
+  .profileImg{
+    width: 65vw;
+    margin-top: 10vh;
+  }
+}
