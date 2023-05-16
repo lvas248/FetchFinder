@@ -1,7 +1,7 @@
 import { Label, Input, Button } from 'reactstrap'
 import { useSelector, useDispatch } from 'react-redux'
-import { useState } from 'react'
-import { createVisit } from './features/visits/visitSlice'
+import { useState, useEffect } from 'react'
+import { createVisit, removeErrors } from './features/visits/visitSlice'
 import { useHistory, useParams } from 'react-router-dom'
 
 function VisitForm(){
@@ -13,6 +13,12 @@ function VisitForm(){
     const params  = useParams()
 
     console.log(errors)
+    useEffect( ()=>{
+        // clear errors when component dismounts
+        return ()=>{
+            dispatch(removeErrors())
+        }
+    }, [dispatch])
 
     const date = Date.now()
     const now = new Date(date)
@@ -54,6 +60,8 @@ function VisitForm(){
                 </Input>
             </div>
 
+            { errors?.hasOwnProperty('errors') && errors.errors.park ? <p className='error left'>Park {errors.errors.park}</p> : null }
+
             <div className='duration'>
 
                 <Label size='sm'>Date: </Label>
@@ -78,6 +86,7 @@ function VisitForm(){
 
             </div>
 
+            { errors.hasOwnProperty('errors') && errors.errors.start_time ? <p className='error left'>{errors.errors.start_time}</p> : null }
 
             <div >
 
@@ -106,6 +115,9 @@ function VisitForm(){
                         </>
  
                     </div>
+
+                    { errors.hasOwnProperty('errors') && errors.errors.duration ? <p className='error left'>Duration {errors.errors.duration}</p> : null }
+
 
             </div>
 
