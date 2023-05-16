@@ -11,7 +11,7 @@ function MapComp(){
     const params = useParams()
     const user = useSelector(state => state.user)
     const parks = useSelector(state => state.park.entity)
-    
+    const parkStatus = useSelector(state => state.park.status)
     const apiKey = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN
 
 
@@ -82,10 +82,10 @@ function MapComp(){
                     {renderMarkers}
                 </ReactMapGL>
  
-               
             </div>
-                {/* { user.location ? null : <Button>Geolocate</Button> } */}
                 { selectedMarker ? <ParkBlurb park={selectedPark} /> : <p>Select a park for details</p> }
+                { parkStatus === 'pending' ? <p className='loading'>Loading...</p> : null }
+
            </div>
     )
     
