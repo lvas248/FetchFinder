@@ -72,9 +72,7 @@ const userSlice = createSlice({
     reducers:{
         setUser: ( state, action) => {
             state.entity = action.payload
-        }
-            ,
-
+        },
         removeUser: ( state ) => {
             state.entity = initialState.entity
             state.location = null

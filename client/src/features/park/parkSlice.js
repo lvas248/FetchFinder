@@ -32,7 +32,7 @@ export const uploadParkImages = createAsyncThunk(
 
 export const addCommentToPark = createAsyncThunk(
     'parks/addComment',
-    async(obj, { dispatch, rejectWithValue })=>{
+    async(obj, { rejectWithValue })=>{
         const response = await fetch('/comments',{
             method: 'POST',
             headers: {
@@ -44,10 +44,6 @@ export const addCommentToPark = createAsyncThunk(
         const data = await response.json()
 
         if(response.ok) return data
-
-        setTimeout(()=>{
-                dispatch(clearError())
-            }, 5000)
 
         return rejectWithValue(data)
  
@@ -86,10 +82,6 @@ export const updateComment = createAsyncThunk(
         const data = await response.json()
 
         if(response.ok) return data
-
-        setTimeout(()=>{
-                dispatch(clearError())
-            }, 5000)
 
         return rejectWithValue(data)
  
@@ -150,10 +142,13 @@ const parkSlice = createSlice({
         builder
             .addCase( getParks.pending, state => {
                 state.status = 'pending'
+                state.error = initialState.error
+
             })
             .addCase( getParks.fulfilled, (state,action) => {
                 state.status = 'idle'
                 state.entity = action.payload
+                state.error = initialState.error
             })
             .addCase( getParks.rejected, (state,action) => {
                 state.status = 'idle'
@@ -162,6 +157,7 @@ const parkSlice = createSlice({
 
             .addCase( uploadParkImages.pending, state => {
                 state.status = 'pending'
+                state.error = initialState.error
             })
             .addCase( uploadParkImages.fulfilled, (state,action) => {
                 state.status = 'idle'
@@ -172,10 +168,12 @@ const parkSlice = createSlice({
                    } 
                    else return p
                 })
+                state.error = initialState.error
             })
 
             .addCase( addCommentToPark.pending, (state) => {
                 state.status = 'pending'
+                state.error = initialState.error
             })
             .addCase( addCommentToPark.fulfilled, (state, action)=>{
                 state.status = 'idle'            
@@ -184,13 +182,16 @@ const parkSlice = createSlice({
                         return {...p, comments: [action.payload, ...p.comments]}
                     }else return p
                 })
+                state.error = initialState.error
             })
             .addCase( addCommentToPark.rejected, (state, action)=>{
-                state.error = action.payload.errors
+                state.error = action
+                state.status = 'idle'
             })
 
             .addCase( deleteComment.pending, (state)=>{
                 state.status = 'pending'
+                state.error = initialState.error
             })
             .addCase( deleteComment.fulfilled, (state, action)=>{
                 state.entity = state.entity.map( p => {
@@ -199,13 +200,16 @@ const parkSlice = createSlice({
                     }else return p
                 })
                 state.status = 'idle'
+                state.error = initialState.error
             })
             .addCase( deleteComment.rejected, (state,action) =>{
-                state.error = action.payload.errors
+                state.error = action
+                state.status = 'idle'
             })
 
             .addCase( updateComment.pending, (state)=>{
                 state.status = 'pending'
+                state.error = initialState.error
             })
             .addCase( updateComment.fulfilled, (state, action)=>{
                 state.entity = state.entity.map( p =>{
@@ -217,9 +221,11 @@ const parkSlice = createSlice({
                     }else return p
                 })
                 state.status = 'idle'
+                state.error = initialState.error
             })
             .addCase( updateComment.rejected, (state,action) =>{
-                state.error = action.payload.errors
+                state.error = action
+                state.status = 'idle'
             })
 
         

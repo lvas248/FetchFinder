@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   post '/visits', to: 'visits#create'
   delete '/visits/:visit_id', to: 'visits#destroy'
 
-  post '/comments/', to: 'comments#create'
+  post '/comments', to: 'comments#create'
   delete '/comments', to: 'comments#destroy'
   patch '/comments/:id', to: 'comments#update'
 

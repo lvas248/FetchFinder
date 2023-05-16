@@ -9,7 +9,7 @@ function CommentForm({parkId}){
 
     const error = useSelector( state => state.park.error)
     
-
+    console.log(error)
     const [commentText, setCommentText] = useState('')
     const dispatch = useDispatch()
 
@@ -39,7 +39,7 @@ function CommentForm({parkId}){
                 <Button>Submit</Button>
 
             </form>
-            <p className='error'>{error}</p>
+            { error.meta?.arg.park_id === parkId ? <p className='error'>Comment {error.payload.errors.comment}</p> : null }
 
         </>
     
