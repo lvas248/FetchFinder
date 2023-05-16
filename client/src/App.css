@@ -270,7 +270,11 @@ a.active{
 
 .error{
   color: red;
-  
+}
+.loading{
+  background-color: green;
+  color: white;
+  margin-top: 10px;
 }
 
 @media (max-width: 600px){

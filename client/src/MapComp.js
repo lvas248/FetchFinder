@@ -20,7 +20,10 @@ function MapComp(){
         longitude: -73.85443092329274,
         zoom: 10
     })
-
+    const [ selectedMarker, setSelectedMarker ] = useState(params.parkId)
+   const selectedPark = parks.find( p => {
+        return p.id === parseInt(selectedMarker)
+    })
     useEffect( ()=>{
         if(selectedPark){
             setViewport({
@@ -29,17 +32,14 @@ function MapComp(){
                 zoom: 11
             })
         }
-    },[])
+    },[selectedPark])
 
-    const [ selectedMarker, setSelectedMarker ] = useState(params.parkId)
 
     function handleViewportChange(v){
             setViewport(v)
     }
 
-    const selectedPark = parks.find( p => {
-        return p.id === parseInt(selectedMarker)
-    })
+ 
    
     const renderMarkers = parks.map( p => {
         return (<Marker 

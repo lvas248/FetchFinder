@@ -64,7 +64,7 @@ export const deleteVisit = createAsyncThunk(
 
 const initialState = {
     entity: [],
-    status: '',
+    status: 'idle',
     errors: {}
 }
 

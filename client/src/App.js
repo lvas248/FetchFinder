@@ -8,7 +8,6 @@ import Parks from './Parks';
 import MapComp from './MapComp';
 import ParkCard from  './ParkCard'
 import Visit from './Visit';
-import VisitCard from './VisitCard';
 import { useEffect } from 'react';
 import { refresh } from './features/sessionSlice';
 import { getParks } from './features/park/parkSlice';
@@ -28,10 +27,10 @@ function App() {
 
   const state = useSelector( state => state)
   const user = useSelector( state => state.user)
+  
   const session = useSelector( state => state.session)
-  // const parks = useSelector( state => state.park)
 
-  console.log('user: ',user, 'state: ', state)
+  console.log(state)
 
   function locateUser(){
     dispatch(getUserPosition())

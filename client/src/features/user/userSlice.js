@@ -63,7 +63,7 @@ const initialState = {
     },
     location: null,
     status: '',
-    error: ''
+    error: 'idle'
 }
 
 const userSlice = createSlice({

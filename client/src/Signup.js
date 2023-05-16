@@ -7,7 +7,7 @@ function Signup(){
 
     const dispatch = useDispatch()
     const history = useHistory()
-    const errors = useSelector( state => state.session.error)
+    const session = useSelector( state => state.session)
     
 
 
@@ -27,7 +27,7 @@ function Signup(){
         e.preventDefault()
         dispatch(signup(signupObj)).then( data => {
             if(data.meta.requestStatus === 'fulfilled'){
-                history.push('/home')   
+                history.push('/map')   
                 setSignupObj({
                     username: '',
                     password: '',
@@ -64,7 +64,7 @@ function Signup(){
 
             </div>
 
-            { errors?.hasOwnProperty('errors') ? <p className='error left'>{errors.errors.username}</p>: null }
+            { session.errors?.hasOwnProperty('errors') ? <p className='error left'>{session.errors.errors.username}</p>: null }
 
             <div className='inputField'>
 
@@ -90,19 +90,8 @@ function Signup(){
 
             </div>
 
-            { errors?.hasOwnProperty('errors') && errors.errors.password_confirmation ? <p className='error left'>{errors.errors.password_confirmation}</p> : null }
+            { session.errors?.hasOwnProperty('errors') && session.errors.errors.password_confirmation ? <p className='error left'>{session.errors.errors.password_confirmation}</p> : null }
 
-            {/* <div className='inputField'>
-
-                <Label>Home Address: </Label>
-                <Input 
-                    id='home_address' 
-                    value={signupObj.home_address} 
-                    onChange={updateSignupObj} 
-                    required 
-                />
-
-            </div> */}
 
             <div className='inputField'>
 
@@ -112,6 +101,8 @@ function Signup(){
 
             <Button id='signupHere' size='sm' color='success' onClick={navigateToLogin}>BACK TO LOGIN</Button>
            
+            { session?.status === 'pending' ? <p className='loading'>Loading...</p> : null }
+
         </form>
     )
 }

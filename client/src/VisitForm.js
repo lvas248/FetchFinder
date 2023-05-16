@@ -12,7 +12,6 @@ function VisitForm(){
     const history = useHistory()
     const params  = useParams()
 
-    console.log(errors)
     useEffect( ()=>{
         // clear errors when component dismounts
         return ()=>{

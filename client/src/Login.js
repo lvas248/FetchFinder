@@ -14,8 +14,8 @@ function Login(){
         password: ''
     })
 
-    const sessionError = useSelector(state => state.session.error)
-
+    const session = useSelector(state => state.session)
+    console.log(session)
     function updateLoginObj(e){
         const copy = {...loginObj}
         copy[e.target.id] = e.target.value
@@ -73,12 +73,12 @@ function Login(){
 
                 <Button color="primary" >Submit</Button>
                 
-                { sessionError ? <p className='error'>{sessionError.error}</p> : null }
+                { session ? <p className='error'>{session.error}</p> : null }
             </div>
 
             <p>New user? Signup <Button color='success' size='sm' id='signupHere' onClick={navigateToSignup}>HERE</Button></p>
 
-
+            { session?.status === 'pending' ? <p className='loading'>Loading...</p> : null }
         </form>
     )
 }

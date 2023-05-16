@@ -76,7 +76,7 @@ export const logout = createAsyncThunk(
 
 const initialState = {
     loggedIn: false,
-    status: null,
+    status: 'idle',
     error: null
 }
 
@@ -96,7 +96,7 @@ const sessionSlice = createSlice({
                 state.error = null
             })
             .addCase( signup.rejected , (state, action )=> {
-                state.status = 'error'
+                state.status = 'idle'
                 state.loggedIn = false
                 state.error = { errors: action.payload.errors }
             }) 
@@ -123,11 +123,10 @@ const sessionSlice = createSlice({
                 state.loggedIn = true
                 state.error = null
             })
-            // .addCase( refresh.rejected , (state, action )=> {
-            //     state.status = 'idle'
-            //     state.loggedIn = false
-            //     state.error = action.payload
-            // }) 
+            .addCase( refresh.rejected , (state, action )=> {
+                state.status = 'idle'
+                state.loggedIn = false
+            }) 
             .addCase( logout.pending , state => {
                 state.status = 'pending'
                 state.error = null
@@ -139,8 +138,7 @@ const sessionSlice = createSlice({
             })
             .addCase( logout.rejected , (state, action )=> {
                 state.status = 'idle'
-                state.loggedIn = true
-                
+                state.loggedIn = true         
             }) 
 
 

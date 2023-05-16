@@ -88,8 +88,6 @@ export const updateComment = createAsyncThunk(
     }
 )
 
-
-
 const initialState = {
     entity:[],
     status: 'idle',
