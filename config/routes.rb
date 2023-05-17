@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
   
   
+  # resources :images
   # resources :comments
   resources :parks
+
+  post '/parks/upload_images/:park_id', to: 'parks#upload_park_images'
 
   patch '/visits/:visit_id', to: 'visits#update'
   post '/visits', to: 'visits#create'

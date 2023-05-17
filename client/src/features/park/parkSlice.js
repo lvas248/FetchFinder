@@ -17,7 +17,7 @@ export const getParks = createAsyncThunk(
 export const uploadParkImages = createAsyncThunk(
     'parks/UploadImages',
     async(obj, { rejectWithValue })=>{
-        const response = await fetch(`/park_images/${obj.park_id}`,{
+        const response = await fetch(`/parks/upload_images/${obj.park_id}`,{
             method: 'POST',
             body: obj.formData
         })
@@ -160,13 +160,17 @@ const parkSlice = createSlice({
             .addCase( uploadParkImages.fulfilled, (state,action) => {
                 state.status = 'idle'
                 state.entity = state.entity.map( p => {
-                   if(p.id === action.payload[0].park.id){
-                        p.park_images = p.park_images.concat(action.payload)
+                   if(p.id === action.payload[0].imageable.id){
+                        p.images = p.images.concat(action.payload)
                     return p
                    } 
                    else return p
                 })
                 state.error = initialState.error
+            })
+            .addCase( uploadParkImages.rejected, (state, action) => {
+                state.status = 'idle'
+                state.error = action
             })
 
             .addCase( addCommentToPark.pending, (state) => {

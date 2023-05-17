@@ -6,6 +6,7 @@ class User < ApplicationRecord
     has_one :user_image, dependent: :destroy
     has_many :comments, dependent: :destroy
     has_many :visits, dependent: :destroy
+    has_many :images, as: :imageable
 
     validates :username, { presence: true, uniqueness: true }
     

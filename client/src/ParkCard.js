@@ -29,7 +29,7 @@ function ParkCard({ park = null }){
 
     }
 
-    const imageItems = park?.park_images.map( i => {
+    const imageItems = park?.images.map( i => {
             return { caption: park.name, key: i.id, src: i.url }
     })
 
@@ -55,11 +55,11 @@ function ParkCard({ park = null }){
 
  
             <div id='carousel'>
-                { park?.park_images.length > 1 ? (
+                { park?.images.length > 1 ? (
                     <UncontrolledCarousel items={imageItems} />):(
                     <img
                         alt='park'
-                        src={ park?.park_images.length > 0 ? park?.park_images[0].url :'http://res.cloudinary.com/dfbe9u9zm/image/upload/v1680727642/dr9lwutdvdzj1kfh5i1f.avif' }
+                        src={ park?.images.length > 0 ? park?.images[0].url :'http://res.cloudinary.com/dfbe9u9zm/image/upload/v1680727642/dr9lwutdvdzj1kfh5i1f.avif' }
                         className='parkImg'    
                     />
                 )}
