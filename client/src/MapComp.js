@@ -54,7 +54,6 @@ function MapComp(){
                     <button className={ parseInt(selectedMarker) === p.id ? "selected" : 'marker'}>🌳</button>
                 </Marker>)
     })
-    const renderHome =  user.entity?.home ? <Marker className='marker' latitude={user.entity.home[1]} longitude={user.entity.home[0]}>🏠</Marker> : null
     const renderUser = user.location ? <Marker className='marker' latitude={user.location[1]} longitude={user.location[0]}>❌</Marker> : null
 
  
@@ -77,7 +76,6 @@ function MapComp(){
                 >
                     <FullscreenControl />
                     <NavigationControl />
-                    {renderHome}                   
                     {renderUser}
                     {renderMarkers}
                 </ReactMapGL>

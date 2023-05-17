@@ -59,7 +59,7 @@ function App() {
             </Route>
 
             <Route path='/visit'>
-              <Visit />     
+              { session.loggedIn ? <Visit /> : 'Login or Signup to access this feature'}
             </Route>
 
             <Route path='/parks'>
@@ -67,7 +67,7 @@ function App() {
             </Route>
             
             <Route path='/profile'>
-              <Profile />
+              { session.loggedIn ? <Profile /> : 'Login or signup to access Feature'}
             </Route>
 
             <Route exact path='/'>

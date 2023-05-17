@@ -23,6 +23,7 @@ function Profile(){
                 editBtnClick ? (
                     <>                    
                         <EditUserForm user={user} clickEdit={clickEdit}/> 
+
                         <Button onClick={clickEdit}>Back</Button>
 
                     </>
@@ -30,7 +31,8 @@ function Profile(){
                     <div>
                         <label>Username: </label>
                         <h5>{user.username}</h5>
-                        <Button onClick={clickEdit}>Edit</Button>
+                        <Button size='sm' color='primary'onClick={clickEdit}>Edit</Button> 
+                        <Button size='sm' color='danger'>Delete Account</Button>
                     </div>  
                 )
             }

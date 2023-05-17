@@ -5,6 +5,7 @@ class Visit < ApplicationRecord
 
   validate :future_date
   validates :duration, numericality: { greater_than: 0}
+  validate :no_time_conflict
 
 
   belongs_to :user
@@ -31,5 +32,12 @@ class Visit < ApplicationRecord
       errors.add(:start_time, 'Must pick a future date and time')
     end
   end
+
+  # def no_time_conflict
+  #   binding.pry
+  #   # self.user.visits.where('start_time < ?', self.start_time).where('end_time > ?', self.start_time + self.duration)
+  # end
+
+  # Search through user.visits to see if new visit.start_time 
   
 end
