@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   post '/signup', to: 'users#create'
   get '/me', to: 'users#show'
   patch '/user', to: 'users#update'
+  post '/upload_user_image', to: 'users#upload_user_image'
   
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'

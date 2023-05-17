@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_05_17_132123) do
+ActiveRecord::Schema.define(version: 2023_05_17_161310) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,15 +35,6 @@ ActiveRecord::Schema.define(version: 2023_05_17_132123) do
     t.index ["imageable_type", "imageable_id"], name: "index_images_on_imageable"
   end
 
-  create_table "park_images", force: :cascade do |t|
-    t.bigint "park_id", null: false
-    t.string "url"
-    t.string "public_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["park_id"], name: "index_park_images_on_park_id"
-  end
-
   create_table "parks", force: :cascade do |t|
     t.string "name"
     t.string "borough"
@@ -55,15 +46,6 @@ ActiveRecord::Schema.define(version: 2023_05_17_132123) do
     t.string "address"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "user_images", force: :cascade do |t|
-    t.string "url"
-    t.string "public_id"
-    t.bigint "user_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_user_images_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -89,8 +71,6 @@ ActiveRecord::Schema.define(version: 2023_05_17_132123) do
 
   add_foreign_key "comments", "parks"
   add_foreign_key "comments", "users"
-  add_foreign_key "park_images", "parks"
-  add_foreign_key "user_images", "users"
   add_foreign_key "visits", "parks"
   add_foreign_key "visits", "users"
 end

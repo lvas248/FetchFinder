@@ -23,7 +23,7 @@ export const editUser = createAsyncThunk(
 export const uploadUserImage = createAsyncThunk(
     'user/image_upload',
     async(obj, { rejectWithValue })=>{
-        const response = await fetch('upload_user_image',{
+        const response = await fetch('/upload_user_image',{
             method: 'POST',
             body: obj
         })
@@ -59,7 +59,7 @@ export const getUserPosition = createAsyncThunk(
 const initialState = {
     entity: {
         username: '',
-        user_image: {}
+        image: {}
     },
     location: null,
     status: '',
@@ -98,7 +98,7 @@ const userSlice = createSlice({
             })
             .addCase( uploadUserImage.fulfilled, (state, action)=>{
                 state.status = 'idle'
-                state.entity = {...state.entity, user_image: action.payload}
+                state.entity = {...state.entity, image: action.payload}
             })
             .addCase( uploadUserImage.rejected, state => {
                 state.status = 'error'

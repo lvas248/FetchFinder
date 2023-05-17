@@ -47,7 +47,7 @@ export const refresh = createAsyncThunk(
         const response = await fetch('/me')
         const data = await response.json()
         if(response.ok){ 
-            dispatch(setUser({ home: data.home, username: data.username, user_image: data.user_image}))
+            dispatch(setUser({ username: data.username, image: data.image}))
             dispatch(setVisits(data.visits))
             removeParkDistanceFromUser()
             return 

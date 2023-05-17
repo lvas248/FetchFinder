@@ -21,8 +21,12 @@ class UsersController < ApplicationController
         render json: user, status: :ok
     end
 
-
-
+# user upload image
+    def upload_user_image
+        user = User.find(session[:user_id])
+        user.upload_and_replace_user_image(params[:image])
+        render json: user.image
+    end
 
     private
 
