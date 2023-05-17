@@ -11,18 +11,10 @@ function EditVisitForm({visit, clickEditBtn}){
     const [ editVisitObj, setEditVisitObj ] = useState({
         date: new Date(visit.start.date).toISOString().slice(0,10),
         park_id: visit.park.id,
-        time: visit.start.time.slice(0,5),
+        time: new Date(visit.start_time).toTimeString().slice(0,5),
         hours: parseInt(visit.formatted_duration.hours),
         minutes: parseInt(visit.formatted_duration.minutes)
     })      
-
-    // function clearErrorTimeout(){
-    //     if(errors){
-    //         setTimeout(()=>{
-    //             dispatch(removeErrors())
-    //         }, 2000)
-    //     }
-    // }
 
     const dispatch = useDispatch()
 
@@ -100,7 +92,7 @@ function EditVisitForm({visit, clickEditBtn}){
                     />
                 </div>
 
-                { errors.hasOwnProperty('errors') && errors.visit === visit.id ? <p className='error'>{errors.errors.start_time}</p> : null }
+                { errors.hasOwnProperty('errors') && errors.visit === visit.id ? <p className='error'>{errors.errors?.start_time}</p> : null }
 
                 <div>
 
@@ -126,12 +118,15 @@ function EditVisitForm({visit, clickEditBtn}){
 
                     </div>
 
-                    { errors.hasOwnProperty('errors') && errors.visit === visit.id ? <p className='error'>{errors.errors.duration}</p> : null }
+                    { errors.hasOwnProperty('errors') && errors.visit === visit.id ? <p className='error'>{errors.errors?.duration}</p> : null }
           
                     <div className='right'>
                         <Button type='submit' color='' >✅</Button>
                         <Button type='button' onClick={exitEditForm} color='' size='sm'>❌</Button>
                     </div>
+
+                    { errors.hasOwnProperty('errors') && errors.errors.conflict ? <p className='error'>{errors.errors.conflict}</p> : null }
+
                 </div>
 
            

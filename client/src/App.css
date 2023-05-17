@@ -293,6 +293,7 @@ a.active{
   }
   .parkImg{
     width: 65vw;
+    object-fit: cover;
   }
   .d-block{
     width: 65vw;
@@ -307,4 +308,18 @@ a.active{
     width: 65vw;
     margin-top: 10vh;
   }
+}
+
+
+.parkImg{
+  width: 65vw;
+  height: auto;
+  object-fit: cover;
+}
+
+img.d-block.w-100{
+  max-width: 65vw;
+  max-height: 40vh;
+  object-fit: cover;
+  margin: auto;
 }

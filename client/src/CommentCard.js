@@ -26,7 +26,7 @@ function CommentCard({comment}){
         <Card id='commentCard'>
             
             <CardHeader id={ isUserComment ? 'commentHeader' : null }>
-                <img alt='alt text' id='commentImage' src={comment.filtered_user.user_image?.url}/>
+                <img alt='alt text' id='commentImage' src={comment.filtered_user.image?.url}/>
                 <h6 id='commentUsername'>{comment.filtered_user?.username}</h6>
                 <p id='headerText'>{comment.date}</p>
             </CardHeader>

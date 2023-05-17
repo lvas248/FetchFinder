@@ -60,7 +60,7 @@ function ParkCard({ park = null }){
                     <img
                         alt='park'
                         src={ park?.images.length > 0 ? park?.images[0].url :'http://res.cloudinary.com/dfbe9u9zm/image/upload/v1680727642/dr9lwutdvdzj1kfh5i1f.avif' }
-                        className='parkImg'    
+                        className='w-100 d-block'    
                     />
                 )}
             </div>

@@ -122,6 +122,7 @@ function VisitForm(){
 
             <Button>Submit</Button>
  
+            { errors.hasOwnProperty('errors') && errors.errors.conflict ? <p className='error'>{errors.errors.conflict}</p> : null }
         </form>
     )
 }

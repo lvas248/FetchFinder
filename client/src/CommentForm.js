@@ -5,7 +5,7 @@ import { addCommentToPark } from './features/park/parkSlice'
 
 function CommentForm({parkId}){
 
-    const profile_image = useSelector( state => state.user.entity.user_image?.url)
+    const profile_image = useSelector( state => state.user.entity.image?.url)
 
     const error = useSelector( state => state.park.error)
     

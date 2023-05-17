@@ -15,7 +15,6 @@ function Login(){
     })
 
     const session = useSelector(state => state.session)
-    console.log(session)
     function updateLoginObj(e){
         const copy = {...loginObj}
         copy[e.target.id] = e.target.value
