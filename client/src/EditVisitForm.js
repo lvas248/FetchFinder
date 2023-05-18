@@ -2,6 +2,7 @@ import { CardHeader, CardBody, Button, Input } from "reactstrap"
 import { useState } from 'react'
 import { useSelector, useDispatch } from "react-redux"
 import { editVisit, removeErrors } from './features/visits/visitSlice'
+import moment from 'moment'
 
 function EditVisitForm({visit, clickEditBtn}){
 
@@ -9,9 +10,9 @@ function EditVisitForm({visit, clickEditBtn}){
     const errors = useSelector( state => state.visit.errors)
 
     const [ editVisitObj, setEditVisitObj ] = useState({
-        date: new Date(visit.start.date).toISOString().slice(0,10),
+        date: moment(visit.start.date).format('YYYY-MM-DD'),
         park_id: visit.park.id,
-        time: new Date(visit.start_time).toTimeString().slice(0,5),
+        time: moment(visit.start_time).format('HH:MM'),
         hours: parseInt(visit.formatted_duration.hours),
         minutes: parseInt(visit.formatted_duration.minutes)
     })      
