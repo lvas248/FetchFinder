@@ -14,6 +14,7 @@ function ParkBlurb({park}){
     function navigateToVisitForm(){
         history.push(`/visit/schedule/${park.id}`)
     }
+    
 
     return (
         <Card >
@@ -30,6 +31,10 @@ function ParkBlurb({park}){
                 <Button size='sm' onClick={navigateToPark}>See Park</Button>
                 <Button size='sm' onClick={navigateToVisitForm}>Schdeule a visit</Button>
             </CardBody>
+
+            {/* { session.loggedIn ? <p>Are you here now? <Button size='sm'>Check in</Button></p> : null } */}
+        
+            
 
         </Card>
     )

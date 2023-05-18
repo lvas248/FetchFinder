@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useState, useEffect } from 'react'
 import { createVisit, removeErrors } from './features/visits/visitSlice'
 import { useHistory, useParams } from 'react-router-dom'
+import moment from 'moment'
 
 function VisitForm(){
 
@@ -19,14 +20,9 @@ function VisitForm(){
         }
     }, [dispatch])
 
-    const date = Date.now()
-    const now = new Date(date)
-
-    now.setHours(now.getHours()-4)
-
     const [ visit, setVisit ] = useState({
-        date: now.toISOString().slice(0,10),
-        time: '12:00',
+        date: moment().format('YYYY-MM-DD'),
+        time: moment().format('HH:mm'),
         duration: { hours: 0, minutes: 0 },
         park_id: params.park_id || 0
     })

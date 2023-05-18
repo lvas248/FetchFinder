@@ -72,7 +72,7 @@ function Login(){
 
                 <Button color="primary" >Submit</Button>
                 
-                { session ? <p className='error'>{session.error}</p> : null }
+                { session.hasOwnProperty('error') && session.error ? <p className='error'>{session.error?.error}</p> : null }
             </div>
 
             <p>New user? Signup <Button color='success' size='sm' id='signupHere' onClick={navigateToSignup}>HERE</Button></p>
