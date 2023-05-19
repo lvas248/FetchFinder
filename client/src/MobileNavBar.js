@@ -3,12 +3,13 @@ import { Button } from 'reactstrap'
 import { NavLink } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { logout } from './features/sessionSlice'
-
+import { getUserPosition } from './features/user/userSlice'
 
 function MobileNavBar(){
 
     const dispatch = useDispatch()
-    const username = useSelector( state => state.user.entity.username)
+    const session = useSelector( state => state.session)
+    const user = useSelector( state => state.user)
     const [ isOpen, setIsOpen ] =  useState(false)
 
     function toggle(){
@@ -20,6 +21,10 @@ function MobileNavBar(){
         dispatch(logout())
     }
 
+    function locateUser(){
+        dispatch(getUserPosition())
+      }
+
     return (
         <div id='mobileNavContainer'>
         
@@ -28,8 +33,11 @@ function MobileNavBar(){
                 <div id='mobileTitle'><h1 className='left'>FetchFinder NYC</h1></div>
 
                 <div id='toggle'>
+
                     <Button id='locate' className='float-right' size='lg' onClick={toggle}>≡</Button>
-                    <Button className='float-right' color='warning' size='lg'>📍</Button>
+                    
+                    <Button id='locate' size='lg' className='float right' color={ !user.location && session.loggedIn ? 'warning' : null } onClick={locateUser}>{ !user.location && session.loggedIn ? '📍' : '🌎' }</Button> 
+
                 </div>
 
             </div>
@@ -51,11 +59,11 @@ function MobileNavBar(){
                     </NavLink>
 
                     <NavLink onClick={toggle} className='navItem' to='/profile'>
-                        { username ? username.toUpperCase() : 'PROFILE'}
+                        { session.loggedIn ? user.entity.username.toUpperCase() : 'PROFILE'}
                     </NavLink>
 
                     {
-                        username ? (
+                        session.loggedIn ? (
                                 <NavLink className='navItem' exact to='/' onClick={logoutUser}>LOGOUT</NavLink>
                             ):(
 

@@ -320,7 +320,7 @@ h6 {
   display: flex;
   flex-direction: row;
   height: 7vh;
-  background-color: white;
+  background-color: whitesmoke;
 }
 
 #mobileTitle{
@@ -331,10 +331,14 @@ h6 {
 #locate{
   margin-left: 15px;
 }
+#located{
+  align-self: center;
+}
 
 #toggle{
   flex-basis: 30vw;
   margin: 15px;
+  border-left: 1px solid grey;
 }
 #collapseMenu{
   position: fixed;
@@ -342,7 +346,7 @@ h6 {
   right: 0;
   width: 100vw;
   height: fit-content;
-  background-color: lightgrey;
+  background-color: whitesmoke;
   color: white;
   z-index: 9999;
   display: flex;
