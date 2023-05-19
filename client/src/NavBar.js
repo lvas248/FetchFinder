@@ -14,37 +14,36 @@ function NavBar(){
     }
     return (
         <nav id='navbar'>
-            <ul>
+            
                     <NavLink className='navItem' to='/map'>
-                        <h6>MAP</h6>
+                        MAP
                     </NavLink>
 
                     <NavLink className='navItem' to='/visit'>
-                        <h6>VISIT</h6>
+                        VISIT
                     </NavLink>
 
                     <NavLink className='navItem' to='/parks'>
-                        <h6>PARKS</h6>
+                        PARKS
                     </NavLink>
 
                     <NavLink className='navItem' to='/profile'>
-                        <h6>{ username ? username.toUpperCase() : 'PROFILE'}</h6>
+                        { username ? username.toUpperCase() : 'PROFILE'}
                     </NavLink>
 
                     
                 {
                     username ? (
-                            <Link className='navItem' to='#' onClick={logoutUser}>LOG OUT</Link>
-                        // <Button color='primary' onClick={logoutUser}>LOGOUT</Button>
+                            <NavLink className='navItem' exact to='/' onClick={logoutUser}>LOGOUT</NavLink>
                          ):(
 
                             <NavLink className='navItem' exact to='/'>
-                                <h6>LOGIN</h6>                    
+                                LOGIN                   
                             </NavLink>
                         )
                 }
  
-            </ul>
+        
 
         </nav>
 

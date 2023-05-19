@@ -39,12 +39,19 @@ function App() {
   return (
 
     <div className="App">
+
       <div id='navContainer'>
 
-        { !user.location && session.loggedIn ? <Button id='locate' color='warning' onClick={locateUser}>📍</Button> : null } 
-        
-        <h1>Fetch Finder NYC</h1>        
-        <NavBar />       
+        <div id='title'>
+          <h2>Fetch Finder NYC</h2>        
+        </div>
+       
+        <NavBar /> 
+
+        <div id='locateContainer'>
+          { !user.location && session.loggedIn ? <Button color='warning' onClick={locateUser}>📍</Button> : <Button color='success'>🌎</Button> } 
+        </div>
+ 
       </div>
 
       <div >

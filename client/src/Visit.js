@@ -17,7 +17,7 @@ function Visit(){
         <div id='visit'>
 
                 <nav>
-                    <ul>
+                    <ul id='visitNav'>
 
                         <NavLink className='visitNavItem' exact to='/visit'>
                                 <h6>My Visits</h6>
