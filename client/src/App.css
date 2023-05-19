@@ -94,7 +94,7 @@ h6 {
 }
 
 #visitNav{
-  padding-top: 5%;
+  padding-top: 5vh;
   display: flex;
   flex-direction: column;
 }
@@ -104,7 +104,7 @@ h6 {
   justify-content: space-around;
   height: 8vh;
   border-bottom: 2px solid lightgrey;
-  margin-bottom: 2%;
+  /* margin-bottom: 2%; */
 }
 #title{
   flex-basis: 30%;
@@ -153,9 +153,9 @@ h6 {
   padding: 5%;
 }
 
-/* #locate{
-  align-self: center;
-} */
+#parkCard{
+  margin-bottom: 2vh;
+}
 
 #locateContainer{
   flex-basis: 15%;
@@ -271,13 +271,13 @@ h6 {
   background-color: white;
 }
 #visitShowPanel{
-  padding: 5%;
+  padding: 2vh;
   overflow-y: auto;
   height: 90vh;
   width: 100%;
 }
 #parkcardShowPanel{
-  padding: 5%;
+  padding: 2vh;
   overflow-y: auto;
   height: 80vh;
 }
@@ -305,7 +305,9 @@ h6 {
   color: white;
   margin-top: 10px;
 }
-
+#visitCard{
+  margin-bottom: 2vh;
+}
 @media (max-width: 600px){
   #parkFilter{
     height: 120px;

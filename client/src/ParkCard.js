@@ -37,7 +37,7 @@ function ParkCard({ park = null }){
 
 
     return (
-        <Card className='parkCard'>
+        <Card id='parkCard'>
 
             <CardBody>
 
