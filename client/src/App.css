@@ -55,7 +55,7 @@
   list-style-type: none;
 }
 a.active{
-  background-color: grey;
+  background-color: #5C636A;
   color: white;
 }
 
@@ -76,7 +76,7 @@ a.active{
   border-radius: 20px;
 }
 .navItem:hover{
-  background-color: slategray;
+  background-color: grey;
   color: white;
 }
 #carousel{
@@ -252,6 +252,9 @@ h6 {
 .right{
   text-align: right;
 }
+.float-right{
+  float: right;
+}
 .left{
   text-align: left;
 }
@@ -308,10 +311,68 @@ h6 {
 #visitCard{
   margin-bottom: 2vh;
 }
+
+.profileImg{
+  margin-top: 2vh;
+}
+
+#mobileNav{
+  display: flex;
+  flex-direction: row;
+  height: 7vh;
+  background-color: white;
+}
+
+#mobileTitle{
+  flex-basis: 70vw;
+  padding: 1vh;
+  align-self: center;
+}
+#locate{
+  margin-left: 15px;
+}
+
+#toggle{
+  flex-basis: 30vw;
+  margin: 15px;
+}
+#collapseMenu{
+  position: fixed;
+  top: 7vh;
+  right: 0;
+  width: 100vw;
+  height: fit-content;
+  background-color: lightgrey;
+  color: white;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  border-right: 1px solid black;
+  border-left: 1px solid black;
+  border-bottom: 1px solid black;
+
+}
+
+#hide{
+  display: none;
+}
+
+#mobileNavContainer{
+  border-bottom: 1px solid black;
+  display: none;
+}
+#locate{
+  align-self: center;
+  flex-basis: 34vw;
+  text-align: center;
+  
+}
+
+
+
 @media (max-width: 600px){
-  #parkFilter{
-    height: 120px;
-  }
+
   #visit{
     padding-top: 5%;
   }
@@ -319,7 +380,7 @@ h6 {
     width: 25vw;
   }
   #parkFilter{
-    height: 10vh;
+    height: 5vh;
     padding-top: 5px;
   }
   .parkImg{
@@ -338,6 +399,13 @@ h6 {
   .profileImg{
     width: 65vw;
     margin-top: 10vh;
+  }
+
+  #navContainer{
+    display: none;
+  }
+  #mobileNavContainer{
+    display: block;
   }
 }
 

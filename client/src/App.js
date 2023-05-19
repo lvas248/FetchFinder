@@ -15,6 +15,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Switch, Route } from 'react-router-dom'
 import { Button } from 'reactstrap';
 import { getUserPosition } from './features/user/userSlice';
+import MobileNavBar from './MobileNavBar';
 
 function App() {
 
@@ -53,6 +54,8 @@ function App() {
         </div>
  
       </div>
+
+      <MobileNavBar />
 
       <div >
           <Switch >
