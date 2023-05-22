@@ -33,10 +33,11 @@ function MobileNavBar(){
                 <div id='mobileTitle'><h1 className='left'>FetchFinder NYC</h1></div>
 
                 <div id='toggle'>
-
-                    <Button id='locate' className='float-right' size='lg' onClick={toggle}>≡</Button>
                     
-                    <Button id='locate' size='lg' className='float right' color={ !user.location && session.loggedIn ? 'warning' : null } onClick={locateUser}>{ !user.location && session.loggedIn ? '📍' : '🌎' }</Button> 
+                    <Button id='locate' size='lg' color={ !user.location && session.loggedIn ? 'warning' : null } onClick={locateUser}>{ !user.location && session.loggedIn ? '📍' : '🌎' }</Button> 
+
+                    <Button id='locate' size='lg' onClick={toggle}>≡</Button>
+                    
 
                 </div>
 

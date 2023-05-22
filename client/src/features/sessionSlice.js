@@ -23,7 +23,7 @@ export const signup = createAsyncThunk(
 
 export const login = createAsyncThunk( 
     'session/login',
-    async( obj, { dispatch, rejectWithValue, getState })=>{
+    async( obj, { dispatch, rejectWithValue })=>{
         const response = await fetch('/login',{
             method: 'POST',
             headers: {
@@ -33,7 +33,7 @@ export const login = createAsyncThunk(
         })
         const data = await response.json()
         if(response.ok){
-            dispatch(setUser({ home: data.home, username: data.username, user_image: data.user_image}))
+            dispatch(setUser({ home: data.home, username: data.username, image: data.image}))
             dispatch(setVisits(data.visits))
             return
         }
