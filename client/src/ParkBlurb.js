@@ -20,7 +20,7 @@ function ParkBlurb({park}){
         <Card >
             <CardBody>
                 <CardHeader className='header'>
-                    <CardSubtitle id='dist'><strong>🐕</strong> {park.users_at_park_now}</CardSubtitle>               
+                    <CardSubtitle id='dist'><strong>🐕</strong> {park?.users_at_park_now}</CardSubtitle>               
                     <CardTitle className='text-left' tag='h5'>{park?.name}</CardTitle>
                 </CardHeader>
                 <CardBody>

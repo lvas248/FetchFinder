@@ -430,3 +430,10 @@ img.d-block.w-100{
   object-fit: cover;
   margin: auto;
 }
+
+/* .mapContainer{
+  width: 90vw; 
+  height: 50vh;
+  border-radius: '15px';
+  border: 2px solid black;
+} */

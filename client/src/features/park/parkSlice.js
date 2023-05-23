@@ -103,7 +103,7 @@ const parkSlice = createSlice({
         },
         updateParkDistanceFromUser: (state, action) =>{
             state.entity = state.entity.map( p =>{
-                return {...p, distance_from_user: updateParkDistances([p.long, p.lat], action.payload)}
+                return {...p, distance_from_user: updateParkDistances([p.central_coords[1], p.central_coords[0]], action.payload)}
             })
         },
         removeParkDistanceFromUser: (state) =>{

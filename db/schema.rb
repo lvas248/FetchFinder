@@ -10,10 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_05_17_161310) do
+ActiveRecord::Schema.define(version: 2023_05_23_144331) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "postgis"
 
   create_table "comments", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -23,6 +24,17 @@ ActiveRecord::Schema.define(version: 2023_05_17_161310) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["park_id"], name: "index_comments_on_park_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "games", force: :cascade do |t|
+    t.string "home_team"
+    t.string "away_team"
+    t.string "day"
+    t.integer "home_team_score"
+    t.integer "away_team_score"
+    t.integer "api_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "images", force: :cascade do |t|
@@ -41,11 +53,13 @@ ActiveRecord::Schema.define(version: 2023_05_17_161310) do
     t.string "zip"
     t.string "surface"
     t.boolean "seating"
-    t.float "lat"
-    t.float "long"
     t.string "address"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.geometry "geometry", limit: {:srid=>0, :type=>"geometry"}
+    t.float "coordinates", default: [], array: true
+    t.string "geometry_type"
+    t.float "central_coords", default: [], array: true
   end
 
   create_table "users", force: :cascade do |t|

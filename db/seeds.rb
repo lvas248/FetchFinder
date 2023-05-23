@@ -10,7 +10,29 @@ require 'faker'
 # #   Character.create(name: 'Luke', movie: movies.first)
 
 
-# response = HTTParty.get("https://data.cityofnewyork.us/resource/hxx3-bwgv.json")
+response = HTTParty.get("https://data.cityofnewyork.us/resource/hxx3-bwgv.json")
+
+if response.code == 200
+    data = JSON.parse(response.body)        
+  
+    data.each do |p|
+        park = Park.find_by_name(p['name'])
+        park.update( geometry_type: p['the_geom']['type'], coordinates: p['the_geom']['coordinates'][0][0])
+        long = 0
+        lat = 0
+        tot = 0
+        park.coordinates.each do |y,x|
+            long += y
+            lat += x
+            tot +=1
+        end   
+
+        park.update(central_coords: [lat/tot,long/tot])
+        puts "#{lat/tot}, #{long/tot}"
+    end
+    
+end
+
 
 # if response.code == 200
 #     park_data = JSON.parse(response.body)
