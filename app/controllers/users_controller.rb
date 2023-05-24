@@ -33,6 +33,12 @@ class UsersController < ApplicationController
         end
     end
 
+    def destroy
+        user = get_user
+        user.destroy
+        head :no_content
+    end
+
     private
 
     def get_user
