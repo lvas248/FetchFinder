@@ -22,7 +22,7 @@ function VisitForm(){
 
     const [ visit, setVisit ] = useState({
         date: moment().format('YYYY-MM-DD'),
-        time: moment().format('HH:mm'),
+        time: moment().add(1,'minute').format('HH:mm'),
         duration: { hours: 0, minutes: 0 },
         park_id: params.park_id || 0
     })

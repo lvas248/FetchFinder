@@ -34,9 +34,10 @@ function MobileNavBar(){
 
                 <div id='toggle'>
                     
-                    <Button id='locate' size='lg' color={ !user.location && session.loggedIn ? 'warning' : null } onClick={locateUser}>{ !user.location && session.loggedIn ? '📍' : '🌎' }</Button> 
+                    { !user.location && session.loggedIn ? <Button color='warning' id='locate' size='lg' onClick={locateUser}>📍</Button> : null } 
+                    {  user.location && session.loggedIn ? (<div id='locate'>🌎</div>) : null }
 
-                    <Button id='locate' size='lg' onClick={toggle}>≡</Button>
+                    <Button id='locate' size='lg' color='' onClick={toggle}>Ξ</Button>
                     
 
                 </div>

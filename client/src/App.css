@@ -437,3 +437,23 @@ img.d-block.w-100{
   border-radius: '15px';
   border: 2px solid black;
 } */
+
+.mapNav{
+  margin-bottom: 1vh;
+  display: flex;
+  justify-content: space-around;
+}
+
+.mapBtn{
+  width: 100%;
+  position: absolute;
+  bottom: 3vh;
+  left: 1vw; 
+  display: flex;
+  justify-content: space-around;
+}
+
+
+
+
+

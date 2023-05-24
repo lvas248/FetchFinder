@@ -1,5 +1,5 @@
 
-import { NavLink, useHistory, Link } from 'react-router-dom'
+import { NavLink, useHistory } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { logout } from './features/sessionSlice'
 
@@ -9,7 +9,7 @@ function NavBar(){
     const history = useHistory()
 
     function logoutUser(){
-        dispatch(logout()).then(res => console.log(res))
+        dispatch(logout())
         history.push('/')
     }
     return (

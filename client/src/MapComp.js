@@ -1,53 +1,56 @@
-import ReactMapGL, { Marker, NavigationControl, FullscreenControl, Source, Layer } from 'react-map-gl';
+import ReactMapGL, { Marker, Source, Layer } from 'react-map-gl';
+import { Button } from 'reactstrap'
+
 import 'mapbox-gl/dist/mapbox-gl.css'
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
+import { useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import ParkBlurb from './ParkBlurb';
-import { useParams } from 'react-router-dom'
-import { Button } from 'reactstrap';
 
 function MapComp(){
 
-    const params = useParams()
+    const { parkId } = useParams()
     const user = useSelector(state => state.user)
     const parks = useSelector(state => state.park.entity)
     const parkStatus = useSelector(state => state.park.status)
     const apiKey = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN
-
+    const mapRef = useRef(null)
 
     const [ viewport, setViewport] = useState({
-        latitude: 40.77686530072597,
-        longitude: -73.85443092329274,
-        zoom: 10,
+        latitude: 40.68216366325822,
+        longitude: -73.99999977096383,
+        zoom: 9.25,
         transitionDuration: 500
     })
 
     const [ route, setRoute ] = useState(null)
     
-    const [ selectedMarker, setSelectedMarker ] = useState(params.parkId)
+    const [ selectedMarker, setSelectedMarker ] = useState(parkId)
     
-    const selectedPark = parks.find( p => {
-        return p.id === parseInt(selectedMarker)
-    })
+    const selectedPark = parks.find( p =>  p.id === parseInt(selectedMarker))
 
-        useEffect( ()=>{
-            if(params.parkId){
-                setViewport({
-                    longitude: selectedPark?.central_coords[1],
-                    latitude: selectedPark?.central_coords[0],
-                    zoom: 18
-                })
-            }
-        },[params])
+    useEffect( ()=>{
+        if(parkId && selectedPark){
+            setViewport({
+                longitude: selectedPark?.central_coords[1],
+                latitude: selectedPark?.central_coords[0],
+                zoom: 18
+            })
+        }
+    },[parkId, selectedPark])
 
     function handleViewportChange(v){
             setViewport(v)
     }
-    
+
+    function selectMarker(p){
+        setSelectedMarker(p.id)
+        setRoute(null)
+    }
 
     function getRoute(){
-        fetch(`https://api.mapbox.com/directions/v5/mapbox/driving/${user?.location[0]},${user.location[1]};${selectedPark.central_coors[1]},${selectedPark.central_coords[0]}?geometries=geojson&access_token=${apiKey}`)
+        fetch(`https://api.mapbox.com/directions/v5/mapbox/driving/${user?.location[0]},${user.location[1]};${selectedPark.central_coords[1]},${selectedPark.central_coords[0]}?geometries=geojson&access_token=${apiKey}`)
         .then(res => res.json())
         .then(data => {
             setRoute({
@@ -60,7 +63,34 @@ function MapComp(){
                   }
                 ]
               })
+                mapRef.current.fitBounds(
+                    [
+                        [user.location[0], user.location[1]],
+                        [selectedPark.central_coords[1], selectedPark.central_coords[0]]
+                    ],
+                    {
+                        padding: 60,
+                        duration: 2000
+                    }
+                )
+
             })
+    }
+
+    function zoomOnPark(){
+        mapRef.current.flyTo({
+            center: [ selectedPark.central_coords[1], selectedPark.central_coords[0]],
+            zoom: 18,
+            duration: 4000
+        })
+    }
+
+    function zoomOut(){
+        mapRef.current.flyTo({
+            center: [ -73.99999977096383, 40.68216366325822],
+            zoom: 9.25,
+            duration: 2000
+        })
     }
 
     const renderMarkers = parks.map( p => {
@@ -68,40 +98,41 @@ function MapComp(){
                     key={p.id} 
                     longitude={p.central_coords[1]} 
                     latitude={p.central_coords[0]}
-                    onClick={()=> {
-                        setSelectedMarker(p.id)
-                    }}
+                    onClick={()=>selectMarker(p)}
                 >
                     
                     <button className={ parseInt(selectedMarker) === p.id ? "selected" : 'marker'}>🌳</button>
                 </Marker>)
     })
 
-    const parkGeometryArray = parks.map( p =>{
-        return {
-            type: 'Feature',
-            geometry:{
-                type: "Polygon",
-                coordinates: [ p.coordinates ]
-            },
-            properties: {}
-        }
-    })
 
     const geojson = {
         type: 'FeatureCollection',
-        features: parkGeometryArray
+        features:  parks.map( p =>{
+            return {
+                type: 'Feature',
+                geometry:{
+                    type: "Polygon",
+                    coordinates: [ p.coordinates ]
+                },
+                properties: {}
+            }
+        })
     }
 
-
-
+    function routeClick(e){
+        if(e.target.textContent === 'Get Route') getRoute() 
+        else setRoute(null)
+    }
+ 
     const renderUser = user.location ? <Marker className='marker' latitude={user.location[1]} longitude={user.location[0]}>❌</Marker> : null
 
     return (
        
            <div id='map_container'>
             <div id='map'>
-                 <ReactMapGL                   
+                 <ReactMapGL  
+                    ref={mapRef}                 
                     {...viewport}
                     mapboxApiAccessToken={apiKey}
                     style={{ 
@@ -114,8 +145,8 @@ function MapComp(){
                     mapStyle='mapbox://styles/mapbox/streets-v12'
                 >                    
                  
-                    <FullscreenControl />
-                    <NavigationControl />
+                    {/* <FullscreenControl /> */}
+                    {/* <NavigationControl /> */}
 
                     {renderUser}
                     {renderMarkers}
@@ -156,14 +187,18 @@ function MapComp(){
                             </Source>   
                         ) : null
                     }
- 
+                    <div className='mapBtn'>
+                        { selectedPark ? <Button size='sm' color='warning' onClick={zoomOnPark}>Closer Look</Button> : null }
+                        <Button size='sm' color='warning' onClick={zoomOut}>View Entire Map</Button>
+                        {  user.location && selectedPark ? <Button size='sm' color='warning' onClick={routeClick}>{ route ? 'Clear Route' : 'Get Route'}</Button> : null }
+                    </div>
+
+
                 </ReactMapGL>
  
             </div>
                 { selectedMarker ? <ParkBlurb park={selectedPark} /> : <p>Select a park for details</p> }
                 { parkStatus === 'pending' ? <p className='loading'>Loading...</p> : null }
-
-                    <Button type='button' onClick={()=>getRoute()}>Get Route</Button>
            </div>
     )
     

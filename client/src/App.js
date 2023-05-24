@@ -50,7 +50,8 @@ function App() {
         <NavBar /> 
 
         <div id='locateContainer'>
-          { !user.location && session.loggedIn ? <Button color='warning' onClick={locateUser}>📍</Button> : '🌎' } 
+          { !user.location && session.loggedIn ? <Button color='warning' onClick={locateUser}>📍</Button> : null } 
+          {  user.location && session.loggedIn ? '🌎' : null }
         </div>
  
       </div>

@@ -31,7 +31,6 @@ function EditUserForm({user={}, clickEdit}){
         clickEdit()
     }
 
-    console.log(user)
     return (
         <>
             <form 

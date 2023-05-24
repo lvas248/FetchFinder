@@ -13,8 +13,6 @@ function Profile(){
         setEditBtnClick(!editBtnClick)
     }
 
-    console.log(user.image)
-
     return (
         <div>
 

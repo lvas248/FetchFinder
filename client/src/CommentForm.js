@@ -9,7 +9,6 @@ function CommentForm({parkId}){
 
     const error = useSelector( state => state.park.error)
     
-    console.log(error)
     const [commentText, setCommentText] = useState('')
     const dispatch = useDispatch()
 

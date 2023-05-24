@@ -23,7 +23,7 @@ class VisitSerializer < ActiveModel::Serializer
   end
 
   def upcoming
-    Time.now < self.object.start_time
+    Time.now < self.object.end_time
   end
   
 end
