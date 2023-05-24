@@ -28,7 +28,7 @@ function EditCommentTextForm({comment, clickEditBtn}){
     return (
         <form onSubmit={submitUpdate}>
             <Input value={editText} onChange={e => setEditText(e.target.value)} />
-            { errors.meta?.arg.id === comment.id ? <p className='error'> Comment {errors.payload.errors.comment}</p> : null}
+            { errors.meta?.arg.id === comment.id ? <p className='error left'> Comment {errors.payload.errors.comment}</p> : null}
             <Button color='primary' size='sm'>update</Button>
         </form>
     )

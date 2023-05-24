@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { setUser, removeUser } from './user/userSlice'
 import { removeParkDistanceFromUser } from './park/parkSlice'
 import { removeVisits, setVisits } from './visits/visitSlice'
+
 export const signup = createAsyncThunk( 
     'session/signup',
     async( obj, { dispatch, rejectWithValue })=>{

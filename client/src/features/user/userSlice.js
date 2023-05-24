@@ -62,8 +62,8 @@ const initialState = {
         image: {}
     },
     location: null,
-    status: '',
-    error: 'idle'
+    status: 'idle',
+    error: null
 }
 
 const userSlice = createSlice({
@@ -79,6 +79,9 @@ const userSlice = createSlice({
         }, 
         setUserLocation: (state, action) => {
             state.location = action.payload
+        },
+        clearError: ( state ) =>{
+            state.error = initialState.error
         }
     },
     extraReducers: ( builder ) => {
@@ -86,8 +89,9 @@ const userSlice = createSlice({
             .addCase( editUser.pending, state => {
                 state.status = 'pending'
             })
-            .addCase( editUser.rejected, state => {
-                state.status = 'error'
+            .addCase( editUser.rejected,( state, action ) => {
+                state.status = 'idle'
+                state.error = action.payload.errors
             })
             .addCase( editUser.fulfilled, (state,action)=>{
                 state.status = 'idle'
@@ -127,4 +131,4 @@ const userSlice = createSlice({
 
 export default userSlice.reducer
 
-export const { setUser, removeUser, setUserLocation } = userSlice.actions
+export const { setUser, removeUser, setUserLocation, clearError } = userSlice.actions

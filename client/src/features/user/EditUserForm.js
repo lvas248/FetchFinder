@@ -1,18 +1,29 @@
-import { useDispatch} from "react-redux"
-import React, { useState } from 'react'
+import { useDispatch ,useSelector } from "react-redux"
+import React, { useState, useEffect } from 'react'
 import { Button,Label, Input } from 'reactstrap'
 import { editUser } from "./userSlice"
-import ImageUpload from "../../ImageUpload"
+import { clearError } from "./userSlice"
 
 
-function EditUserForm({user={}, clickEdit}){
+function EditUserForm({user={}, navigateTo}){
 
     const dispatch = useDispatch()
+    const error = useSelector(state => state.user.error)
+
+    useEffect(()=>{
+        return ()=>{
+            dispatch(clearError())
+        }
+    },[dispatch])
+
 
     const [ userObj, setUserObj ] = useState({
-        username: user ? user.username : ''
+        username: user.username
     })
 
+
+
+    
  
     
     function updateUserObj(e){
@@ -23,12 +34,10 @@ function EditUserForm({user={}, clickEdit}){
 
     function submitUpdate(e){
         e.preventDefault()
-        dispatch(editUser(userObj))
-        setUserObj({
-            username: '',
-            image_url: ''
+        dispatch(editUser(userObj)).then(data => {
+            if(data.meta.requestStatus === 'fulfilled') navigateTo()
         })
-        clickEdit()
+  
     }
 
     return (
@@ -38,21 +47,27 @@ function EditUserForm({user={}, clickEdit}){
                 onSubmit={submitUpdate}
                 >
 
-                <h1>Edit User Form</h1>
+                <h4 className='left'>Edit User Form</h4>
 
                 <div className='inputField'>
-                    <Label>Username</Label>
+
+                    <div className='labelContainer'>
+                        <Label>Username</Label>
+                        <p className='error left'>{error?.username}</p>
+                    </div>
+
                     <Input
                         name='username'
                         placeholder='username'
                         value={userObj.username}
                         onChange={updateUserObj}
-                    />                  
+                    />     
+
                 </div>
 
-                <Button color='primary'>Submit</Button>
+                <Button color='success' type='submit' size='sm'>Submit</Button>
+                <Button color='warning' type='button' size='sm' onClick={()=>navigateTo()}>Back</Button>
             </form>
-            <ImageUpload />
 
         </>
     )

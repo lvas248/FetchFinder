@@ -1,41 +1,72 @@
-import { useState } from 'react'
-import EditUserForm from "./features/user/EditUserForm"
 import { useSelector } from 'react-redux'
 import { Button } from 'reactstrap'
+import { Switch, Route, useHistory } from 'react-router-dom' 
+
+import ImageUpload from './ImageUpload'
+import EditUserForm from "./features/user/EditUserForm"
+
+import { useDispatch } from 'react-redux'
+import { logout } from './features/sessionSlice'
+
 function Profile(){
 
-
+    const dispatch = useDispatch()
     const user = useSelector(state => state.user.entity)
+    const history = useHistory()
 
-    const [ editBtnClick, setEditBtnClick ] = useState(false)
-    
-    function clickEdit(){
-        setEditBtnClick(!editBtnClick)
+    function navigateTo(endPoint=''){
+        history.push(`/profile/${endPoint}`)
+    }
+
+    function submitDelete(){
+        console.log('Deleted!')
+        dispatch(logout()).then(data => {
+            console.log(data)
+            if(data.meta.requestStatus === 'fulfilled') history.push('')
+        })
+
+        
     }
 
     return (
         <div>
-
+            <h1>{user.username}</h1>
             <img className='profileImg' alt={user.username} src={user.image ? user.image.url : 'https://cdn.pixabay.com/photo/2018/11/13/21/43/avatar-3814049_1280.png' }/>
+            
+            <div className='profileSwitchContainer'>
+                <Switch>
+
+                    <Route exact path='/profile'>
+                        <Button size='sm' color='primary' onClick={()=>navigateTo('edit_username')}>Edit Username</Button> 
+                        <Button size='sm' color='success' onClick={()=>navigateTo('edit_user_image')}>Change Profile Image</Button> 
+                        <Button size='sm' color='danger' onClick={()=>navigateTo('delete_account')}>Delete Account</Button>
+                    </Route>
+
+                    <Route path='/profile/edit_username'>
+                        <EditUserForm user={user} navigateTo={navigateTo}/> 
+                    </Route>
+
+                    <Route path='/profile/edit_user_image'>
+                        <ImageUpload navigateTo={navigateTo}/>
+                    </Route>
+
+                    <Route path='/profile/delete_account'>
+                        <div>
+                            <p>Are your sure?</p>
+                            <div>
+                                <Button color='warning' onClick={()=>navigateTo()}>Back</Button>
+                                <Button color='danger' onClick={submitDelete}>Delete</Button>
+                            </div>
+                        </div>
+                    </Route>
+
+                </Switch>
+  
+            </div>
+
 
             
-            {
-                editBtnClick ? (
-                    <>                    
-                        <EditUserForm user={user} clickEdit={clickEdit}/> 
-
-                        <Button onClick={clickEdit}>Back</Button>
-
-                    </>
-                    ):(
-                    <div>
-                        <label>Username: </label>
-                        <h5>{user.username}</h5>
-                        <Button size='sm' color='primary'onClick={clickEdit}>Edit</Button> 
-                        <Button size='sm' color='danger'>Delete Account</Button>
-                    </div>  
-                )
-            }
+    
 
   
 
