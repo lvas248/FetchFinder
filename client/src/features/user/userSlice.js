@@ -100,13 +100,16 @@ const userSlice = createSlice({
             .addCase( uploadUserImage.pending, state => {
                 state.status = 'pending'
             })
+        
             .addCase( uploadUserImage.fulfilled, (state, action)=>{
                 state.status = 'idle'
                 state.entity = {...state.entity, image: action.payload}
             })
-            .addCase( uploadUserImage.rejected, state => {
-                state.status = 'error'
+            .addCase( uploadUserImage.rejected, ( state, action ) => {
+                state.status = 'idle'
+                state.error = action.payload
             })
+
             .addCase( getUserPosition.pending, state=>{
                 state.status = 'pending'
             })

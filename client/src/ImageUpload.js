@@ -1,10 +1,18 @@
 import { Input, Button } from 'reactstrap'
-import { useDispatch } from 'react-redux'
-import { uploadUserImage } from './features/user/userSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import { useEffect } from 'react'
+import { uploadUserImage, clearError  } from './features/user/userSlice'
 
 function ImageUpload({navigateTo}){
 
     const dispatch = useDispatch()
+    const error = useSelector( state => state.user.error)
+    
+    useEffect(()=>{
+        return ()=>{
+            dispatch(clearError())
+        }
+    },[])
 
     function submitUpload(e){
         e.preventDefault()
@@ -17,8 +25,10 @@ function ImageUpload({navigateTo}){
             id='form'
             onSubmit={submitUpload}
         >
-
-            <h4 className='left'>Upload Image</h4>
+            <div className='labelContainer'>
+                <h4 className='left'>Upload Image</h4>
+                <p className='error'>{error?.image}</p>
+            </div>
             
             <Input 
                 className='inputField'
