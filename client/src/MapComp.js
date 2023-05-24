@@ -5,7 +5,9 @@ import 'mapbox-gl/dist/mapbox-gl.css'
 
 import React, { useState, useEffect, useRef } from 'react'
 import { useParams } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { getUserPosition } from './features/user/userSlice';
+
 import ParkBlurb from './ParkBlurb';
 
 function MapComp(){
@@ -16,6 +18,7 @@ function MapComp(){
     const parkStatus = useSelector(state => state.park.status)
     const apiKey = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN
     const mapRef = useRef(null)
+    const dispatch = useDispatch()
 
     const [ viewport, setViewport] = useState({
         latitude: 40.68216366325822,
@@ -93,6 +96,19 @@ function MapComp(){
         })
     }
 
+    function zoomToUser(){
+        if(user.location){
+            mapRef.current.flyTo({
+                center: [ user?.location[0], user?.location[1]],
+                zoom: 13,
+                duration: 2000
+            })  
+        }else{
+            dispatch(getUserPosition())
+        }
+
+    }
+
     const renderMarkers = parks.map( p => {
         return (<Marker 
                     key={p.id} 
@@ -145,9 +161,6 @@ function MapComp(){
                     mapStyle='mapbox://styles/mapbox/streets-v12'
                 >                    
                  
-                    {/* <FullscreenControl /> */}
-                    {/* <NavigationControl /> */}
-
                     {renderUser}
                     {renderMarkers}
 
@@ -191,6 +204,7 @@ function MapComp(){
                         { selectedPark ? <Button size='sm' color='warning' onClick={zoomOnPark}>Closer Look</Button> : null }
                         <Button size='sm' color='warning' onClick={zoomOut}>View Entire Map</Button>
                         {  user.location && selectedPark ? <Button size='sm' color='warning' onClick={routeClick}>{ route ? 'Clear Route' : 'Get Route'}</Button> : null }
+                        <Button size='sm' color='warning' onClick={zoomToUser}>{ user.location? '🌎' : '📍'}</Button>
                     </div>
 
 
