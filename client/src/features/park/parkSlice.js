@@ -170,7 +170,7 @@ const parkSlice = createSlice({
             })
             .addCase( uploadParkImages.rejected, (state, action) => {
                 state.status = 'idle'
-                state.error = action
+                state.error = action.payload
             })
 
             .addCase( addCommentToPark.pending, (state) => {
