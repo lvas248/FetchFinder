@@ -10,7 +10,7 @@ require 'faker'
 # #   Character.create(name: 'Luke', movie: movies.first)
 
 
-# response = HTTParty.get("https://data.cityofnewyork.us/resource/hxx3-bwgv.json")
+response = HTTParty.get("https://data.cityofnewyork.us/resource/hxx3-bwgv.json")
 
 if response.code == 200
     data = JSON.parse(response.body)        
