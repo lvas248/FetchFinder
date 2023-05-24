@@ -53,6 +53,7 @@
 .error{
   color: red;
   list-style-type: none;
+  margin-left: 1vw;
 }
 a.active{
   background-color: #5C636A;
@@ -314,6 +315,7 @@ h6 {
 
 .profileImg{
   margin-top: 2vh;
+  width: 60%;
 }
 
 #mobileNav{
@@ -454,6 +456,8 @@ img.d-block.w-100{
 }
 
 
-
+.labelContainer{
+  display: flex;
+}
 
 

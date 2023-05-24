@@ -81,7 +81,7 @@ function MapComp(){
         mapRef.current.flyTo({
             center: [ selectedPark.central_coords[1], selectedPark.central_coords[0]],
             zoom: 18,
-            duration: 4000
+            duration: 2000
         })
     }
 

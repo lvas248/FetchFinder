@@ -9,7 +9,8 @@ function Signup(){
     const history = useHistory()
     const session = useSelector( state => state.session)
     
-
+    console.log( session?.error?.errors?.username )
+    
 
     const [ signupObj, setSignupObj ] = useState({
         username: '',
@@ -42,8 +43,6 @@ function Signup(){
         history.push('/')
     }
 
-   
-
     return (
         <form 
             id='form'
@@ -53,8 +52,10 @@ function Signup(){
             <h1>Signup</h1>
 
             <div className='inputField'>
-
-                <Label>Username</Label>
+                <div className='labelContainer'>
+                    <Label>Username</Label>
+                    <p className='error'>{session?.error?.errors?.username}</p>
+                </div>
                 <Input 
                     id='username' 
                     value={signupObj.username} 
@@ -63,8 +64,6 @@ function Signup(){
                 />
 
             </div>
-
-            { session.errors?.hasOwnProperty('errors') ? <p className='error left'>{session.errors.errors.username}</p>: null }
 
             <div className='inputField'>
 
@@ -79,8 +78,10 @@ function Signup(){
             </div>
 
             <div className='inputField'>
-
-                <Label>Password Confirmation</Label>
+                <div className='labelContainer'>
+                    <Label>Password Confirmation</Label>
+                    <p className='error'>{session?.error?.errors?.password_confirmation}</p>
+                </div>
                 <Input 
                     id='password_confirmation' 
                     value={signupObj.password_confirmation} 
@@ -89,9 +90,6 @@ function Signup(){
                 />
 
             </div>
-
-            { session.errors?.hasOwnProperty('errors') && session.errors.errors.password_confirmation ? <p className='error left'>{session.errors.errors.password_confirmation}</p> : null }
-
 
             <div className='inputField'>
 

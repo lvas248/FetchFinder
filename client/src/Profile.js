@@ -16,7 +16,7 @@ function Profile(){
     return (
         <div>
 
-            <img className='profileImg' alt={user.username} src={user.image ? user.image.url : null }/>
+            <img className='profileImg' alt={user.username} src={user.image ? user.image.url : 'https://cdn.pixabay.com/photo/2018/11/13/21/43/avatar-3814049_1280.png' }/>
 
             
             {
