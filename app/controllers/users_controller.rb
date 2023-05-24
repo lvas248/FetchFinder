@@ -25,11 +25,12 @@ class UsersController < ApplicationController
     def upload_user_image
         user = User.find(session[:user_id])
         image_params = params[:image]
-        unless image_params.nil?
+        if image_params.nil?
+            render json: { image: 'Image must be selected'}, status: :unprocessable_entity
+        else
             user.upload_and_replace_user_image(params[:image])
             render json: user.image
         end
-        render json: { image: 'Image must be selected'}, status: :unprocessable_entity
     end
 
     private

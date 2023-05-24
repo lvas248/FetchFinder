@@ -21,11 +21,13 @@ class User < ApplicationRecord
             self.image.destroy
         end
 
+
         self.create_image!(
             url: result['url'],
             public_id: result['public_id']
         )
         
+        # binding.pry
     end
 
 

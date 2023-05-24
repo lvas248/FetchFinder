@@ -17,7 +17,9 @@ function ImageUpload({navigateTo}){
     function submitUpload(e){
         e.preventDefault()
         const formData = new FormData(e.target)
-        dispatch(uploadUserImage(formData))
+        dispatch(uploadUserImage(formData)).then( data => {
+            if(data.meta.requestStatus === 'fulfilled') navigateTo()
+        })
     }
 
     return (
