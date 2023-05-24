@@ -55,7 +55,7 @@ function VisitForm(){
                 </Input>
             </div>
 
-            { errors?.hasOwnProperty('errors') && errors.errors.park ? <p className='error left'>Park {errors.errors.park}</p> : null }
+            <p className='error left'>{errors?.errors?.park}</p>
 
             <div className='duration'>
 
@@ -81,7 +81,7 @@ function VisitForm(){
 
             </div>
 
-            { errors.hasOwnProperty('errors') && errors.errors.start_time ? <p className='error left'>{errors.errors.start_time}</p> : null }
+            <p className='error left'>{errors?.errors?.start_time}</p>
 
             <div >
 
@@ -111,7 +111,7 @@ function VisitForm(){
  
                     </div>
 
-                    { errors.hasOwnProperty('errors') && errors.errors.duration ? <p className='error left'>Duration {errors.errors.duration}</p> : null }
+                    <p className='error left'>{errors?.errors?.duration}</p>
 
 
             </div>
