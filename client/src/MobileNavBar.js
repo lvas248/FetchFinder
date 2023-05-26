@@ -61,7 +61,7 @@ function MobileNavBar(){
                     </NavLink>
 
                     <NavLink onClick={toggle} className='navItem' to='/profile'>
-                        { session.loggedIn ? user.entity.username.toUpperCase() : 'PROFILE'}
+                        { session.loggedIn && user?.entity.username ? user?.entity.username.toUpperCase() : 'PROFILE'}
                     </NavLink>
 
                     {

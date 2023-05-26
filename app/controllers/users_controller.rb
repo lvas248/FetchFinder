@@ -1,3 +1,5 @@
+require 'pry'
+
 class UsersController < ApplicationController
 
 # signup 
@@ -35,8 +37,11 @@ class UsersController < ApplicationController
 
     def destroy
         user = get_user
+        user.destroy_cloudinary_image  
         user.destroy
-        head :no_content
+        # binding.pry
+
+        render json: user
     end
 
     private

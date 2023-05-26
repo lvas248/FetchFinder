@@ -1,5 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { updateParkDistanceFromUser } from "../park/parkSlice";
+import { removeVisits } from "../visits/visitSlice";
+import { removeParkDistanceFromUser } from "../park/parkSlice";
 
 export const editUser = createAsyncThunk(
     'user/editUser',
@@ -52,6 +54,27 @@ export const getUserPosition = createAsyncThunk(
                 reject(error)
             }) 
         })
+    }
+)
+
+export const deleteUser = createAsyncThunk(
+    'user/deleteUser',
+    async(_,{dispatch, rejectWithValue})=>{
+        const response = await fetch('/user',{
+            method: 'DELETE',
+            headers: {
+                'Content-type':'application/json'
+            }
+        })
+
+        const data = await response.json()
+
+        if(response.ok){
+            dispatch(removeVisits())
+            dispatch(removeParkDistanceFromUser())
+            return data
+        } 
+        return rejectWithValue(data)
     }
 )
 
@@ -119,6 +142,19 @@ const userSlice = createSlice({
             })
             .addCase( getUserPosition.rejected, (state, action)=>{
                 state.status = 'rejected'
+                state.error = action.payload
+            })
+            .addCase( deleteUser.pending, ( state )=>{
+                state.status = 'pending'
+            })
+            .addCase( deleteUser.fulfilled, ( state )=>{
+                state.status = 'idle'
+                state.entity = initialState
+                state.location = null
+                state.error = null
+            })
+            .addCase( deleteUser.rejected, (state, action)=>{
+                state.status = 'idle'
                 state.error = action.payload
             })
 

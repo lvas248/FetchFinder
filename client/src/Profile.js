@@ -6,7 +6,7 @@ import ImageUpload from './ImageUpload'
 import EditUserForm from "./features/user/EditUserForm"
 
 import { useDispatch } from 'react-redux'
-import { logout } from './features/sessionSlice'
+import { deleteUser } from './features/user/userSlice'
 
 function Profile(){
 
@@ -19,8 +19,7 @@ function Profile(){
     }
 
     function submitDelete(){
-        console.log('Deleted!')
-        dispatch(logout()).then(data => {
+        dispatch(deleteUser()).then(data => {
             console.log(data)
             if(data.meta.requestStatus === 'fulfilled') history.push('')
         })
