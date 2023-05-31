@@ -12,7 +12,7 @@ function ImageUpload({navigateTo}){
         return ()=>{
             dispatch(clearError())
         }
-    },[])
+    },[dispatch])
 
     function submitUpload(e){
         e.preventDefault()

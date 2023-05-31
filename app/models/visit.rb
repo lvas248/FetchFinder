@@ -34,8 +34,8 @@ class Visit < ApplicationRecord
   end
 
   def time_conflict?
-      conflict = self.user.visits.where('(start_time <= ? AND end_time >= ?) OR (start_time <= ? AND end_time >= ?)', self.start_time, self.start_time, self.start_time + self.duration, self.start_time + self.duration)
-      unless conflict.empty?
+      conflicts = self.user.visits.where('(start_time <= ? AND end_time >= ?) OR (start_time <= ? AND end_time >= ?)', self.start_time, self.start_time, self.start_time + self.duration, self.start_time + self.duration).where.not(id: self.id)
+      unless conflicts.empty?
         errors.add(:conflict, 'Conflicting visit. Please select a different timeframe.')
       end
   end

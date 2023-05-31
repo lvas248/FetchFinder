@@ -20,7 +20,6 @@ function Profile(){
 
     function submitDelete(){
         dispatch(deleteUser()).then(data => {
-            console.log(data)
             if(data.meta.requestStatus === 'fulfilled') history.push('')
         })
 

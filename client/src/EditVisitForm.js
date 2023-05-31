@@ -12,7 +12,7 @@ function EditVisitForm({visit, clickEditBtn}){
     const [ editVisitObj, setEditVisitObj ] = useState({
         date: moment(visit.start.date).format('YYYY-MM-DD'),
         park_id: visit.park.id,
-        time: moment(visit.start_time).format('HH:MM'),
+        time: moment(visit.start_time).format('HH:mm'),
         hours: parseInt(visit.formatted_duration.hours),
         minutes: parseInt(visit.formatted_duration.minutes)
     })      

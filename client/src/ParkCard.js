@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Card, CardTitle, CardSubtitle, CardBody, CardText, Button, UncontrolledCarousel } from 'reactstrap'
 import MultipleImageUpload from "./MultipleImageUpload"
 import { useSelector } from 'react-redux'
-import { useParams, useHistory, Switch, Route } from 'react-router-dom'
+import { useParams, useHistory } from 'react-router-dom'
 import Comments from './Comments'
 
 function ParkCard({ park = null }){

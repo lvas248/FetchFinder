@@ -3,7 +3,7 @@ import { Button } from 'reactstrap'
 
 import 'mapbox-gl/dist/mapbox-gl.css'
 
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, useMemo } from 'react'
 import { useParams } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { getUserPosition } from './features/user/userSlice';
@@ -29,19 +29,19 @@ function MapComp(){
 
     const [ route, setRoute ] = useState(null)
     
-    const [ selectedMarker, setSelectedMarker ] = useState(parkId)
+    const [ selectedMarker, setSelectedMarker ] = useState(parkId || null)
     
     const selectedPark = parks.find( p =>  p.id === parseInt(selectedMarker))
 
     useEffect( ()=>{
-        if(parkId && selectedPark){
+        if(selectedPark && parkId){
             setViewport({
                 longitude: selectedPark?.central_coords[1],
                 latitude: selectedPark?.central_coords[0],
                 zoom: 18
             })
         }
-    },[parkId, selectedPark])
+    },[ parkId ])
 
     function handleViewportChange(v){
             setViewport(v)
@@ -80,6 +80,11 @@ function MapComp(){
             })
     }
 
+    function routeClick(e){
+        if(e.target.textContent === 'Get Route') getRoute() 
+        else setRoute(null)
+    }
+
     function zoomOnPark(){
         mapRef.current.flyTo({
             center: [ selectedPark.central_coords[1], selectedPark.central_coords[0]],
@@ -89,6 +94,7 @@ function MapComp(){
     }
 
     function zoomOut(){
+       
         mapRef.current.flyTo({
             center: [ -73.99999977096383, 40.68216366325822],
             zoom: 9.25,
@@ -109,19 +115,17 @@ function MapComp(){
 
     }
 
-    const renderMarkers = parks.map( p => {
-        return (<Marker 
-                    key={p.id} 
-                    longitude={p.central_coords[1]} 
-                    latitude={p.central_coords[0]}
-                    onClick={()=>selectMarker(p)}
-                >
-                    
-                    <button className={ parseInt(selectedMarker) === p.id ? "selected" : 'marker'}>🌳</button>
-                </Marker>)
-    })
-
-
+    const renderMarkers = useMemo(()=> parks.map( p => {
+            return <Marker 
+                key={p.id} 
+                longitude={p.central_coords[1]} 
+                latitude={p.central_coords[0]}
+                onClick={()=>selectMarker(p)}
+            >
+                <button className={ parseInt(selectedMarker) === p.id ? "selected" : 'marker'}>🌳</button>
+            </Marker>
+            }),[parks, selectedMarker])
+ 
     const geojson = {
         type: 'FeatureCollection',
         features:  parks.map( p =>{
@@ -136,12 +140,7 @@ function MapComp(){
         })
     }
 
-    function routeClick(e){
-        if(e.target.textContent === 'Get Route') getRoute() 
-        else setRoute(null)
-    }
- 
-    const renderUser = user.location ? <Marker className='marker' latitude={user.location[1]} longitude={user.location[0]}>❌</Marker> : null
+    const renderUser = user.location ? <Marker className='marker' anchor='center' latitude={user.location[1]} longitude={user.location[0]}>❌</Marker> : null
 
     return (
        
@@ -161,29 +160,24 @@ function MapComp(){
                     mapStyle='mapbox://styles/mapbox/streets-v12'
                 >                    
                  
-                    {renderUser}
+                    {user.location ? renderUser : null }
                     {renderMarkers}
 
-                    
                     <Source
                         type='geojson'
                         data={geojson}
                     >
                         <Layer
-                            id='polygon'
+                            // id='polygon'
                             type='fill'
                             paint={{
                                 'fill-color': '#f7ec04',
-                                'fill-opacity': 1
+                                'fill-opacity': 1,
+                                'fill-outline-color':'black'
                             }}
                         />
                     </Source>
-                  
-
-
-                 
-
-
+                
                     {
                         route ? (
                             <Source type='geojson' data={route}>
@@ -200,13 +194,13 @@ function MapComp(){
                             </Source>   
                         ) : null
                     }
+
                     <div className='mapBtn'>
                         { selectedPark ? <Button size='sm' color='warning' onClick={zoomOnPark}>Closer Look</Button> : null }
                         <Button size='sm' color='warning' onClick={zoomOut}>View Entire Map</Button>
                         {  user.location && selectedPark ? <Button size='sm' color='warning' onClick={routeClick}>{ route ? 'Clear Route' : 'Get Route'}</Button> : null }
                         <Button size='sm' color='warning' onClick={zoomToUser}>{ user.location? '🌎' : '📍'}</Button>
                     </div>
-
 
                 </ReactMapGL>
  
