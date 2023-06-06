@@ -32,7 +32,7 @@ function CommentForm({parkId}){
             <form onSubmit={submitComment}
                 id='formContainer'>
 
-                <img alt='Prof' id='commentImage' src={profile_image}/>
+                <img alt='Prof' id='commentImage' src={profile_image ? profile_image : 'https://t3.ftcdn.net/jpg/02/95/26/46/360_F_295264675_clwKZxogAhxLS9sD163Tgkz1WMHsq1RJ.jpg'}/>
                 <Input value={commentText} placeholder='comment...' onChange={handleTextChange} type='text' />
                 
                 <Button>Submit</Button>

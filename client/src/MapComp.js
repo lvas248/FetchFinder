@@ -199,7 +199,7 @@ function MapComp(){
                         { selectedPark ? <Button size='sm' color='warning' onClick={zoomOnPark}>Closer Look</Button> : null }
                         <Button size='sm' color='warning' onClick={zoomOut}>View Entire Map</Button>
                         {  user.location && selectedPark ? <Button size='sm' color='warning' onClick={routeClick}>{ route ? 'Clear Route' : 'Get Route'}</Button> : null }
-                        <Button size='sm' color='warning' onClick={zoomToUser}>{ user.location? '🌎' : '📍'}</Button>
+                        <Button size='sm' color='warning' onClick={zoomToUser}>{ user.location? '👤' : '📍'}</Button>
                     </div>
 
                 </ReactMapGL>

@@ -75,8 +75,8 @@ function ParkCard({ park = null }){
 
 
                 <div id='parkCardBody'>
-                    <CardText><strong>ADDRESS</strong>: {park?.address}</CardText>
-                    { park?.distance_from_user ? <CardText><strong>Distance: </strong>{park.distance_from_user} </CardText> : null }
+                    <CardText><strong>Address</strong>: {park?.address}</CardText>
+                    { park?.distance_from_user ? <CardText><strong>Distance: </strong>{park.distance_from_user} miles</CardText> : null }
 
                 </div>
                 

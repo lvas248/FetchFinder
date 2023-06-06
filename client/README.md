@@ -1,70 +1,83 @@
-# Getting Started with Create React App
+# FetchFinder NYC
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+  
+FetchFinder is an app that assists dog owners in discovering nearby dog parks. The app provides a list of dog parks in the proximity and offers ratings and feedback by other users. It also offers data regarding the number of dogs in each park at any moment.
+  
 
-## Available Scripts
+## Features
+  
+- User authentication: users can securely log in and out of their accounts.
 
-In the project directory, you can run:
+- Profile Creation.
 
-### `npm start`
+- Location Based Search: Allows user to search for dog parks based on their current location through geolocation and a map interface.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- Check-ins: allows users to check in to dog parks and obtain the current number of users checked in.
+- User comments and images: allows users to leave comments and upload images for each dog park.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
 
-### `npm test`
+  
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Description
 
-### `npm run build`
+LOGIN/SIGNUP
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+  
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+The system enables user authentication and account creation for a personalized experience.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+  ![Alt Text](media/signup.gif)
 
-### `npm run eject`
+MAP
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+The user interface features an interactive map showcasing all dog parks located in New York City (NYC). Users can zoom in and navigate the map freely, with a convenient "view entire map" button provided for easy zooming out. Additionally, users can geolocate themselves by clicking on the pin button, resulting in a red "X" marking their current location on the map.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+  
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Upon geolocation and park selection, the map interface dynamically updates with additional buttons and a park blurb below:
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+  
 
-## Learn More
+Additional buttons include:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+-   "Closer Look" button: Provides a zoomed-in view of the selected park, displaying the park's perimeter and area to offer a better understanding of its size and shape.
+    
+-   "Get Route" button: Generates the optimal route between the user's current location and the selected dog park.
+    
+-   "Globe" button: Zooms in on the user's current location.
+    
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Park Blurb: The park blurb offers brief details about the selected park, including:
 
-### Code Splitting
+-   Park name
+    
+-   Number of current park users checked in
+    
+-   Park address
+    
+-   Distance from the user's location
+    
+-   Options to navigate to "view more details" and "schedule a visit"
+    
+![Alt Text](media/map.gif)
+  
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+VISIT
 
-### Analyzing the Bundle Size
+Clicking the "Schedule a visit" button directs the user to a new visit form. The form is prefilled with the selected park's information and automatically sets the date and time to the current moment. Users can edit any of this information and input an estimated duration for their park visit. Submitting the form creates a visit and redirects the user to the "My Visits" section within the Visits tab. From there, users can edit or delete any future scheduled visits.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+  ![Alt Text](media/visit.gif)
 
-### Making a Progressive Web App
+PARKS
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+  
 
-### Advanced Configuration
+The Parks tab provides comprehensive information on all dog parks in NYC. Each park is represented as a card containing the following details: park name, borough, number of users checked in, address, distance from the user's location, user-uploaded images, a comment section, the ability to upload additional images, navigation to the map, and the option to schedule a visit. Users can sort the parks alphabetically or in reverse order. If the user has geolocated, they can also sort the parks based on distance. Furthermore, a search feature allows users to find parks by name.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+  ![Alt Text](media/park.gif)
+  
+PROFILE
 
-### Deployment
+The Profile tab displays the user's image and username. It offers options to modify the user's profile image or username. Additionally, users can delete their account directly from this tab.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+![Alt Text](media/profile.gif)  

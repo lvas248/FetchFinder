@@ -26,7 +26,7 @@ function CommentCard({comment}){
         <Card id='commentCard'>
             
             <CardHeader id={ isUserComment ? 'commentHeader' : null }>
-                <img alt='alt text' id='commentImage' src={comment.filtered_user.image?.url}/>
+                <img alt='alt text' id='commentImage' src={comment.filtered_user.image ? comment.filtered_user.image?.url : 'https://t3.ftcdn.net/jpg/02/95/26/46/360_F_295264675_clwKZxogAhxLS9sD163Tgkz1WMHsq1RJ.jpg'}/>
                 <h6 id='commentUsername'>{comment.filtered_user?.username}</h6>
                 <p id='headerText'>{comment.date}</p>
             </CardHeader>
