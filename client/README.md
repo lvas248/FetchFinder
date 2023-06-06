@@ -44,7 +44,7 @@ Additional buttons include:
     
 -   "Get Route" button: Generates the optimal route between the user's current location and the selected dog park.
     
--   "Globe" button: Zooms in on the user's current location.
+-   "👤" button: Zooms in on the user's current location.
     
 
 Park Blurb: The park blurb offers brief details about the selected park, including:
@@ -81,3 +81,5 @@ PROFILE
 The Profile tab displays the user's image and username. It offers options to modify the user's profile image or username. Additionally, users can delete their account directly from this tab.
 
 ![Alt Text](media/profile.gif)  
+
+Video Walkthrough: https://youtu.be/nXjRSwnjM-0
