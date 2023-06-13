@@ -18,7 +18,6 @@ function Profile(){
         return <li className='listItem' key={p.name}>{p.name}  visits: {p.qty}</li>
     })
 
-    console.log(user.top_visited_parks)
     function navigateTo(endPoint=''){
         history.push(`/profile/${endPoint}`)
     }

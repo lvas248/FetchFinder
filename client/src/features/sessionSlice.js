@@ -84,7 +84,13 @@ const initialState = {
 const sessionSlice = createSlice({
     name: 'session',
     initialState: initialState,
-    reducers: {}, 
+    reducers: {
+        sessionLogout: ( state ) =>{
+            state.loggedIn = false
+            state.error = null
+            state.status = 'idle'
+        }
+    }, 
     extraReducers: (builder)=> {
         builder
             .addCase( signup.pending , state => {
@@ -149,3 +155,4 @@ const sessionSlice = createSlice({
 })
 
 export default sessionSlice.reducer
+export const { sessionLogout } = sessionSlice.actions

@@ -42,11 +42,9 @@ function EditVisitForm({visit, clickEditBtn}){
             start_time: new Date(editVisitObj.date + 'T' + editVisitObj.time + ':00'),
             duration: editVisitObj.hours*3600 + editVisitObj.minutes*60
         })).then( data => {
-            console.log(data)
             //if http request is successful, close editVisitForm
             if(data.meta.requestStatus === 'fulfilled') clickEditBtn()
         })
-        // clearErrorTimeout()
     }
     
     return (

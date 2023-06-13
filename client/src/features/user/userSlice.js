@@ -4,6 +4,7 @@ import { removeVisits } from "../visits/visitSlice";
 import { removeParkDistanceFromUser } from "../park/parkSlice";
 import { updateCommentImage } from "../park/parkSlice";
 import { updateCommentUsername } from "../park/parkSlice";
+import { sessionLogout } from "../sessionSlice";
 
 export const editUser = createAsyncThunk(
     'user/editUser',
@@ -74,6 +75,7 @@ export const deleteUser = createAsyncThunk(
         const data = await response.json()
 
         if(response.ok){
+            dispatch(sessionLogout())
             dispatch(removeVisits())
             dispatch(removeParkDistanceFromUser())
             return data

@@ -9,7 +9,7 @@ function Signup(){
     const history = useHistory()
     const session = useSelector( state => state.session)
     
-    console.log( session?.error?.errors?.username )
+    
     
 
     const [ signupObj, setSignupObj ] = useState({

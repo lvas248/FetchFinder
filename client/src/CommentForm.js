@@ -18,7 +18,6 @@ function CommentForm({parkId}){
 
     function submitComment(e){
         e.preventDefault()
-        console.log({comment: commentText, park_id: parkId})
         dispatch(addCommentToPark({
             comment: commentText, 
             park_id: parkId

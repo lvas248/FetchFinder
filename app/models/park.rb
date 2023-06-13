@@ -1,6 +1,6 @@
 class Park < ApplicationRecord
     
-    has_many :comments, destroy: :dependent
+    has_many :comments
     has_many :visits
     has_many :images, as: :imageable
 
