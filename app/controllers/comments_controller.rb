@@ -1,5 +1,7 @@
 class CommentsController < ApplicationController
 
+    before_action :authorize
+
     def create
         user = get_user
         comment = user.comments.create!(comment_params)

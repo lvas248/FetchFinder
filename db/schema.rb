@@ -26,17 +26,6 @@ ActiveRecord::Schema.define(version: 2023_05_23_144331) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
-  create_table "games", force: :cascade do |t|
-    t.string "home_team"
-    t.string "away_team"
-    t.string "day"
-    t.integer "home_team_score"
-    t.integer "away_team_score"
-    t.integer "api_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "images", force: :cascade do |t|
     t.string "url"
     t.string "public_id"
@@ -56,7 +45,7 @@ ActiveRecord::Schema.define(version: 2023_05_23_144331) do
     t.string "address"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.geometry "geometry", limit: {:srid=>0, :type=>"geometry"}
+    t.geography "geometry", limit: {:srid=>4326, :type=>"geometry", :geographic=>true}
     t.float "coordinates", default: [], array: true
     t.string "geometry_type"
     t.float "central_coords", default: [], array: true

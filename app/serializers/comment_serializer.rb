@@ -5,7 +5,7 @@ class CommentSerializer < ActiveModel::Serializer
 
   
   def filtered_user
-    { username: self.object.user.username, image: self.object.user.image }
+    { username: self.object.user.username, image: self.object.user.image, id: self.object.user.id }
   end
 
   def date

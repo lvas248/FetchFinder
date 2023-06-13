@@ -51,9 +51,9 @@ function ParkCard({ park = null }){
                 { park?.images.length > 1 ? (
                     <UncontrolledCarousel items={imageItems} />):(
                     <img
+                        className='profileImage'
                         alt='park'
-                        src={ park?.images.length > 0 ? park?.images[0].url :'http://res.cloudinary.com/dfbe9u9zm/image/upload/v1680727642/dr9lwutdvdzj1kfh5i1f.avif' }
-                        className='w-100 d-block'    
+                        src={ park?.images.length > 0 ? park?.images[0].url :'https://res.cloudinary.com/dfbe9u9zm/image/upload/c_scale,w_400/v1686627574/park_image_xdq873.avif'}
                     />
                 )}
             </div>

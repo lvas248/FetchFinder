@@ -134,6 +134,28 @@ const parkSlice = createSlice({
         },
         clearError: ( state ) => {
             state.error = ''
+        },
+        updateCommentImage: ( state, action )=>{
+            //cycle through parks, cycle through comments in each park, 
+            //look at filtered_user  
+                //if it equals the current user, replace image with payload
+            state.entity = state.entity.map( p =>{
+                return {...p, comments: p.comments = p.comments.map( c => {
+                    if(c.filtered_user?.id === action.payload.imageable_id){
+                        return {...c, filtered_user:{...c.filtered_user, image: action.payload}}
+                    }else return c
+                })}
+            })
+        },
+        updateCommentUsername: (state, action)=>{
+            state.entity = state.entity.map( p => {
+                return {...p, comments: p.comments.map( c =>{
+                    if(c.filtered_user.id === action.payload.id){
+                        return { ...c, filtered_user: {...c.filtered_user, username: action.payload.username}} 
+                    }else return c
+                    }   
+                )}
+            })
         }
     },
     extraReducers: builder =>{
@@ -240,4 +262,4 @@ const parkSlice = createSlice({
 
 export default parkSlice.reducer
 
-export const { setParks, updateParkDistanceFromUser, removeParkDistanceFromUser, alphabetizeParks, reverseAlphabetizeParks, organizeParksByDistance, clearError } = parkSlice.actions
+export const { setParks, updateParkDistanceFromUser, removeParkDistanceFromUser, alphabetizeParks, reverseAlphabetizeParks, organizeParksByDistance, clearError, updateCommentImage, updateCommentUsername } = parkSlice.actions

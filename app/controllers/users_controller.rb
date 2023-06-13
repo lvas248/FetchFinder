@@ -2,6 +2,9 @@ require 'pry'
 
 class UsersController < ApplicationController
 
+    before_action :authorize
+    skip_before_action :authorize, only: :create
+
 # signup 
     def create
         user = User.create!(user_params)
@@ -39,8 +42,6 @@ class UsersController < ApplicationController
         user = get_user
         user.destroy_cloudinary_image  
         user.destroy
-        # binding.pry
-
         render json: user
     end
 

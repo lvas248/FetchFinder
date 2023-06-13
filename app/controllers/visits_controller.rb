@@ -1,6 +1,8 @@
 require 'pry'
 class VisitsController < ApplicationController
 
+    before_action :authorize
+    
     def create
         user = get_user
         visit = user.visits.create!(visit_params)

@@ -86,24 +86,29 @@ function MapComp(){
     }
 
     function zoomOnPark(){
-        mapRef.current.flyTo({
-            center: [ selectedPark.central_coords[1], selectedPark.central_coords[0]],
-            zoom: 18,
-            duration: 2000
-        })
+        if (mapRef.current){
+            mapRef.current.flyTo({
+                center: [ selectedPark.central_coords[1], selectedPark.central_coords[0]],
+                zoom: 18,
+                duration: 2000
+            })            
+        }
+
     }
 
     function zoomOut(){
+        if (mapRef.current){
        
-        mapRef.current.flyTo({
-            center: [ -73.99999977096383, 40.68216366325822],
-            zoom: 9.25,
-            duration: 2000
-        })
+            mapRef.current.flyTo({
+                center: [ -73.99999977096383, 40.68216366325822],
+                zoom: 9.25,
+                duration: 2000
+            })
+        }
     }
 
     function zoomToUser(){
-        if(user.location){
+        if(user.location && mapRef.current){
             mapRef.current.flyTo({
                 center: [ user?.location[0], user?.location[1]],
                 zoom: 13,

@@ -2,10 +2,12 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { updateParkDistanceFromUser } from "../park/parkSlice";
 import { removeVisits } from "../visits/visitSlice";
 import { removeParkDistanceFromUser } from "../park/parkSlice";
+import { updateCommentImage } from "../park/parkSlice";
+import { updateCommentUsername } from "../park/parkSlice";
 
 export const editUser = createAsyncThunk(
     'user/editUser',
-    async(obj, { rejectWithValue })=>{
+    async(obj, { dispatch, rejectWithValue })=>{
         const response = await fetch('/user',{
             method: 'PATCH',
             headers: {
@@ -16,6 +18,7 @@ export const editUser = createAsyncThunk(
         const data = await response.json()
 
         if(response.ok){
+            dispatch(updateCommentUsername(data))
             return data
         }
         return rejectWithValue(data)
@@ -24,7 +27,7 @@ export const editUser = createAsyncThunk(
 
 export const uploadUserImage = createAsyncThunk(
     'user/image_upload',
-    async(obj, { rejectWithValue })=>{
+    async(obj, { dispatch, rejectWithValue })=>{
         const response = await fetch('/upload_user_image',{
             method: 'POST',
             body: obj
@@ -32,6 +35,7 @@ export const uploadUserImage = createAsyncThunk(
         const image = await response.json()
 
         if(response.ok){
+            dispatch(updateCommentImage(image))
             return image
         }
 
@@ -114,7 +118,7 @@ const userSlice = createSlice({
             })
             .addCase( editUser.rejected,( state, action ) => {
                 state.status = 'idle'
-                state.error = action.payload.errors
+                state.error = action
             })
             .addCase( editUser.fulfilled, (state,action)=>{
                 state.status = 'idle'
