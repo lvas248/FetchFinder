@@ -39,8 +39,6 @@ if response.code == 200
             name: p['name'],
             borough: borough(p['borough']),
             zip: p['zipcode'],
-            # lat: p['the_geom']['coordinates'][0][0][0][1],
-            # long: p['the_geom']['coordinates'][0][0][0][0],
             address: results.first.address
         }) 
         

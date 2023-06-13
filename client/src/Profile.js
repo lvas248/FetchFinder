@@ -14,7 +14,7 @@ function Profile(){
     const user = useSelector(state => state.user.entity)
     const history = useHistory()
 
-    const renderTopParks = user.top_visited_parks.map( p=> {
+    const renderTopParks = user?.top_visited_parks?.map( p=> {
         return <li className='listItem' key={p.name}>{p.name}  visits: {p.qty}</li>
     })
 

@@ -26,12 +26,12 @@ function App() {
     dispatch(getParks())
   }, [dispatch])
 
-  const state = useSelector( state => state)
+  // const state = useSelector( state => state)
   const user = useSelector( state => state.user)
   
   const session = useSelector( state => state.session)
 
-  console.log(state)
+  // console.log(state)
 
   function locateUser(){
     dispatch(getUserPosition())
