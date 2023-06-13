@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux'
-import { Button } from 'reactstrap'
+import { Button, List } from 'reactstrap'
 import { Switch, Route, useHistory } from 'react-router-dom' 
 
 import ImageUpload from './ImageUpload'
@@ -14,6 +14,11 @@ function Profile(){
     const user = useSelector(state => state.user.entity)
     const history = useHistory()
 
+    const renderTopParks = user.top_visited_parks.map( p=> {
+        return <li className='listItem' key={p.name}>{p.name}  visits: {p.qty}</li>
+    })
+
+    console.log(user.top_visited_parks)
     function navigateTo(endPoint=''){
         history.push(`/profile/${endPoint}`)
     }
@@ -38,6 +43,11 @@ function Profile(){
                         <Button size='sm' color='primary' onClick={()=>navigateTo('edit_username')}>Edit Username</Button> 
                         <Button size='sm' color='success' onClick={()=>navigateTo('edit_user_image')}>Change Profile Image</Button> 
                         <Button size='sm' color='danger' onClick={()=>navigateTo('delete_account')}>Delete Account</Button>
+
+                        <List className='list'>
+                            <h4>Top Visits Parks</h4>
+                            {renderTopParks}
+                        </List>
                     </Route>
 
                     <Route path='/profile/edit_username'>

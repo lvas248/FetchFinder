@@ -5,7 +5,10 @@ class User < ApplicationRecord
 
     has_one :image, as: :imageable, dependent: :destroy
     has_many :comments, dependent: :destroy
+
     has_many :visits, dependent: :destroy
+    has_many :parks, through: :visits
+    
     has_many :images, as: :imageable, dependent: :destroy
 
     validates :username, { presence: true, uniqueness: true }

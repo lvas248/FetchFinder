@@ -86,7 +86,8 @@ export const deleteUser = createAsyncThunk(
 const initialState = {
     entity: {
         username: '',
-        image: {}
+        image: {},
+        top_visited_parks: {}
     },
     location: null,
     status: 'idle',

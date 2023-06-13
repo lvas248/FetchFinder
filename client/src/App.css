@@ -465,3 +465,11 @@ img.d-block.w-100{
   padding: 2vh;
 }
 
+.list{
+  margin-top: 5vh;
+}
+
+.listItem{
+  list-style: none;
+  text-align: center;
+}
