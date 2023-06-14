@@ -40,6 +40,5 @@ class Visit < ApplicationRecord
       end
   end
 
-  # Search through user.visits to see if new visit.start_time 
   
 end

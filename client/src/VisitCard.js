@@ -9,11 +9,9 @@ function VisitCard({visit}){
     const dispatch = useDispatch()
 
     const duration = `${visit.formatted_duration.hours} hours, ${visit.formatted_duration.minutes} minutes`
+    
     function handleDelete(){
-        dispatch(deleteVisit(visit.id)).then(res => {
-            if(res.ok) console.log('yes')
-            else console.log('no')
-        })
+        dispatch(deleteVisit(visit.id))
     }
 
     function clickEditBtn(){

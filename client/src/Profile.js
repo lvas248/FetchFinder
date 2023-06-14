@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux'
-import { Button, List } from 'reactstrap'
+import { Button } from 'reactstrap'
 import { Switch, Route, useHistory } from 'react-router-dom' 
 
 import ImageUpload from './ImageUpload'
@@ -7,6 +7,7 @@ import EditUserForm from "./features/user/EditUserForm"
 
 import { useDispatch } from 'react-redux'
 import { deleteUser } from './features/user/userSlice'
+import VisitedParks from './VisitedParks'
 
 function Profile(){
 
@@ -14,9 +15,7 @@ function Profile(){
     const user = useSelector(state => state.user.entity)
     const history = useHistory()
 
-    const renderTopParks = user?.top_visited_parks?.map( p=> {
-        return <li className='listItem' key={p.name}>{p.name}  visits: {p.qty}</li>
-    })
+
 
     function navigateTo(endPoint=''){
         history.push(`/profile/${endPoint}`)
@@ -43,10 +42,7 @@ function Profile(){
                         <Button size='sm' color='success' onClick={()=>navigateTo('edit_user_image')}>Change Profile Image</Button> 
                         <Button size='sm' color='danger' onClick={()=>navigateTo('delete_account')}>Delete Account</Button>
 
-                        <List className='list'>
-                            <h4>Top Visits Parks</h4>
-                            {renderTopParks}
-                        </List>
+                        <VisitedParks />
                     </Route>
 
                     <Route path='/profile/edit_username'>

@@ -1,6 +1,6 @@
 .App {
   text-align: center;
-  max-width: 1280px;
+  max-width: 1000px;
   margin: auto
 }
 
@@ -113,13 +113,10 @@ h6 {
  
 }
 #map_container{
-  /* height: 500px;
-  width: 100vw; */
   padding: 5%;
 }
 #map{
   margin: auto;
- 
 }
 .text-left{
   text-align: left;
@@ -376,6 +373,9 @@ h6 {
   
 }
 
+.mapboxgl-canvas{
+  margin: auto;
+}
 
 
 @media (max-width: 600px){
@@ -433,12 +433,7 @@ img.d-block.w-100{
   margin: auto;
 }
 
-/* .mapContainer{
-  width: 90vw; 
-  height: 50vh;
-  border-radius: '15px';
-  border: 2px solid black;
-} */
+
 
 .mapNav{
   margin-bottom: 1vh;
@@ -465,11 +460,33 @@ img.d-block.w-100{
   padding: 2vh;
 }
 
-.list{
-  margin-top: 5vh;
-}
+
 
 .listItem{
   list-style: none;
   text-align: center;
+}
+
+#visitedParks{
+  height: 25vh;
+  /* background-color: lightgrey; */
+  align-content: center;
+  margin: 2vh auto auto auto;
+  border: 1px solid lightgray;
+  width: max-content;
+  
+}
+
+#visitedParksList{
+  /* background-color: blue; */
+  height: 21vh;
+  overflow: auto;
+  border-top: 1px solid lightgray;
+  display: flex;
+  flex-direction: column;
+}
+
+#visitedParksList > * {
+  text-align: left;
+  font-weight: bold;
 }

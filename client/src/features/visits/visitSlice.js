@@ -1,8 +1,9 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { addToVisitedParks, removeFromVisitedParks, updateVisitedParksAfterEdit } from "../user/userSlice";
 
 export const createVisit = createAsyncThunk(
     'visit/createVisit',
-    async( obj, { dispatch, rejectWithValue })=>{
+    async( obj, { getState, dispatch, rejectWithValue })=>{
         const response = await fetch('/visits',{
             method: 'POST',
             headers: {
@@ -14,6 +15,7 @@ export const createVisit = createAsyncThunk(
         const data = await response.json()
 
         if(response.ok){ 
+            if(!getState().visit.entity.find( v => v.park.name === data.park.name)) dispatch(addToVisitedParks({name: data.park.name, id: data.park.id}))
             return data
         }
 
@@ -23,7 +25,7 @@ export const createVisit = createAsyncThunk(
 
 export const editVisit = createAsyncThunk(
     'visit/editVisit',
-    async( obj, { dispatch, rejectWithValue })=>{
+    async( obj, { getState, dispatch, rejectWithValue })=>{
         const response = await fetch(`/visits/${obj.visit_id}`,{
             method: 'PATCH',
             headers: {
@@ -32,9 +34,23 @@ export const editVisit = createAsyncThunk(
             body: JSON.stringify(obj)
         })
 
-        const data = await response.json()
+        const data = await response.json()  
 
         if(response.ok){ 
+            
+            const allVisits = getState().visit.entity.map( v => {
+                if(v.id === data.id) return data
+                else return v
+            })
+
+            const uniqueParks = []
+
+            allVisits.forEach( v =>{
+                if(!uniqueParks.find( p => p.name === v.park.name)) uniqueParks.push({name: v.park.name, id: v.park.id})
+            })
+
+            dispatch(updateVisitedParksAfterEdit(uniqueParks))
+
             return data
         }
         return rejectWithValue(data)
@@ -44,7 +60,7 @@ export const editVisit = createAsyncThunk(
 
 export const deleteVisit = createAsyncThunk(
     'visit/deleteVisit',
-    async( obj, { rejectWithValue })=>{
+    async( obj, { getState, dispatch, rejectWithValue })=>{
         const response = await fetch(`/visits/${obj}`,{
             method: 'DELETE',
             headers: {
@@ -56,6 +72,7 @@ export const deleteVisit = createAsyncThunk(
         const data = await response.json()
 
         if(response.ok){ 
+            if(getState().visit.entity.filter( v => v.park.name === data.park.name).length === 1) dispatch(removeFromVisitedParks({name: data.park.name}))
             return data
         }
         return rejectWithValue(data)
@@ -123,7 +140,7 @@ const visitSlice = createSlice({
                 }).sort((a,b) => a.start_time - b.start_time)          
             })
             .addCase( editVisit.rejected, ( state, action )=>{
-                state.errors = {errors: action.payload.errors, visit: action.meta.arg.visit_id}
+                state.errors = {errors: action.payload?.errors, visit: action.meta.arg.visit_id}
                 state.status = 'idle'
             })
 }})

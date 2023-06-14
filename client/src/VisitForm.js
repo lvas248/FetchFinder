@@ -40,7 +40,7 @@ function VisitForm(){
         })).then( data => {
             if(data.meta.requestStatus === 'fulfilled'){
                 history.push('/visit')
-            }
+            }else console.log(data)
         })
     }
 
@@ -117,8 +117,8 @@ function VisitForm(){
             </div>
 
             <Button>Submit</Button>
- 
-            { errors.hasOwnProperty('errors') && errors.errors.conflict ? <p className='error'>{errors.errors.conflict}</p> : null }
+            <p className='error'>{errors?.errors?.conflict}</p>
+            {/* { errors.hasOwnProperty('errors') && errors?.errors?.conflict ? <p className='error'>{errors?.errors?.conflict}</p> : null } */}
         </form>
     )
 }

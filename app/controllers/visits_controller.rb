@@ -20,7 +20,7 @@ class VisitsController < ApplicationController
         user = get_user
         visit = user.visits.find(params[:visit_id]).destroy
         visit.destroy
-        render json: visit
+        render json: visit, status: :ok
     end
 
     private 

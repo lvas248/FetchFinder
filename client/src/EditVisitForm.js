@@ -41,9 +41,9 @@ function EditVisitForm({visit, clickEditBtn}){
             park_id: editVisitObj.park_id,
             start_time: new Date(editVisitObj.date + 'T' + editVisitObj.time + ':00'),
             duration: editVisitObj.hours*3600 + editVisitObj.minutes*60
-        })).then( data => {
+        })).then( res => {
             //if http request is successful, close editVisitForm
-            if(data.meta.requestStatus === 'fulfilled') clickEditBtn()
+            if(res.meta.requestStatus === 'fulfilled') clickEditBtn()
         })
     }
     
@@ -117,14 +117,14 @@ function EditVisitForm({visit, clickEditBtn}){
 
                     </div>
 
-                    { errors.hasOwnProperty('errors') && errors.visit === visit.id ? <p className='error'>{errors.errors?.duration}</p> : null }
+                    { errors.hasOwnProperty('errors') && errors?.visit === visit.id ? <p className='error'>{errors?.errors?.duration}</p> : null }
           
                     <div className='right'>
                         <Button type='submit' color='' >✅</Button>
                         <Button type='button' onClick={exitEditForm} color='' size='sm'>❌</Button>
                     </div>
 
-                    { errors.hasOwnProperty('errors') && errors.errors.conflict ? <p className='error'>{errors.errors.conflict}</p> : null }
+                    { errors.hasOwnProperty('errors') && errors?.errors?.conflict ? <p className='error'>{errors?.errors?.conflict}</p> : null }
 
                 </div>
 

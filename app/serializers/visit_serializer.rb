@@ -1,7 +1,7 @@
 require 'time'
 
 class VisitSerializer < ActiveModel::Serializer
-  attributes :id, :start_time, :start, :upcoming, :park, :formatted_duration, :number_times_visited
+  attributes :id, :start_time, :start, :upcoming, :park, :formatted_duration
   
  
   def start
@@ -22,11 +22,12 @@ class VisitSerializer < ActiveModel::Serializer
   end
 
   def upcoming
+    # binding.pry
     Time.now < self.object.end_time
   end
 
-  def number_times_visited
-    self.object.user.visits.where('park_id = ?', self.object.park.id).count
-  end
+
+
+
   
 end

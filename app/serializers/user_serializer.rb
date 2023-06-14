@@ -1,13 +1,14 @@
 class UserSerializer < ActiveModel::Serializer
-  attributes :username, :id, :top_visited_parks
+  attributes :username, :id
 
   has_one :image, as: :imageable
   has_many :visits
+  has_many :visited_parks, through: :visits, source: :park, serializer: UserParkSerializer
 
-  def top_visited_parks
-    groups = self.object.parks.group_by{|p| p.name}.sort_by{|_,g| g.count}.reverse
-    updated_groups = groups.map{ |n,g| { name: n, qty: g.count} }
-    updated_groups.slice(0,3)
-  end
+ 
+ def visited_parks
+  object.parks.uniq
+ end
   
+
 end

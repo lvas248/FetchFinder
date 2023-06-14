@@ -8,7 +8,7 @@ function Visit(){
 
     const visits = useSelector( state => state.visit?.entity)
     const renderAllVisits = visits?.map( v => {
-        return <VisitCard key={v.id} visit={v}/>
+       return <VisitCard key={v.id} visit={v}/>
     })
 
     return (

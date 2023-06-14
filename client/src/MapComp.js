@@ -151,12 +151,13 @@ function MapComp(){
        
            <div id='map_container'>
             <div id='map'>
-                 <ReactMapGL  
+                 <ReactMapGL 
+                    className='theMap'
                     ref={mapRef}                 
                     {...viewport}
                     mapboxApiAccessToken={apiKey}
                     style={{ 
-                        width: '90vw', 
+                        maxWidth: '90vw', 
                         height: '50vh', 
                         borderRadius: '15px', 
                         border: '2px solid black'

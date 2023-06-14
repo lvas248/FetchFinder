@@ -34,7 +34,8 @@ export const login = createAsyncThunk(
         })
         const data = await response.json()
         if(response.ok){
-            dispatch(setUser({ username: data.username, image: data.image, top_visited_parks: data.top_visited_parks}))
+            console.log(data)
+            dispatch(setUser({ username: data.username, image: data.image, visited_parks: data.visited_parks}))
             dispatch(setVisits(data.visits))
             return
         }
@@ -48,7 +49,7 @@ export const refresh = createAsyncThunk(
         const response = await fetch('/me')
         const data = await response.json()
         if(response.ok){ 
-            dispatch(setUser({ username: data.username, image: data.image, top_visited_parks: data.top_visited_parks}))
+            dispatch(setUser({ username: data.username, image: data.image, visited_parks: data.visited_parks}))
             dispatch(setVisits(data.visits))
             removeParkDistanceFromUser()
             return 

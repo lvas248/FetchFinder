@@ -89,7 +89,7 @@ const initialState = {
     entity: {
         username: '',
         image: {},
-        top_visited_parks: {}
+        visited_parks: []
     },
     location: null,
     status: 'idle',
@@ -112,7 +112,18 @@ const userSlice = createSlice({
         },
         clearError: ( state ) =>{
             state.error = initialState.error
+        },
+        addToVisitedParks: (state, action)=>{
+            state.entity.visited_parks = [...state.entity.visited_parks, action.payload].sort((a,b)=> b.name - a.name)
+        },
+        removeFromVisitedParks:(state, action)=>{
+            state.entity.visited_parks = state.entity.visited_parks.filter( p => p.name !== action.payload.name)
+        }, 
+        updateVisitedParksAfterEdit: (state, action)=>{
+            state.entity.visited_parks = action.payload.sort((a,b)=> a.name.localeCompare(b.name))
         }
+  
+
     },
     extraReducers: ( builder ) => {
         builder
@@ -177,4 +188,4 @@ const userSlice = createSlice({
 
 export default userSlice.reducer
 
-export const { setUser, removeUser, setUserLocation, clearError } = userSlice.actions
+export const { setUser, removeUser, setUserLocation, clearError, addToVisitedParks, removeFromVisitedParks, updateVisitedParksAfterEdit } = userSlice.actions
