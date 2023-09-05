@@ -121,7 +121,6 @@ function MapComp(){
     }
 
     const renderMarkers = useMemo(()=> parks.map( p => {
-            console.log(p.central_coords)
             return <Marker 
                 key={p.id} 
                 longitude={p?.central_coords[1]} 

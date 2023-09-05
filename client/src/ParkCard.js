@@ -12,6 +12,7 @@ function ParkCard({ park = null }){
 
     const parks = useSelector(state => state.park.entity)
     const session = useSelector(state => state.session)
+    const loggedIn = useSelector( state => state.session.loggedIn)
     park = park || parks.find( p => p.id === parseInt(parkId))
 
     const [ addImageClick, setAddImageClick ] = useState(false)
@@ -41,7 +42,10 @@ function ParkCard({ park = null }){
                 <CardSubtitle
                     className='mb-2 text-muted'
                 >{park?.borough}</CardSubtitle>
-                <CardSubtitle><strong>🐕</strong> {park?.users_at_park_now}</CardSubtitle>               
+                {
+                    loggedIn && <CardSubtitle><strong>🐕</strong> {park?.users_at_park_now}</CardSubtitle>               
+
+                }
 
 
             </CardBody>
