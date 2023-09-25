@@ -10,8 +10,8 @@ function Login(){
     const history = useHistory()
    
     const [ loginObj, setLoginObj ] = useState({
-        username: '',
-        password: ''
+        username: 'demo',
+        password: 'password'
     })
 
     const session = useSelector(state => state.session)
@@ -60,6 +60,7 @@ function Login(){
 
                 <Label>Password</Label>
                 <Input 
+                    type='password'
                     id='password' 
                     value={loginObj.password} 
                     onChange={updateLoginObj} 

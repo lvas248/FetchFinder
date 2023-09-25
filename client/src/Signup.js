@@ -69,6 +69,7 @@ function Signup(){
 
                 <Label>Password</Label>
                 <Input 
+                    type='password'
                     id='password' 
                     value={signupObj.password} 
                     onChange={updateSignupObj} 
@@ -83,6 +84,7 @@ function Signup(){
                     <p className='error'>{session?.error?.errors?.password_confirmation}</p>
                 </div>
                 <Input 
+                    type='password'
                     id='password_confirmation' 
                     value={signupObj.password_confirmation} 
                     onChange={updateSignupObj} 
