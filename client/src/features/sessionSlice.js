@@ -34,7 +34,6 @@ export const login = createAsyncThunk(
         })
         const data = await response.json()
         if(response.ok){
-            console.log(data)
             dispatch(setUser({ username: data.username, image: data.image, visited_parks: data.visited_parks}))
             dispatch(setVisits(data.visits))
             return
