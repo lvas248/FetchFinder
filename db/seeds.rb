@@ -5,6 +5,8 @@ require 'faker'
 
 response = HTTParty.get("https://data.cityofnewyork.us/resource/hxx3-bwgv.json")
 
+debugger 
+
 if response.code == 200
     data = JSON.parse(response.body)  
     
@@ -62,23 +64,23 @@ end
 
 
 
-5.times do
-    User.create!(
-        username: Faker::Internet.unique.username,
-        password: '123',
-        password_confirmation: '123'
-    )
-end
+# 5.times do
+#     User.create!(
+#         username: Faker::Internet.unique.username,
+#         password: '123',
+#         password_confirmation: '123'
+#     )
+# end
 
-100.times do 
-    Visit.create!(
-        user_id: User.all.sample.id,
-        park_id: Park.all.sample.id,
-        start_time: Faker::Time.between(from: DateTime.now, to: DateTime.now + Rational(1,1440)),
-        end_time: Faker::Time.between(from: DateTime.now + Rational(1,24), to: DateTime.now + Rational(2,24)),
-        duration: rand(3600..10800)
-    )
-end
+# 100.times do 
+#     Visit.create!(
+#         user_id: User.all.sample.id,
+#         park_id: Park.all.sample.id,
+#         start_time: Faker::Time.between(from: DateTime.now, to: DateTime.now + Rational(1,1440)),
+#         end_time: Faker::Time.between(from: DateTime.now + Rational(1,24), to: DateTime.now + Rational(2,24)),
+#         duration: rand(3600..10800)
+#     )
+# end
 
 # ^^This creates visits for random parks by random users  with start_time now
 
